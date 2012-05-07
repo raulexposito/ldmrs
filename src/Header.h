@@ -1,4 +1,4 @@
-#include <stdint.h> // para 'uint8_t'
+#include <stdint.h> 	// para 'uint8_t'
 
 /**
  * Clase basica con todos los elementos que requieren los encabezados del protocolo LD-MRS
@@ -9,7 +9,7 @@ class Header {
 
 	public:
 
-		Header(int dataBlockSize);
+		Header(int dataBlockSize, uint8_t preffix, uint8_t suffix);
 
 		virtual ~Header();
 
@@ -20,8 +20,6 @@ class Header {
 	protected:
 
 		uint8_t * bytes;
-
-		virtual void addDataType()=0;
 
 	private:
 
@@ -34,6 +32,8 @@ class Header {
 		void addReservedAndSourceId();
 
 		void addNTPTime();
+
+		void addDataType(uint8_t preffix, uint8_t suffix);
 };
 
 /**
@@ -41,19 +41,12 @@ class Header {
  */
 class ScanDataHeader : public Header {
 
+	static const uint8_t SCAN_DATA_HEADER_PREFFIX = 0x22;
+	static const uint8_t SCAN_DATA_HEADER_SUFFIX = 0x02;
+
 	public:
-
-	ScanDataHeader(int dataBlockSize): Header(dataBlockSize) {
-			addDataType();
-		}
-
-	private:
-
-		void addDataType() {
-			bytes[14] = 0x22;
-			bytes[15] = 0x02;
-		}
-
+		ScanDataHeader(int dataBlockSize):
+			Header(dataBlockSize, SCAN_DATA_HEADER_PREFFIX, SCAN_DATA_HEADER_SUFFIX) {}
 };
 
 /**
@@ -61,19 +54,12 @@ class ScanDataHeader : public Header {
  */
 class ErrorAndWarningHeader : public Header {
 
+	static const uint8_t ERROR_WARNING_HEADER_PREFFIX = 0x20;
+	static const uint8_t ERROR_WARNING_HEADER_SUFFIX = 0x30;
+
 	public:
-
-		ErrorAndWarningHeader(int dataBlockSize): Header(dataBlockSize) {
-			addDataType();
-		}
-
-	private:
-
-		void addDataType() {
-			bytes[14] = 0x20;
-			bytes[15] = 0x30;
-		}
-
+		ErrorAndWarningHeader(int dataBlockSize):
+			Header(dataBlockSize, ERROR_WARNING_HEADER_PREFFIX, ERROR_WARNING_HEADER_SUFFIX) {}
 };
 
 /**
@@ -81,19 +67,12 @@ class ErrorAndWarningHeader : public Header {
  */
 class CommandHeader : public Header {
 
+	static const uint8_t COMMAND_HEADER_PREFFIX = 0x20;
+	static const uint8_t COMMAND_HEADER_SUFFIX = 0x10;
+
 	public:
-
-		CommandHeader(int dataBlockSize): Header(dataBlockSize) {
-			addDataType();
-		}
-
-	private:
-
-		void addDataType() {
-			bytes[14] = 0x20;
-			bytes[15] = 0x10;
-		}
-
+		CommandHeader(int dataBlockSize):
+			Header(dataBlockSize, COMMAND_HEADER_PREFFIX, COMMAND_HEADER_SUFFIX) {}
 };
 
 /**
@@ -101,18 +80,11 @@ class CommandHeader : public Header {
  */
 class CommandReplyHeader : public Header {
 
+	static const uint8_t COMMAND_REPLY_HEADER_PREFFIX = 0x20;
+	static const uint8_t COMMAND_REPLY_HEADER_SUFFIX = 0x20;
+
 	public:
-
-		CommandReplyHeader(int dataBlockSize): Header(dataBlockSize) {
-			addDataType();
-		}
-
-	private:
-
-		void addDataType() {
-			bytes[14] = 0x20;
-			bytes[15] = 0x20;
-		}
-
+		CommandReplyHeader(int dataBlockSize):
+			Header(dataBlockSize, COMMAND_REPLY_HEADER_PREFFIX, COMMAND_REPLY_HEADER_SUFFIX) {}
 };
 

@@ -1,15 +1,16 @@
 #include "Header.h"
-#include <iostream.h>	// para 'cout'
+#include <iostream>		// para 'cout'
 #include <iomanip>		// para formateo de cout
 using namespace std;	// para formateo de cout
 
-Header::Header (int dataBlockSize) {
+Header::Header (int dataBlockSize, uint8_t preffix, uint8_t suffix) {
 
 	bytes = new uint8_t[HEADER_SIZE];
 	addMagicWord();
 	addSizeOfPreviousMessage();
 	addSizeOfDataBlock();
 	addReservedAndSourceId();
+	addDataType(preffix, suffix);
 	addNTPTime();
 }
 
@@ -38,6 +39,11 @@ void Header::addSizeOfDataBlock() {
 void Header::addReservedAndSourceId() {
 	bytes[12] = 0x00;
 	bytes[13] = 0x00;
+}
+
+void Header::addDataType(uint8_t preffix, uint8_t suffix) {
+	bytes[14] = preffix;
+	bytes[15] = suffix;
 }
 
 // TODO: implementar

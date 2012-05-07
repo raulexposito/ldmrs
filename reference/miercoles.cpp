@@ -452,7 +452,7 @@ uint8_t* comandoSaveConfig () {
 }
 
 
-int main ()
+int main_miercoles ()
 {
 	//while (true) {
 	int descriptorSocketServidor = conectarConServidor ("laser13", "puerto_laser");
@@ -487,4 +487,6 @@ int main ()
 //	printf ("Soy cliente, He recibido : %d\n", buffer);
 	close (descriptorSocketServidor);
 	//}
+
+	return 0;
 }

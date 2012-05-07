@@ -1,5 +1,7 @@
 #include "Header.h"
-#include <iostream.h>
+#include <iostream>		// para 'cout'
+#include <iomanip>		// para formateo de cout
+using namespace std;	// para formateo de cout
 
 void testShowBytesHeaders() {
 	Header *scanDataHeader = new ScanDataHeader(42);
