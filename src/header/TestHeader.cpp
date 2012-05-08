@@ -1,4 +1,8 @@
-#include "Header.h"
+#include "header/Header.h"
+#include "header/CommandHeader.h"
+#include "header/CommandReplyHeader.h"
+#include "header/ErrorAndWarningHeader.h"
+#include "header/ScanDataHeader.h"
 #include <iostream>		// para 'cout'
 #include <iomanip>		// para formateo de cout
 using namespace std;	// para formateo de cout

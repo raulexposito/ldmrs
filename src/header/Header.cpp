@@ -1,7 +1,9 @@
-#include "Header.h"
+#include "header/Header.h"
 #include <iostream>		// para 'cout'
 #include <iomanip>		// para formateo de cout
 using namespace std;	// para formateo de cout
+
+#define HEADER_SIZE 24
 
 Header::Header (int dataBlockSize, uint8_t preffix, uint8_t suffix) {
 
