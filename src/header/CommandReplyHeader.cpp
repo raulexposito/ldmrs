@@ -1,4 +1,4 @@
-#include "header/CommandReplyHeader.h"
+#include "hdr/CommandReplyHeader.h"
 
 #define COMMAND_REPLY_HEADER_PREFFIX 0x20
 #define COMMAND_REPLY_HEADER_SUFFIX 0x20

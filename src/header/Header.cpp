@@ -1,4 +1,4 @@
-#include "header/Header.h"
+#include "hdr/Header.h"
 #include <iostream>		// para 'cout'
 #include <iomanip>		// para formateo de cout
 using namespace std;	// para formateo de cout
