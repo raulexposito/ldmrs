@@ -1,4 +1,4 @@
-#include "hdr/GetParameterBody.h"
+#include "hdr/GetParameterRequestBody.h"
 #include "enum/ParameterEnum.h"
 #include "util/hdr/ParameterConverter.h"
 
@@ -12,13 +12,12 @@
  * TODO: en la pagina 11 hablan del mensaje de vuelta, hay que implementarlo
  */
 
-GetParameterBody::GetParameterBody(ParameterEnum parameter):
+GetParameterRequestBody::GetParameterRequestBody(ParameterEnum parameter):
 			Body(BODY_SIZE, CODE_PREFFIX, CODE_SUFFIX) {
 	addParameterCode(parameter);
 }
 
-void GetParameterBody::addParameterCode(ParameterEnum parameter) {
-
+void GetParameterRequestBody::addParameterCode(ParameterEnum parameter) {
 	ParameterConverter::getInstance()->parameterToHex(
 			parameter,
 			bytes[PARAMETER_CODE_PREFFIX_POSITION],

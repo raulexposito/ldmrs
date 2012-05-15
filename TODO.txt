@@ -1,0 +1,23 @@
+
+* COMANDOS:
+
+- respuesta al getStatus
+- respuesta al saveConfig
+- respuesta al setParameter
+- respuesta al getParameter
+- respuesta al startMeasure
+- respuesta al stopMeasure
+- respuesta al setNTPTimestampSec
+- respuesta al setNTPTimestampFracSec
+
+
+- setNTPTimestampSec -> segundos a NTP
+- setNTPTimestampFracSec -> milisegundos a NTP
+
+
+* UTILIDADES
+
+- conversion de IP a hexadecimal, tanto little endian como big endian
+- segundos en formato NTP
+- leer de un fichero de configuracion.
+- crear conexiones TCP con el laser.

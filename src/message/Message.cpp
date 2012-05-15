@@ -1,6 +1,5 @@
 #include "hdr/Message.h"
 
-
 Message::~Message() {
 	delete header;
 	delete body;

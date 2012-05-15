@@ -3,10 +3,11 @@
 #include "../header/hdr/CommandReplyHeader.h"
 #include "../header/hdr/ErrorAndWarningHeader.h"
 #include "../header/hdr/ScanDataHeader.h"
-#include "../body/hdr/GetParameterBody.h"
+#include "../body/hdr/GetParameterRequestBody.h"
 #include "../message/hdr/ResetMessage.h"
 #include "../message/hdr/GetParameterRequestMessage.h"
-#include "../message/hdr/SaveConfigMessage.h"
+#include "../message/hdr/SetParameterRequestMessage.h"
+#include "../message/hdr/SaveConfigRequestMessage.h"
 #include <iostream>		// para 'cout'
 #include <iomanip>		// para formateo de cout
 using namespace std;	// para formateo de cout
@@ -32,8 +33,8 @@ void testShowBytesHeaders() {
 }
 
 void testShowGetParameters() {
-	Body *getParameterIP = new GetParameterBody(IP_ADDRESS);
-	Body *getParameterGateway = new GetParameterBody(STANDARD_GATEWAY);
+	Body *getParameterIP = new GetParameterRequestBody(IP_ADDRESS);
+	Body *getParameterGateway = new GetParameterRequestBody(STANDARD_GATEWAY);
 
 	getParameterIP->showBytes();
 	cout << endl;
@@ -47,7 +48,8 @@ void testCreateMessages() {
 	Message *resetMessage = new ResetMessage();
 	Message *getIPMessage = new GetParameterRequestMessage(IP_ADDRESS);
 	Message *getPuertoMessage = new GetParameterRequestMessage(TCP_PORT);
-	Message *saveConfig = new SaveConfigMessage();
+	Message *saveConfig = new SaveConfigRequestMessage();
+	Message *setParameter = new SetParameterRequestMessage(START_ANGLE, 0x12345678);
 
 	cout << endl << "comando reset:" << endl;
 	resetMessage->showBytes();
@@ -57,8 +59,14 @@ void testCreateMessages() {
 	getPuertoMessage->showBytes();
 	cout << endl << "comando save config:" << endl;
 	saveConfig->showBytes();
+	cout << endl << "comando setParameter:" << endl;
+	setParameter->showBytes();
 
 	delete resetMessage;
+	delete getIPMessage;
+	delete getPuertoMessage;
+	delete saveConfig;
+	delete setParameter;
 }
 
 int main () {
