@@ -4,6 +4,7 @@
 using namespace std;	// para formateo de cout
 
 #define RESERVED 0x00
+#define BODY_SIZE_BY_DEFAULT 4
 
 Body::Body(int bodySize, uint8_t preffix, uint8_t suffix) {
 	this->bodySize = bodySize;
@@ -20,6 +21,10 @@ Body::~Body() {
 
 uint8_t * Body::getBytes() {
 	return bytes;
+}
+
+int Body::getAmountBytes() {
+	return BODY_SIZE_BY_DEFAULT;
 }
 
 void Body::showBytes() {

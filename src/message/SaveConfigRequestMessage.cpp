@@ -5,7 +5,5 @@
 
 #define BODY_LENGTH 4
 
-SaveConfigRequestMessage::SaveConfigRequestMessage() {
- 	header = new CommandHeader(BODY_LENGTH);
-	body = new SaveConfigRequestBody();
+SaveConfigRequestMessage::SaveConfigRequestMessage():Message(new CommandHeader(BODY_LENGTH), new SaveConfigRequestBody()) {
 }

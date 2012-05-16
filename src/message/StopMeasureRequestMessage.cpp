@@ -5,7 +5,6 @@
 
 #define BODY_LENGTH 4
 
-StopMeasureRequestMessage::StopMeasureRequestMessage() {
- 	header = new CommandHeader(BODY_LENGTH);
-	body = new StopMeasureRequestBody();
+StopMeasureRequestMessage::StopMeasureRequestMessage():Message(
+		new CommandHeader(BODY_LENGTH), new StopMeasureRequestBody()) {
 }

@@ -9,17 +9,29 @@ class Message {
 
 	public:
 
+		Message(Header* header, Body* body);
+
 		virtual ~Message();
 
-//		uint8_t * getBytes();
+		uint8_t * getBytes();
 
 		void showBytes();
+
+		int getAmountBytes();
 
 	protected:
 
 		Header* header;
 
 		Body* body;
+
+		uint8_t* bytes;
+
+		int messageSize;
+
+	private:
+
+		void populateBytes();
 };
 
 #endif // MESSAGE_H

@@ -13,6 +13,8 @@ class SetParameterRequestBody : public Body {
 	public:
 		SetParameterRequestBody(ParameterEnum parameter, uint32_t value);
 
+		int getAmountBytes();
+
 	private:
 		void addParameterCode(ParameterEnum parameter);
 		void addUINT32ParameterValue(uint32_t value);

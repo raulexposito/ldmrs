@@ -5,7 +5,6 @@
 
 #define BODY_LENGTH 10
 
-SetNTPTimestampSecRequestMessage::SetNTPTimestampSecRequestMessage(uint32_t seconds) {
- 	header = new CommandHeader(BODY_LENGTH);
-	body = new SetNTPTimestampSecRequestBody(seconds);
+SetNTPTimestampSecRequestMessage::SetNTPTimestampSecRequestMessage(uint32_t seconds):Message(
+		new CommandHeader(BODY_LENGTH), new SetNTPTimestampSecRequestBody(seconds)) {
 }

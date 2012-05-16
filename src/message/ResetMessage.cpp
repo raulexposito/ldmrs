@@ -5,7 +5,5 @@
 
 #define BODY_LENGTH 4
 
-ResetMessage::ResetMessage() {
- 	header = new CommandHeader(BODY_LENGTH);
-	body = new ResetBody();
+ResetMessage::ResetMessage():Message(new CommandHeader(BODY_LENGTH), new ResetBody()) {
 }

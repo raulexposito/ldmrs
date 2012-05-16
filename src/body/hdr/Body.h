@@ -16,6 +16,8 @@ class Body {
 
 		uint8_t * getBytes();
 
+		virtual int getAmountBytes();
+
 		void showBytes();
 
 	protected:

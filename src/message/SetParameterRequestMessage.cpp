@@ -5,7 +5,6 @@
 
 #define BODY_LENGTH 10
 
-SetParameterRequestMessage::SetParameterRequestMessage(ParameterEnum parameter, uint32_t value) {
- 	header = new CommandHeader(BODY_LENGTH);
-	body = new SetParameterRequestBody(parameter, value);
+SetParameterRequestMessage::SetParameterRequestMessage(ParameterEnum parameter, uint32_t value):Message(
+		new CommandHeader(BODY_LENGTH), new SetParameterRequestBody(parameter, value)) {
 }

@@ -5,7 +5,6 @@
 
 #define BODY_LENGTH 4
 
-StartMeasureRequestMessage::StartMeasureRequestMessage() {
- 	header = new CommandHeader(BODY_LENGTH);
-	body = new StartMeasureRequestBody();
+StartMeasureRequestMessage::StartMeasureRequestMessage():Message(
+		new CommandHeader(BODY_LENGTH), new StartMeasureRequestBody()) {
 }

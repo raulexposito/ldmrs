@@ -5,7 +5,5 @@
 
 #define BODY_LENGTH 4
 
-GetStatusRequestMessage::GetStatusRequestMessage() {
- 	header = new CommandHeader(BODY_LENGTH);
-	body = new GetStatusRequestBody();
-}
+GetStatusRequestMessage::GetStatusRequestMessage():Message(
+		new CommandHeader(BODY_LENGTH), new GetStatusRequestBody()) {}

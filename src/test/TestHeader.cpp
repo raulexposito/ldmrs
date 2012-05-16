@@ -51,15 +51,15 @@ void testCreateMessages() {
 	Message *saveConfig = new SaveConfigRequestMessage();
 	Message *setParameter = new SetParameterRequestMessage(START_ANGLE, 0x12345678);
 
-	cout << endl << "comando reset:" << endl;
+	cout << endl << "comando reset [" << resetMessage->getAmountBytes() << " bytes]: " << endl;
 	resetMessage->showBytes();
-	cout << endl << "comando getParameter con IP:" << endl;
+	cout << endl << "comando getParameter con IP [" << getIPMessage->getAmountBytes() << " bytes]: " << endl;
 	getIPMessage->showBytes();
-	cout << endl << "comando getParameter con TCP port:" << endl;
+	cout << endl << "comando getParameter con TCP port [" << getPuertoMessage->getAmountBytes() << " bytes]: " << endl;
 	getPuertoMessage->showBytes();
-	cout << endl << "comando save config:" << endl;
+	cout << endl << "comando save config [" << saveConfig->getAmountBytes() << " bytes]: " << endl;
 	saveConfig->showBytes();
-	cout << endl << "comando setParameter:" << endl;
+	cout << endl << "comando setParameter [" << setParameter->getAmountBytes() << " bytes]: " << endl;
 	setParameter->showBytes();
 
 	delete resetMessage;

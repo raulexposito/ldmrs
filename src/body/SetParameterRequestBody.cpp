@@ -80,3 +80,8 @@ void SetParameterRequestBody::addUINT16ParameterValue(uint32_t value) {
 	bytes[VALUE_POSITION + 2] = (value & 0x0000ff00) >> 8;
 	bytes[VALUE_POSITION + 3] = (value & 0x000000ff);
 }
+
+int SetParameterRequestBody::getAmountBytes() {
+	return BODY_SIZE;
+}
+

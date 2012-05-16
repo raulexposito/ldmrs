@@ -12,6 +12,8 @@ class GetParameterRequestBody : public Body {
 	public:
 		GetParameterRequestBody(ParameterEnum parameter);
 
+		int getAmountBytes();
+
 	private:
 		void addParameterCode(ParameterEnum parameter);
 };
