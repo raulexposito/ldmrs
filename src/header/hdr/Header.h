@@ -2,6 +2,7 @@
 #define HEADER_H
 
 #include <stdint.h> 	// para 'uint8_t'
+#include "../enum/HeaderTypeEnum.h"
 
 /**
  * Clase basica con todos los elementos que requieren los encabezados del protocolo LD-MRS
@@ -12,11 +13,15 @@ class Header {
 
 		Header(int dataBlockSize, uint8_t preffix, uint8_t suffix);
 
+		Header(uint8_t * headerBytes);
+
 		virtual ~Header();
 
 		uint8_t * getBytes();
 
 		void showBytes();
+
+		virtual HeaderTypeEnum getType()=0;
 
 	protected:
 

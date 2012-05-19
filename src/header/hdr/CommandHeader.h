@@ -10,6 +10,10 @@ class CommandHeader : public Header {
 
 	public:
 		CommandHeader(int dataBlockSize);
+
+		CommandHeader(uint8_t * headerBytes);
+
+		virtual HeaderTypeEnum getType();
 };
 
 #endif /* COMMANDHEADER_H_ */

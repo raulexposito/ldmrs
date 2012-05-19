@@ -5,3 +5,10 @@
 
 CommandHeader::CommandHeader(int dataBlockSize):
 			Header(dataBlockSize, COMMAND_HEADER_PREFFIX, COMMAND_HEADER_SUFFIX) {}
+
+CommandHeader::CommandHeader(uint8_t * headerBytes):
+			Header(headerBytes) {}
+
+HeaderTypeEnum CommandHeader::getType() {
+	return COMMAND;
+}

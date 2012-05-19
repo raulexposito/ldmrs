@@ -5,3 +5,10 @@
 
 ScanDataHeader::ScanDataHeader(int dataBlockSize):
 			Header(dataBlockSize, SCAN_DATA_HEADER_PREFFIX, SCAN_DATA_HEADER_SUFFIX) {}
+
+ScanDataHeader::ScanDataHeader(uint8_t * headerBytes):
+			Header(headerBytes) {}
+
+HeaderTypeEnum ScanDataHeader::getType() {
+	return SCAN_DATA;
+}

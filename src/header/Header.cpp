@@ -6,7 +6,6 @@ using namespace std;	// para formateo de cout
 #define HEADER_SIZE 24
 
 Header::Header (int dataBlockSize, uint8_t preffix, uint8_t suffix) {
-
 	bytes = new uint8_t[HEADER_SIZE];
 	addMagicWord();
 	addSizeOfPreviousMessage();
@@ -14,6 +13,11 @@ Header::Header (int dataBlockSize, uint8_t preffix, uint8_t suffix) {
 	addReservedAndSourceId();
 	addDataType(preffix, suffix);
 	addNTPTime();
+}
+
+Header::Header (uint8_t * headerBytes) {
+	bytes = new uint8_t[HEADER_SIZE];
+	bytes = headerBytes;
 }
 
 void Header::addMagicWord() {

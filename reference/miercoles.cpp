@@ -10,6 +10,10 @@
 #include <netdb.h>
 #include <stdlib.h>
 
+#include <iostream>		// para 'cout'
+#include <iomanip>		// para formateo de cout
+using namespace std;	// para formateo de cout
+
 
 int conectarConServidor (
 						char *Host_Servidor,
@@ -47,15 +51,33 @@ int conectarConServidor (
 	return Descriptor;
 }
 
-void recibeDelLaser (int fd, void *Datos, int Longitud)
+void recibeDelLaser (int fd, int Longitud)
 {
-	read (fd, Datos, Longitud);
+	uint8_t * recibido = new uint8_t[Longitud];
+
+	read (fd, recibido, Longitud);
+
+	cout << "LLEGA: ";
+	int i;
+	for (i = 0; i < Longitud; i++) {
+		cout << setw(2) << setfill('0') << hex << uppercase << (int) recibido[i] << " ";
+	}
+	cout << dec << endl;
+
+	free(recibido);
 }
 
 
-void mandaAlLaser (int fd, void *Datos, int Longitud)
+void mandaAlLaser (int fd, uint8_t *Datos, int Longitud)
 {
 	write (fd, Datos, Longitud);
+
+	cout << "MANDO: ";
+	int i;
+	for (i = 0; i < Longitud; i++) {
+		cout << setw(2) << setfill('0') << hex << uppercase << (int) Datos[i] << " ";
+	}
+	cout << dec << endl;
 }
 
 
@@ -451,11 +473,14 @@ uint8_t* comandoSaveConfig () {
 	return buffer;
 }
 
-
-int main_miercoles ()
+/*
+int main ()
 {
 	//while (true) {
-	int descriptorSocketServidor = conectarConServidor ("laser13", "puerto_laser");
+	int descriptorSocketServidor = conectarConServidor ("ldmrs_device", "ldmrs_port");
+
+	cout << descriptorSocketServidor;
+
 	if (descriptorSocketServidor == 1)
 	{
 		printf ("No puedo establecer conexion con el servidor\n");
@@ -466,6 +491,7 @@ int main_miercoles ()
 	
 //	 buffer = comandoViernes();mandaAlLaser (descriptorSocketServidor, buffer, 26);
 
+	buffer = comandoReset();mandaAlLaser (descriptorSocketServidor, buffer, 28);
 
 //	 buffer = comandoGetPort();mandaAlLaser (descriptorSocketServidor, buffer, 30);recibeDelLaser (descriptorSocketServidor, buffer, 32);
 //	 buffer = comandoGetSubnetMask();mandaAlLaser (descriptorSocketServidor, buffer, 30);recibeDelLaser (descriptorSocketServidor, buffer, 32);
@@ -474,15 +500,17 @@ int main_miercoles ()
 //	buffer = comandoSetPort();mandaAlLaser (descriptorSocketServidor, buffer, 34);recibeDelLaser (descriptorSocketServidor, buffer, 26);
 //	 buffer = comandoSetGateway();mandaAlLaser (descriptorSocketServidor, buffer, 34);recibeDelLaser (descriptorSocketServidor, buffer, 26);
 //	buffer = comandoSaveConfig();mandaAlLaser (descriptorSocketServidor, buffer, 28);recibeDelLaser (descriptorSocketServidor, buffer, 26);
-	buffer = comandoGetIP();mandaAlLaser (descriptorSocketServidor, buffer, 30);recibeDelLaser (descriptorSocketServidor, buffer, 32);
+	buffer = comandoGetIP();mandaAlLaser (descriptorSocketServidor, buffer, 30);recibeDelLaser (descriptorSocketServidor, 32);
+
+
 //
 //
-//	 buffer = comandoReset();mandaAlLaser (descriptorSocketServidor, buffer, 28);
+
 
 //	printf("el buffer es %h",buffer);
 	
 	//recibeDelLaser (descriptorSocketServidor, buffer, 32);
-	
+
 	
 //	printf ("Soy cliente, He recibido : %d\n", buffer);
 	close (descriptorSocketServidor);
@@ -490,3 +518,4 @@ int main_miercoles ()
 
 	return 0;
 }
+*/

@@ -5,3 +5,10 @@
 
 CommandReplyHeader::CommandReplyHeader(int dataBlockSize):
 			Header(dataBlockSize, COMMAND_REPLY_HEADER_PREFFIX, COMMAND_REPLY_HEADER_SUFFIX) {}
+
+CommandReplyHeader::CommandReplyHeader(uint8_t * headerBytes):
+			Header(headerBytes) {}
+
+HeaderTypeEnum CommandReplyHeader::getType() {
+	return COMMAND_REPLY;
+}
