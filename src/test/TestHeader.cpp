@@ -8,6 +8,7 @@
 #include "../message/hdr/ResetMessage.h"
 #include "../message/hdr/GetParameterRequestMessage.h"
 #include "../message/hdr/SetParameterRequestMessage.h"
+#include "../message/hdr/StopMeasureRequestMessage.h"
 #include "../message/hdr/SaveConfigRequestMessage.h"
 #include "../net/hdr/NetworkClient.h"
 #include <iostream>		// para 'cout'
@@ -72,9 +73,23 @@ void testCreateMessages() {
 }
 
 void testMandarMensajes() {
+
+	Message *stopMeasureMessage = new StopMeasureRequestMessage();
+	NetworkClient::getInstance()->send(stopMeasureMessage);
+	NetworkClient::getInstance()->receive(26);
+	delete stopMeasureMessage;
+
+/*
+	Message *resetMessage = new ResetMessage();
+	NetworkClient::getInstance()->send(resetMessage);
+	delete resetMessage;
+*/
+
 	Message *getIPMessage = new GetParameterRequestMessage(IP_ADDRESS);
 	NetworkClient::getInstance()->send(getIPMessage);
+	NetworkClient::getInstance()->receive(32);
 	delete getIPMessage;
+
 }
 
 void testHeaderFactory() {
@@ -129,8 +144,8 @@ int main () {
 //	testShowBytesHeaders();
 //	testShowGetParameters();
 //	testCreateMessages();
-//	testMandarMensajes();
-	testHeaderFactory();
+	testMandarMensajes();
+//	testHeaderFactory();
 	return 0;
 }
 

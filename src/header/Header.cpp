@@ -9,7 +9,7 @@ Header::Header (int dataBlockSize, uint8_t preffix, uint8_t suffix) {
 	bytes = new uint8_t[HEADER_SIZE];
 	addMagicWord();
 	addSizeOfPreviousMessage();
-	addSizeOfDataBlock();
+	addSizeOfDataBlock(dataBlockSize);
 	addReservedAndSourceId();
 	addDataType(preffix, suffix);
 	addNTPTime();
@@ -35,11 +35,11 @@ void Header::addSizeOfPreviousMessage() {
 }
 
 // TODO: convertir a hexadecimal
-void Header::addSizeOfDataBlock() {
+void Header::addSizeOfDataBlock(int dataBlockSize) {
 	bytes[8] = 0x00;
 	bytes[9] = 0x00;
 	bytes[10] = 0x00;
-	bytes[11] = 0x0A;
+	bytes[11] = dataBlockSize;
 }
 
 void Header::addReservedAndSourceId() {

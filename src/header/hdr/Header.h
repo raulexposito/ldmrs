@@ -33,7 +33,7 @@ class Header {
 
 		void addSizeOfPreviousMessage();
 
-		void addSizeOfDataBlock();
+		void addSizeOfDataBlock(int dataBlockSize);
 
 		void addReservedAndSourceId();
 

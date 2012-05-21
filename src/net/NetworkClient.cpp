@@ -77,4 +77,5 @@ void NetworkClient::send (Message * message) {
 	write (serverSocket, message->getBytes(), message->getAmountBytes());
 	cout << "MANDO: ";
 	message->showBytes();
+	cout << endl;
 }
