@@ -13,7 +13,7 @@ class ErrorAndWarningHeader : public Header {
 
 		ErrorAndWarningHeader(uint8_t * headerBytes);
 
-		virtual HeaderTypeEnum getType();
+		virtual HeaderTypeEnum getDataType();
 };
 
 #endif /* ERRORANDWARNINGHEADER_H_ */

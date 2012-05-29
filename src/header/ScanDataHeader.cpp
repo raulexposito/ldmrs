@@ -9,6 +9,6 @@ ScanDataHeader::ScanDataHeader(int dataBlockSize):
 ScanDataHeader::ScanDataHeader(uint8_t * headerBytes):
 			Header(headerBytes) {}
 
-HeaderTypeEnum ScanDataHeader::getType() {
+HeaderTypeEnum ScanDataHeader::getDataType() {
 	return SCAN_DATA;
 }

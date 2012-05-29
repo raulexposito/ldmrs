@@ -16,6 +16,7 @@ class HeaderFactory {
 
 		HeaderFactory(){};
 		HeaderFactory(HeaderFactory const&){};
+		void setBodySize(uint8_t * receivedHeader);
 		static HeaderFactory* instance;
 };
 

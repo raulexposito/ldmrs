@@ -13,7 +13,7 @@ class CommandReplyHeader : public Header {
 
 		CommandReplyHeader(uint8_t * headerBytes);
 
-		virtual HeaderTypeEnum getType();
+		virtual HeaderTypeEnum getDataType();
 };
 
 #endif /* COMMANDREPLYHEADER_H_ */

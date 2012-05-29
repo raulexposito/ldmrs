@@ -10,6 +10,8 @@ class ResetBody : public Body {
 
 	public:
 		ResetBody();
+
+		virtual BodyTypeEnum getBodyType();
 };
 
 #endif // RESETBODY_H

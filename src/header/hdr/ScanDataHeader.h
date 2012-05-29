@@ -13,7 +13,7 @@ class ScanDataHeader : public Header {
 
 		ScanDataHeader(uint8_t * headerBytes);
 
-		virtual HeaderTypeEnum getType();
+		virtual HeaderTypeEnum getDataType();
 };
 
 #endif // SCANDATAHEADER_H

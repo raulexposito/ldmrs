@@ -9,6 +9,6 @@ CommandReplyHeader::CommandReplyHeader(int dataBlockSize):
 CommandReplyHeader::CommandReplyHeader(uint8_t * headerBytes):
 			Header(headerBytes) {}
 
-HeaderTypeEnum CommandReplyHeader::getType() {
+HeaderTypeEnum CommandReplyHeader::getDataType() {
 	return COMMAND_REPLY;
 }

@@ -9,3 +9,7 @@ SetNTPTimestampFracSecRequestBody::SetNTPTimestampFracSecRequestBody(uint32_t fr
 
 	// TODO: tratar las fracciones de segundo
 }
+
+BodyTypeEnum SetNTPTimestampFracSecRequestBody::getBodyType() {
+	return SET_NTP_TIMESTAMP_FRACSEC;
+}

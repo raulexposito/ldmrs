@@ -4,6 +4,8 @@
 #include "../hdr/CommandHeader.h"
 #include "../hdr/CommandReplyHeader.h"
 
+#define LENGTH_FIRST_POSITION 8
+
 HeaderFactory* HeaderFactory::instance = 0;
 
 HeaderFactory* HeaderFactory::getInstance() {
@@ -26,6 +28,6 @@ Header* HeaderFactory::generateHeader (uint8_t * headerBytes) {
 	} else {
 		header = new CommandHeader(headerBytes);
 	}
-
 	return header;
 }
+

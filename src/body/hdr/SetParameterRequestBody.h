@@ -15,6 +15,8 @@ class SetParameterRequestBody : public Body {
 
 		int getAmountBytes();
 
+		virtual BodyTypeEnum getBodyType();
+
 	private:
 		void addParameterCode(ParameterEnum parameter);
 		void addUINT32ParameterValue(uint32_t value);

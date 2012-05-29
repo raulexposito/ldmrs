@@ -9,6 +9,6 @@ CommandHeader::CommandHeader(int dataBlockSize):
 CommandHeader::CommandHeader(uint8_t * headerBytes):
 			Header(headerBytes) {}
 
-HeaderTypeEnum CommandHeader::getType() {
+HeaderTypeEnum CommandHeader::getDataType() {
 	return COMMAND;
 }

@@ -2,6 +2,8 @@
 #define BODY_H
 
 #include <stdint.h> 	// para 'uint8_t'
+#include "../enum/BodyTypeEnum.h"
+
 
 /**
  * Clase basica con los elementos basicos del cuerpo de un mensaje
@@ -11,6 +13,8 @@ class Body {
 	public:
 
 		Body(int bodySize, uint8_t preffix, uint8_t suffix);
+
+		Body(uint8_t * bodyBytes);
 
 		virtual ~Body();
 

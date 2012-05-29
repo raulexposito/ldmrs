@@ -1,15 +1,15 @@
-#include "hdr/SetNTPTimestampSecRequestBody.h"
+#include "hdr/SetNTPTimestampSecReplyBody.h"
 
 #define CODE_PREFFIX 0x30
 #define CODE_SUFFIX 0x00
 #define BODY_SIZE 4
 
-SetNTPTimestampSecRequestBody::SetNTPTimestampSecRequestBody(uint32_t seconds):
+SetNTPTimestampSecReplyBody::SetNTPTimestampSecReplyBody(uint32_t seconds):
 			Body(BODY_SIZE, CODE_PREFFIX, CODE_SUFFIX) {
 
 	// TODO: tratar los segundos
 }
 
-BodyTypeEnum SetNTPTimestampSecRequestBody::getBodyType() {
+BodyTypeEnum SetNTPTimestampSecReplyBody::getBodyType() {
 	return SET_NTP_TIMESTAMP_SEC;
 }

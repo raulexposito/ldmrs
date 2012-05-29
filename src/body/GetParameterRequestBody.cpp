@@ -23,3 +23,7 @@ void GetParameterRequestBody::addParameterCode(ParameterEnum parameter) {
 int GetParameterRequestBody::getAmountBytes() {
 	return BODY_SIZE;
 }
+
+BodyTypeEnum GetParameterRequestBody::getBodyType() {
+	return GET_PARAMETER;
+}

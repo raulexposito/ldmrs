@@ -7,17 +7,12 @@
 /**
  * Cuerpo del comando 'get parameter'
  */
-class GetParameterRequestBody : public Body {
+class GetParameterReplyBody : public Body {
 
 	public:
-		GetParameterRequestBody(ParameterEnum parameter);
-
-		int getAmountBytes();
+		GetParameterReplyBody(ParameterEnum parameter);
 
 		virtual BodyTypeEnum getBodyType();
-
-	private:
-		void addParameterCode(ParameterEnum parameter);
 };
 
 #endif // GETPARAMETERREQUESTBODY_H

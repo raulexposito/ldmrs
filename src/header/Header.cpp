@@ -1,9 +1,10 @@
 #include "hdr/Header.h"
-#include <iostream>		// para 'cout'
-#include <iomanip>		// para formateo de cout
-using namespace std;	// para formateo de cout
+#include "../util/hdr/BytesConverter.h"
 
 #define HEADER_SIZE 24
+#define LENGTH_FIRST_POSITION 8
+
+#define DATATYPE_PREFIX
 
 Header::Header (int dataBlockSize, uint8_t preffix, uint8_t suffix) {
 	bytes = new uint8_t[HEADER_SIZE];
@@ -34,12 +35,12 @@ void Header::addSizeOfPreviousMessage() {
 	bytes[7] = 0x00;
 }
 
-// TODO: convertir a hexadecimal
 void Header::addSizeOfDataBlock(int dataBlockSize) {
-	bytes[8] = 0x00;
-	bytes[9] = 0x00;
-	bytes[10] = 0x00;
-	bytes[11] = dataBlockSize;
+	uint32_t dataBlock32 = dataBlockSize;
+	bytes[8] = (dataBlock32 & 0xff000000) >> 24;
+	bytes[9] = (dataBlock32 & 0x00ff0000) >> 16;
+	bytes[10] = (dataBlock32 & 0x0000ff00) >> 8;
+	bytes[11] = (dataBlock32 & 0x000000ff);
 }
 
 void Header::addReservedAndSourceId() {
@@ -72,11 +73,15 @@ uint8_t * Header::getBytes() {
 	return bytes;
 }
 
-// http://stackoverflow.com/questions/673240/how-do-i-print-an-unsigned-char-as-hex-in-c-using-ostream
+int Header::getBodySize () {
+	int bodySize;
+	bodySize = static_cast<int>(bytes[LENGTH_FIRST_POSITION]) * 16777216;
+	bodySize += static_cast<int>(bytes[LENGTH_FIRST_POSITION + 1]) * 65536;
+	bodySize += static_cast<int>(bytes[LENGTH_FIRST_POSITION + 2]) * 256;
+	bodySize += static_cast<int>(bytes[LENGTH_FIRST_POSITION + 3]);
+	return bodySize;
+}
+
 void Header::showBytes() {
-	int i;
-	for (i = 0; i < HEADER_SIZE; i++) {
-		cout << setw(2) << setfill('0') << hex << uppercase << (int) bytes[i] << " ";
-	}
-	cout << dec;
+	BytesConverter::getInstance()->print(bytes, HEADER_SIZE);
 }

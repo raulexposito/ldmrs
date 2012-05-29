@@ -1,11 +1,5 @@
 #include "hdr/Message.h"
 
-
-#include <iostream>		// para 'cout'
-#include <iomanip>		// para formateo de cout
-using namespace std;	// para formateo de cout
-
-
 #define HEADER_SIZE 24
 
 Message::Message(Header* header, Body* body) {

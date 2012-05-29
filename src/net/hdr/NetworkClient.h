@@ -10,7 +10,7 @@ class NetworkClient {
 	public:
 		static NetworkClient* getInstance();
 
-		void receive (int amountBytes);
+		Message * receive ();
 
 		void send (Message * message);
 
@@ -18,6 +18,7 @@ class NetworkClient {
 
 		NetworkClient();
 		NetworkClient(NetworkClient const&){};
+		uint8_t * receiveBody(int bodySize);
 		static NetworkClient* instance;
 		int serverSocket;
 };

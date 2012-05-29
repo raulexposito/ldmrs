@@ -85,3 +85,7 @@ int SetParameterRequestBody::getAmountBytes() {
 	return BODY_SIZE;
 }
 
+BodyTypeEnum SetParameterRequestBody::getBodyType() {
+	return SET_PARAMETER;
+}
+

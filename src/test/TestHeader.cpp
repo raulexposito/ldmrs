@@ -8,26 +8,28 @@
 #include "../message/hdr/ResetMessage.h"
 #include "../message/hdr/GetParameterRequestMessage.h"
 #include "../message/hdr/SetParameterRequestMessage.h"
-#include "../message/hdr/StopMeasureRequestMessage.h"
-#include "../message/hdr/SaveConfigRequestMessage.h"
+#include "../message/hdr/StopMeasureMessage.h"
+#include "../message/hdr/StartMeasureMessage.h"
+#include "../message/hdr/SaveConfigMessage.h"
 #include "../net/hdr/NetworkClient.h"
 #include <iostream>		// para 'cout'
 #include <iomanip>		// para formateo de cout
 using namespace std;	// para formateo de cout
 
 void testShowBytesHeaders() {
-	Header *scanDataHeader = new ScanDataHeader(42);
-	Header *errorAndWarningHeader = new ErrorAndWarningHeader(42);
-	Header *commandHeader = new CommandHeader(42);
-	Header *commandReplyHeader = new CommandReplyHeader(42);
+	Header *scanDataHeader = new ScanDataHeader(256);
+	Header *errorAndWarningHeader = new ErrorAndWarningHeader(257);
+	Header *commandHeader = new CommandHeader(65537);
+	Header *commandReplyHeader = new CommandReplyHeader(16843009);
 
 	scanDataHeader->showBytes();
-	cout << endl;
+	cout << " | " << scanDataHeader->getBodySize() << endl;
 	errorAndWarningHeader->showBytes();
-	cout << endl;
+	cout << " | " << errorAndWarningHeader->getBodySize() << endl;
 	commandHeader->showBytes();
-	cout << endl;
+	cout << " | " << commandHeader->getBodySize() << endl;
 	commandReplyHeader->showBytes();
+	cout << " | " << commandReplyHeader->getBodySize() << endl;
 
 	delete scanDataHeader;
 	delete errorAndWarningHeader;
@@ -51,7 +53,7 @@ void testCreateMessages() {
 	Message *resetMessage = new ResetMessage();
 	Message *getIPMessage = new GetParameterRequestMessage(IP_ADDRESS);
 	Message *getPuertoMessage = new GetParameterRequestMessage(TCP_PORT);
-	Message *saveConfig = new SaveConfigRequestMessage();
+	Message *saveConfig = new SaveConfigMessage();
 	Message *setParameter = new SetParameterRequestMessage(START_ANGLE, 0x12345678);
 
 	cout << endl << "comando reset [" << resetMessage->getAmountBytes() << " bytes]: " << endl;
@@ -74,22 +76,29 @@ void testCreateMessages() {
 
 void testMandarMensajes() {
 
+/*
+	Message *startMeasure = new StartMeasureRequestMessage();
+	NetworkClient::getInstance()->send(startMeasure);
+	for (;;) {
+		NetworkClient::getInstance()->receive();
+	}
+*/
+//	delete startMeasure;
+/*
 	Message *stopMeasureMessage = new StopMeasureRequestMessage();
 	NetworkClient::getInstance()->send(stopMeasureMessage);
 	NetworkClient::getInstance()->receive(26);
 	delete stopMeasureMessage;
 
-/*
 	Message *resetMessage = new ResetMessage();
 	NetworkClient::getInstance()->send(resetMessage);
 	delete resetMessage;
-*/
 
 	Message *getIPMessage = new GetParameterRequestMessage(IP_ADDRESS);
 	NetworkClient::getInstance()->send(getIPMessage);
-	NetworkClient::getInstance()->receive(32);
+	NetworkClient::getInstance()->receive();
 	delete getIPMessage;
-
+*/
 }
 
 void testHeaderFactory() {
@@ -105,7 +114,7 @@ void testHeaderFactory() {
 	headerBytes[8] = 0x00;
 	headerBytes[9] = 0x00;
 	headerBytes[10] = 0x00;
-	headerBytes[11] = 0x19;
+	headerBytes[11] = 0x01;
 	headerBytes[12] = 0x00;
 	headerBytes[13] = 0x00;
 	headerBytes[14] = 0x20;	// Data Type - 2030 = error and warnings
@@ -121,7 +130,7 @@ void testHeaderFactory() {
 
 	Header * header = HeaderFactory::getInstance()->generateHeader(headerBytes);
 
-	switch (header->getType()) {
+	switch (header->getDataType()) {
 		case SCAN_DATA:
 			cout << "SCAN_DATA";
 			break;
@@ -139,13 +148,42 @@ void testHeaderFactory() {
 	delete headerBytes;
 }
 
+
+void testBodyFactory() {
+	uint8_t * headerBytes = new uint8_t[26];
+	headerBytes[0] = 0xAF;
+	headerBytes[1] = 0xFE;
+	headerBytes[2] = 0xC0;
+	headerBytes[3] = 0xC2;
+	headerBytes[4] = 0x00;
+	headerBytes[5] = 0x00;
+	headerBytes[6] = 0x00;
+	headerBytes[7] = 0x00;
+	headerBytes[8] = 0x00;
+	headerBytes[9] = 0x00;
+	headerBytes[10] = 0x00;
+	headerBytes[11] = 0x01;
+	headerBytes[12] = 0x00;
+	headerBytes[13] = 0x00;
+	headerBytes[14] = 0x20;	// Data Type - 2030 = error and warnings
+	headerBytes[15] = 0x30;
+	headerBytes[16] = 0x00;
+	headerBytes[17] = 0x00;
+	headerBytes[18] = 0x00;
+	headerBytes[19] = 0x00;
+	headerBytes[20] = 0x00;
+	headerBytes[21] = 0x00;
+	headerBytes[22] = 0x00;
+	headerBytes[23] = 0x00;
+}
 int main () {
 	
 //	testShowBytesHeaders();
 //	testShowGetParameters();
 //	testCreateMessages();
-	testMandarMensajes();
+//	testMandarMensajes();
 //	testHeaderFactory();
+//	testTamanoResultado();
 	return 0;
 }
 

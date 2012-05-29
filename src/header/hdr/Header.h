@@ -19,9 +19,11 @@ class Header {
 
 		uint8_t * getBytes();
 
+		int getBodySize();
+
 		void showBytes();
 
-		virtual HeaderTypeEnum getType()=0;
+		virtual HeaderTypeEnum getDataType()=0;
 
 	protected:
 

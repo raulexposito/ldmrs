@@ -10,6 +10,8 @@ class GetStatusRequestBody : public Body {
 
 	public:
 		GetStatusRequestBody();
+
+		virtual BodyTypeEnum getBodyType();
 };
 
 #endif // GETSTATUSREQUESTBODY_H

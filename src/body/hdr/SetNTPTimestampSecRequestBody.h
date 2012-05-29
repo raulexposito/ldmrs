@@ -11,6 +11,8 @@ class SetNTPTimestampSecRequestBody : public Body {
 
 	public:
 		SetNTPTimestampSecRequestBody(uint32_t seconds);
+
+		virtual BodyTypeEnum getBodyType();
 };
 
 #endif // SETNTPTIMESTAMPSECREQUESTBODY_H

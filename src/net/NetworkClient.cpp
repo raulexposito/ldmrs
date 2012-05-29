@@ -10,14 +10,14 @@
 #include <netdb.h>
 #include <stdlib.h>
 
-#include <iostream>		// para 'cout'
-#include <iomanip>		// para formateo de cout
-using namespace std;	// para formateo de cout
-
 #include "hdr/NetworkClient.h"
+#include "../header/factory/hdr/HeaderFactory.h"
 
 #define HOST "ldmrs_device"
 #define PORT "ldmrs_port"
+
+#define HEADER_LENGTH 24
+#define LENGTH_FIRST_POSITION 8
 
 NetworkClient* NetworkClient::instance = 0;
 
@@ -58,24 +58,21 @@ NetworkClient::NetworkClient() {
 	}
 }
 
-void NetworkClient::receive (int amountBytes) {
-	uint8_t * received = new uint8_t[amountBytes];
+Message * NetworkClient::receive () {
+	uint8_t * receivedHeader = new uint8_t[HEADER_LENGTH];
+	read (serverSocket, receivedHeader, HEADER_LENGTH);
+	Header * header = HeaderFactory::getInstance()->generateHeader(receivedHeader);
 
-	read (serverSocket, received, amountBytes);
+	uint8_t * receivedBody = new uint8_t[header->getBodySize()];
+	read (serverSocket, receivedBody, header->getBodySize());
+	Body * body = BodyFactory::getInstance()->generateBody(header->getDataType(), receivedBody);
 
-	cout << "LLEGA: ";
-	int i;
-	for (i = 0; i < amountBytes; i++) {
-		cout << setw(2) << setfill('0') << hex << uppercase << (int) received[i] << " ";
-	}
-	cout << dec << endl;
-
-	free(received);
+	Message * message = new Message(header, body);
+	message->showBytes();
+	return message;
 }
 
 void NetworkClient::send (Message * message) {
 	write (serverSocket, message->getBytes(), message->getAmountBytes());
-	cout << "MANDO: ";
-	message->showBytes();
-	cout << endl;
 }
+

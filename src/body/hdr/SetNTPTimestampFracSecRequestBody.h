@@ -11,6 +11,8 @@ class SetNTPTimestampFracSecRequestBody : public Body {
 
 	public:
 		SetNTPTimestampFracSecRequestBody(uint32_t frac_seconds);
+
+		virtual BodyTypeEnum getBodyType();
 };
 
 #endif // SETNTPTIMESTAMPFRACSECREQUESTBODY_H

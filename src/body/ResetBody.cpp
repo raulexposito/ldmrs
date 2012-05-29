@@ -6,3 +6,7 @@
 
 ResetBody::ResetBody():
 			Body(BODY_SIZE, CODE_PREFFIX, CODE_SUFFIX) {}
+
+BodyTypeEnum ResetBody::getBodyType() {
+	return RESET;
+}

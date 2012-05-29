@@ -17,7 +17,5 @@
 
 * UTILIDADES
 
-- conversion de IP a hexadecimal, tanto little endian como big endian
+- funcion que muestre por pantalla chorros de bytes
 - segundos en formato NTP
-- leer de un fichero de configuracion.
-- crear conexiones TCP con el laser.

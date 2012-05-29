@@ -9,6 +9,6 @@ ErrorAndWarningHeader::ErrorAndWarningHeader(int dataBlockSize):
 ErrorAndWarningHeader::ErrorAndWarningHeader(uint8_t * headerBytes):
 			Header(headerBytes) {}
 
-HeaderTypeEnum ErrorAndWarningHeader::getType() {
+HeaderTypeEnum ErrorAndWarningHeader::getDataType() {
 	return ERRORS_AND_WARNINGS;
 }
