@@ -6,8 +6,11 @@
 
 SetNTPTimestampFracSecReplyBody::SetNTPTimestampFracSecReplyBody(uint32_t frac_seconds):
 			Body(BODY_SIZE, CODE_PREFFIX, CODE_SUFFIX) {
-
 	// TODO: tratar las fracciones de segundo
+}
+
+SetNTPTimestampFracSecReplyBody::SetNTPTimestampFracSecReplyBody(int bodySize, uint8_t * bodyBytes):
+		Body(bodySize, bodyBytes) {
 }
 
 BodyTypeEnum SetNTPTimestampFracSecReplyBody::getBodyType() {

@@ -11,6 +11,10 @@ GetParameterReplyBody::GetParameterReplyBody(ParameterEnum parameter):
 			Body(BODY_SIZE, CODE_PREFFIX, CODE_SUFFIX) {
 }
 
+GetParameterReplyBody::GetParameterReplyBody(int bodySize, uint8_t * bodyBytes):
+		Body(bodySize, bodyBytes) {
+}
+
 BodyTypeEnum GetParameterReplyBody::getBodyType() {
 	return GET_PARAMETER;
 }

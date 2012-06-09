@@ -14,7 +14,7 @@ class Body {
 
 		Body(int bodySize, uint8_t preffix, uint8_t suffix);
 
-		Body(uint8_t * bodyBytes);
+		Body(int bodySize, uint8_t * bodyBytes);
 
 		virtual ~Body();
 

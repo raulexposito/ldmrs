@@ -1,21 +1,73 @@
 
-* COMANDOS:
 
-- respuesta al getStatus
-- respuesta al saveConfig
-- respuesta al setParameter
-- respuesta al getParameter
-- respuesta al startMeasure
-- respuesta al stopMeasure
-- respuesta al setNTPTimestampSec
-- respuesta al setNTPTimestampFracSec
+* Message::showParameterValue()
 
 
-- setNTPTimestampSec -> segundos a NTP
-- setNTPTimestampFracSec -> milisegundos a NTP
+	En linea con la pagina 13. La respuesta al GetParameter, como se puede ver en las paginas 11-12, viene en 4 bytes. La cuestion es que en esos 4 bytes
+	puede venir una direccion IP, una puerta de enlace, una mascara de red (las 3 con el formato aaa.bbb.ccc.ddd) o un puerto, la frecuencia de escaneo, etc (las demas
+	como enteros).
+	
+	Ahora mismo se muestra lo que devuelve el laser, pero habria que comprobar si es una direccion o un entero par mostrar la informacion en un formato que se entienda.     
+
+	Por ejemplo, ante esta respuesta:
+	
+	
+	RAW header: AF FE C0 C2 00 00 00 00 00 00 00 08 00 00 20 20 00 05 26 BA 8B 6E 27 FC 
+	RAW body: 11 00 02 10 00 FF FF FF 
+	----------------------
+	type: COMMAND REPLY
+	subtype: GET PARAMETER
+	parameter: SUBNET MASK
+	value: FF FF FF 00
+	
+	la mascara de red deberia mostrarse as’:
+	
+	value: FF FF FF 00 (255.255.255.0)
+	
+	
+	Ante esta otra respuesta:
+	
+	
+	RAW header: AF FE C0 C2 00 00 00 00 00 00 00 08 00 00 20 20 00 05 28 D9 39 5B 43 A0 
+	RAW body: 11 00 01 10 50 00 00 00 
+	----------------------
+	type: COMMAND REPLY
+	subtype: GET PARAMETER
+	parameter: TCP PORT
+	value: 00 00 00 50 
+	
+	el puerto deberia mostrarse asi:
+	
+	value: 00 00 00 50 (80)
+	
+	
+* Message::showGetStatus()
 
 
-* UTILIDADES
+	Algo similar habria que hacer en este metodo. Los valores en bruto se recuperan bien pero deben ser convertidos. P‡gina 10.
 
-- funcion que muestre por pantalla chorros de bytes
-- segundos en formato NTP
+
+* SetNTPTimestampSec y SetNTPTimestampFracSec
+	
+
+	Hay que investigar el formato NTP
+
+
+* Message::showErrorsAndWarnings()
+
+
+	Hay que implementarlo para saber que informacion nos da en caso de error
+
+
+* Message::showScanData()
+
+	
+	Eliminar los TODO con el formato de fecha NTP
+
+	
+* Message::showPointMeasurement()
+
+
+	Mostrar layer y echo como UINT4. P‡gina 5.
+	
+	

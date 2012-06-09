@@ -6,8 +6,11 @@
 
 SetNTPTimestampSecReplyBody::SetNTPTimestampSecReplyBody(uint32_t seconds):
 			Body(BODY_SIZE, CODE_PREFFIX, CODE_SUFFIX) {
-
 	// TODO: tratar los segundos
+}
+
+SetNTPTimestampSecReplyBody::SetNTPTimestampSecReplyBody(int bodySize, uint8_t * bodyBytes):
+		Body(bodySize, bodyBytes) {
 }
 
 BodyTypeEnum SetNTPTimestampSecReplyBody::getBodyType() {

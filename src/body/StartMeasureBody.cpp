@@ -7,6 +7,10 @@
 StartMeasureBody::StartMeasureBody():
 			Body(BODY_SIZE, CODE_PREFFIX, CODE_SUFFIX) {}
 
+StartMeasureBody::StartMeasureBody(int bodySize, uint8_t * bodyBytes):
+		Body(bodySize, bodyBytes) {
+}
+
 BodyTypeEnum StartMeasureBody::getBodyType() {
 	return START_MEASURE;
 }

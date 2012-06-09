@@ -7,6 +7,7 @@
 #include "../body/hdr/GetParameterRequestBody.h"
 #include "../message/hdr/ResetMessage.h"
 #include "../message/hdr/GetParameterRequestMessage.h"
+#include "../message/hdr/GetStatusRequestMessage.h"
 #include "../message/hdr/SetParameterRequestMessage.h"
 #include "../message/hdr/StopMeasureMessage.h"
 #include "../message/hdr/StartMeasureMessage.h"
@@ -16,174 +17,59 @@
 #include <iomanip>		// para formateo de cout
 using namespace std;	// para formateo de cout
 
-void testShowBytesHeaders() {
-	Header *scanDataHeader = new ScanDataHeader(256);
-	Header *errorAndWarningHeader = new ErrorAndWarningHeader(257);
-	Header *commandHeader = new CommandHeader(65537);
-	Header *commandReplyHeader = new CommandReplyHeader(16843009);
+void testStartMensajes() {
 
-	scanDataHeader->showBytes();
-	cout << " | " << scanDataHeader->getBodySize() << endl;
-	errorAndWarningHeader->showBytes();
-	cout << " | " << errorAndWarningHeader->getBodySize() << endl;
-	commandHeader->showBytes();
-	cout << " | " << commandHeader->getBodySize() << endl;
-	commandReplyHeader->showBytes();
-	cout << " | " << commandReplyHeader->getBodySize() << endl;
+	Message *request = new StartMeasureMessage();
+	NetworkClient::getInstance()->send(request);
+	Message * response = NetworkClient::getInstance()->receive();
 
-	delete scanDataHeader;
-	delete errorAndWarningHeader;
-	delete commandHeader;
-	delete commandReplyHeader;
+	request->showInfo();
+	response->showInfo();
+
+	delete request;
+	delete response;
 }
 
-void testShowGetParameters() {
-	Body *getParameterIP = new GetParameterRequestBody(IP_ADDRESS);
-	Body *getParameterGateway = new GetParameterRequestBody(STANDARD_GATEWAY);
+void testStopMensajes() {
 
-	getParameterIP->showBytes();
-	cout << endl;
-	getParameterGateway->showBytes();
+	Message *request = new StopMeasureMessage();
+	NetworkClient::getInstance()->send(request);
+	Message * response = NetworkClient::getInstance()->receive();
 
-	delete getParameterIP;
-	delete getParameterGateway;
+	request->showInfo();
+	response->showInfo();
+
+	delete request;
+	delete response;
 }
 
-void testCreateMessages() {
-	Message *resetMessage = new ResetMessage();
-	Message *getIPMessage = new GetParameterRequestMessage(IP_ADDRESS);
-	Message *getPuertoMessage = new GetParameterRequestMessage(TCP_PORT);
-	Message *saveConfig = new SaveConfigMessage();
-	Message *setParameter = new SetParameterRequestMessage(START_ANGLE, 0x12345678);
+void testLeerLaser() {
 
-	cout << endl << "comando reset [" << resetMessage->getAmountBytes() << " bytes]: " << endl;
-	resetMessage->showBytes();
-	cout << endl << "comando getParameter con IP [" << getIPMessage->getAmountBytes() << " bytes]: " << endl;
-	getIPMessage->showBytes();
-	cout << endl << "comando getParameter con TCP port [" << getPuertoMessage->getAmountBytes() << " bytes]: " << endl;
-	getPuertoMessage->showBytes();
-	cout << endl << "comando save config [" << saveConfig->getAmountBytes() << " bytes]: " << endl;
-	saveConfig->showBytes();
-	cout << endl << "comando setParameter [" << setParameter->getAmountBytes() << " bytes]: " << endl;
-	setParameter->showBytes();
-
-	delete resetMessage;
-	delete getIPMessage;
-	delete getPuertoMessage;
-	delete saveConfig;
-	delete setParameter;
+	Message * laserRead = NetworkClient::getInstance()->receive();
+	laserRead->showInfo();
+	delete laserRead;
 }
 
-void testMandarMensajes() {
+void testGetParameter() {
 
-/*
-	Message *startMeasure = new StartMeasureRequestMessage();
-	NetworkClient::getInstance()->send(startMeasure);
-	for (;;) {
-		NetworkClient::getInstance()->receive();
-	}
-*/
-//	delete startMeasure;
-/*
-	Message *stopMeasureMessage = new StopMeasureRequestMessage();
-	NetworkClient::getInstance()->send(stopMeasureMessage);
-	NetworkClient::getInstance()->receive(26);
-	delete stopMeasureMessage;
+	Message *request = new GetParameterRequestMessage(TCP_PORT);
+	NetworkClient::getInstance()->send(request);
+	Message * response = NetworkClient::getInstance()->receive();
 
-	Message *resetMessage = new ResetMessage();
-	NetworkClient::getInstance()->send(resetMessage);
-	delete resetMessage;
+	request->showInfo();
+	response->showInfo();
 
-	Message *getIPMessage = new GetParameterRequestMessage(IP_ADDRESS);
-	NetworkClient::getInstance()->send(getIPMessage);
-	NetworkClient::getInstance()->receive();
-	delete getIPMessage;
-*/
+	delete request;
+	delete response;
 }
 
-void testHeaderFactory() {
-	uint8_t * headerBytes = new uint8_t[26];
-	headerBytes[0] = 0xAF;
-	headerBytes[1] = 0xFE;
-	headerBytes[2] = 0xC0;
-	headerBytes[3] = 0xC2;
-	headerBytes[4] = 0x00;
-	headerBytes[5] = 0x00;
-	headerBytes[6] = 0x00;
-	headerBytes[7] = 0x00;
-	headerBytes[8] = 0x00;
-	headerBytes[9] = 0x00;
-	headerBytes[10] = 0x00;
-	headerBytes[11] = 0x01;
-	headerBytes[12] = 0x00;
-	headerBytes[13] = 0x00;
-	headerBytes[14] = 0x20;	// Data Type - 2030 = error and warnings
-	headerBytes[15] = 0x30;
-	headerBytes[16] = 0x00;
-	headerBytes[17] = 0x00;
-	headerBytes[18] = 0x00;
-	headerBytes[19] = 0x00;
-	headerBytes[20] = 0x00;
-	headerBytes[21] = 0x00;
-	headerBytes[22] = 0x00;
-	headerBytes[23] = 0x00;
-
-	Header * header = HeaderFactory::getInstance()->generateHeader(headerBytes);
-
-	switch (header->getDataType()) {
-		case SCAN_DATA:
-			cout << "SCAN_DATA";
-			break;
-		case ERRORS_AND_WARNINGS:
-			cout << "ERRORS_AND_WARNINGS";
-			break;
-		case COMMAND:
-			cout << "COMMAND";
-			break;
-		case COMMAND_REPLY:
-			cout << "COMMAND_REPLY";
-			break;
-	}
-
-	delete headerBytes;
-}
-
-
-void testBodyFactory() {
-	uint8_t * headerBytes = new uint8_t[26];
-	headerBytes[0] = 0xAF;
-	headerBytes[1] = 0xFE;
-	headerBytes[2] = 0xC0;
-	headerBytes[3] = 0xC2;
-	headerBytes[4] = 0x00;
-	headerBytes[5] = 0x00;
-	headerBytes[6] = 0x00;
-	headerBytes[7] = 0x00;
-	headerBytes[8] = 0x00;
-	headerBytes[9] = 0x00;
-	headerBytes[10] = 0x00;
-	headerBytes[11] = 0x01;
-	headerBytes[12] = 0x00;
-	headerBytes[13] = 0x00;
-	headerBytes[14] = 0x20;	// Data Type - 2030 = error and warnings
-	headerBytes[15] = 0x30;
-	headerBytes[16] = 0x00;
-	headerBytes[17] = 0x00;
-	headerBytes[18] = 0x00;
-	headerBytes[19] = 0x00;
-	headerBytes[20] = 0x00;
-	headerBytes[21] = 0x00;
-	headerBytes[22] = 0x00;
-	headerBytes[23] = 0x00;
-}
 int main () {
-	
-//	testShowBytesHeaders();
-//	testShowGetParameters();
-//	testCreateMessages();
-//	testMandarMensajes();
-//	testHeaderFactory();
-//	testTamanoResultado();
+//	testStartMensajes();
+//	testStopMensajes();
+//	testLeerLaser();
+
+	testGetParameter();
+
 	return 0;
 }
 

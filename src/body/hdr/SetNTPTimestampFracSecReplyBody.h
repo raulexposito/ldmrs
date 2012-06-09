@@ -10,7 +10,9 @@
 class SetNTPTimestampFracSecReplyBody : public Body {
 
 	public:
-	SetNTPTimestampFracSecReplyBody(uint32_t frac_seconds);
+		SetNTPTimestampFracSecReplyBody(uint32_t frac_seconds);
+
+		SetNTPTimestampFracSecReplyBody(int bodySize, uint8_t * bodyBytes);
 
 		virtual BodyTypeEnum getBodyType();
 };

@@ -13,6 +13,8 @@ class SetParameterReplyBody : public Body {
 	public:
 		SetParameterReplyBody(ParameterEnum parameter);
 
+		SetParameterReplyBody(int bodySize, uint8_t * bodyBytes);
+
 		virtual BodyTypeEnum getBodyType();
 };
 

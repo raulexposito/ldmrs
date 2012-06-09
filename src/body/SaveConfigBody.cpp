@@ -7,6 +7,10 @@
 SaveConfigBody::SaveConfigBody():
 			Body(BODY_SIZE, CODE_PREFFIX, CODE_SUFFIX) {}
 
+SaveConfigBody::SaveConfigBody(int bodySize, uint8_t * bodyBytes):
+		Body(bodySize, bodyBytes) {
+}
+
 BodyTypeEnum SaveConfigBody::getBodyType() {
 	return SAVE_CONFIG;
 }

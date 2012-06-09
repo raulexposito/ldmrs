@@ -11,6 +11,8 @@ class SaveConfigBody : public Body {
 	public:
 		SaveConfigBody();
 
+		SaveConfigBody(int bodySize, uint8_t * bodyBytes);
+
 		virtual BodyTypeEnum getBodyType();
 };
 

@@ -3,6 +3,7 @@
 
 #include "../../header/hdr/Header.h"
 #include "../../body/hdr/Body.h"
+#include "../../header/enum/HeaderTypeEnum.h"
 #include <stdint.h> 	// para 'uint8_t'
 
 class Message {
@@ -15,9 +16,17 @@ class Message {
 
 		uint8_t * getBytes();
 
+		Header* getHeader();
+
+		Body* getBody();
+
 		void showBytes();
 
 		int getAmountBytes();
+
+		HeaderTypeEnum getDataType();
+
+		void showInfo();
 
 	protected:
 
@@ -32,6 +41,24 @@ class Message {
 	private:
 
 		void populateBytes();
+
+		void showHeaderDataType(HeaderTypeEnum headerType, Body* body);
+
+		void showScanData(Body* body);
+
+		void showPointMeasurement(int number, int pointBodyPosition, Body* body);
+
+		void showErrorsAndWarnings(Body* body);
+
+		void showHeaderSubDataType(Body* body, bool isCommandReply);
+
+		void showParameterType(Body* body, int firstPosition, int secondPosition);
+
+		void showParameterValue(Body* body, int initPosition, int endPosition);
+
+		void showGetStatus(Body* body);
+
+		void showHex8(uint8_t uint8);
 };
 
 #endif // MESSAGE_H

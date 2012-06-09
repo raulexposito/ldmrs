@@ -11,6 +11,8 @@ class GetStatusReplyBody : public Body {
 	public:
 		GetStatusReplyBody();
 
+		GetStatusReplyBody(int bodySize, uint8_t * bodyBytes);
+
 		virtual BodyTypeEnum getBodyType();
 };
 

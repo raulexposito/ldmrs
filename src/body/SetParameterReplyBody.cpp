@@ -10,6 +10,10 @@
 SetParameterReplyBody::SetParameterReplyBody(ParameterEnum parameter):
 			Body(BODY_SIZE, CODE_PREFFIX, CODE_SUFFIX) {}
 
+SetParameterReplyBody::SetParameterReplyBody(int bodySize, uint8_t * bodyBytes):
+		Body(bodySize, bodyBytes) {
+}
+
 BodyTypeEnum SetParameterReplyBody::getBodyType() {
 	return SET_PARAMETER;
 }

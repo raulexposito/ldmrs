@@ -21,3 +21,4 @@ void BytesConverter::print (uint8_t * bytes, int size) {
 	}
 	cout << dec;
 }
+

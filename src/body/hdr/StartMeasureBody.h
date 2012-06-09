@@ -11,6 +11,8 @@ class StartMeasureBody : public Body {
 	public:
 		StartMeasureBody();
 
+		StartMeasureBody(int bodySize, uint8_t * bodyBytes);
+
 		virtual BodyTypeEnum getBodyType();
 };
 

@@ -2,8 +2,6 @@
 #define BYTESCONVERTER_H
 
 #include <stdint.h> 	// para 'uint8_t'
-#include "../../message/hdr/Message.h"
-
 
 class BytesConverter {
 

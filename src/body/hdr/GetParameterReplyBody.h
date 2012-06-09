@@ -12,6 +12,8 @@ class GetParameterReplyBody : public Body {
 	public:
 		GetParameterReplyBody(ParameterEnum parameter);
 
+		GetParameterReplyBody(int bodySize, uint8_t * bodyBytes);
+
 		virtual BodyTypeEnum getBodyType();
 };
 

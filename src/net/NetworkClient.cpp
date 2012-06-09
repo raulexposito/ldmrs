@@ -12,6 +12,7 @@
 
 #include "hdr/NetworkClient.h"
 #include "../header/factory/hdr/HeaderFactory.h"
+#include "../body/factory/hdr/BodyFactory.h"
 
 #define HOST "ldmrs_device"
 #define PORT "ldmrs_port"
@@ -59,16 +60,15 @@ NetworkClient::NetworkClient() {
 }
 
 Message * NetworkClient::receive () {
-	uint8_t * receivedHeader = new uint8_t[HEADER_LENGTH];
-	read (serverSocket, receivedHeader, HEADER_LENGTH);
-	Header * header = HeaderFactory::getInstance()->generateHeader(receivedHeader);
+	uint8_t * receivedHeaderBytes = new uint8_t[HEADER_LENGTH];
+	read (serverSocket, receivedHeaderBytes, HEADER_LENGTH);
+	Header * header = HeaderFactory::getInstance()->generateHeader(receivedHeaderBytes);
 
-	uint8_t * receivedBody = new uint8_t[header->getBodySize()];
-	read (serverSocket, receivedBody, header->getBodySize());
-	Body * body = BodyFactory::getInstance()->generateBody(header->getDataType(), receivedBody);
+	uint8_t * receivedBodyBytes = new uint8_t[header->getBodySize()];
+	read (serverSocket, receivedBodyBytes, header->getBodySize());
+	Body * body = BodyFactory::getInstance()->generateBody(header->getBodySize(), receivedBodyBytes);
 
 	Message * message = new Message(header, body);
-	message->showBytes();
 	return message;
 }
 

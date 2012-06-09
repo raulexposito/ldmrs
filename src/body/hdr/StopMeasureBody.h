@@ -11,6 +11,8 @@ class StopMeasureBody : public Body {
 	public:
 		StopMeasureBody();
 
+		StopMeasureBody(int bodySize, uint8_t * bodyBytes);
+
 		virtual BodyTypeEnum getBodyType();
 };
 

@@ -13,7 +13,8 @@ Body::Body(int bodySize, uint8_t preffix, uint8_t suffix) {
 	bytes[3] = RESERVED;
 }
 
-Body::Body(uint8_t * bodyBytes) {
+Body::Body(int bodySize, uint8_t * bodyBytes) {
+	this->bodySize = bodySize;
 	bytes = bodyBytes;
 }
 

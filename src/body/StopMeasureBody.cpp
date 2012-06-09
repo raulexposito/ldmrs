@@ -7,6 +7,10 @@
 StopMeasureBody::StopMeasureBody():
 			Body(BODY_SIZE, CODE_PREFFIX, CODE_SUFFIX) {}
 
+StopMeasureBody::StopMeasureBody(int bodySize, uint8_t * bodyBytes):
+		Body(bodySize, bodyBytes) {
+}
+
 BodyTypeEnum StopMeasureBody::getBodyType() {
 	return STOP_MEASURE;
 }
