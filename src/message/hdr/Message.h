@@ -52,9 +52,9 @@ class Message {
 
 		void showHeaderSubDataType(Body* body, bool isCommandReply);
 
-		void showParameterType(Body* body, int firstPosition, int secondPosition);
+		bool showParameterType(Body* body, int parameterFirstPosition, int parameterSecondPosition);
 
-		void showParameterValue(Body* body, int initPosition, int endPosition);
+		void showParameterValue(Body* body, int initPosition, int endPosition, bool isAddress);
 
 		void showGetStatus(Body* body);
 
