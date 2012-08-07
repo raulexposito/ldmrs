@@ -22,15 +22,11 @@ Body::~Body() {
 	delete [] bytes;
 }
 
-uint8_t * Body::getBytes() {
+uint8_t * Body::getBytesInRaw() {
 	return bytes;
 }
 
 int Body::getAmountBytes() {
 	return BODY_SIZE_BY_DEFAULT;
-}
-
-void Body::showBytes() {
-	BytesConverter::getInstance()->print(bytes, bodySize);
 }
 

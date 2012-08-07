@@ -1,5 +1,6 @@
 #include "hdr/BytesConverter.h"
 
+#include <sstream>
 #include <iostream>		// para 'cout'
 #include <iomanip>		// para formateo de cout
 using namespace std;	// para formateo de cout
@@ -22,3 +23,14 @@ void BytesConverter::print (uint8_t * bytes, int size) {
 	cout << dec;
 }
 
+std::string BytesConverter::toString (uint8_t * bytes, int size) {
+	std::stringstream result;
+
+	int i;
+	for (i = 0; i < size; i++) {
+		result << setw(2) << setfill('0') << hex << uppercase << (int) bytes[i] << " ";
+//		cout << setw(2) << setfill('0') << hex << uppercase << (int) bytes[i] << " ";
+	}
+//	cout << dec;
+	return result.str();
+}

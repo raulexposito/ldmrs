@@ -22,5 +22,39 @@
 
 
 	Mostrar layer y echo como UINT4. Pagina 5.
+
 	
+---------------------------
+
+
+1) En header.h:
+
+void addReservedAndSourceId();
+
+dividir en dos metodos
+
+
+2) prefix es con una sola f, aunque suffix es con dos f.
+
+reemplazar en todos los ficheros
+
+
+3) #define HEADER_SIZE 24 
+
+dejar en un unico .h
+
 	
+---------------------------
+
+1- logs unicamente en el caso de leer desde el laser. Quiza configurable desde el properties
+
+2- fichero con constantes
+
+3- NTP
+
+4- refactorizacion de paquetes
+
+5- Message, debe preguntar el tipo al Header con isXXX()
+
+6- destructores!!!!!
+ 

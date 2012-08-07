@@ -1,0 +1,5 @@
+	RAW header: AF FE C0 C2 00 00 00 00 00 00 00 02 00 00 20 20 00 05 47 2F D6 90 06 38 
+	RAW body: 21 00 
+	----------------------
+	type: COMMAND REPLY
+	subtype: STOP MEASURE

@@ -10,7 +10,7 @@
 class SetNTPTimestampFracSecRequestMessage : public Message {
 
 	public:
-	SetNTPTimestampFracSecRequestMessage(uint32_t frac_seconds);
+		SetNTPTimestampFracSecRequestMessage(uint32_t frac_seconds);
 };
 
 #endif /* SETNTPTIMESTAMPFRACSECREQUESTMESSAGE_H_ */

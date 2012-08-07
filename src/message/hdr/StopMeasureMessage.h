@@ -9,7 +9,7 @@
 class StopMeasureMessage : public Message {
 
 	public:
-	StopMeasureMessage();
+		StopMeasureMessage();
 };
 
 #endif /* STOPMEASUREMESSAGE_H_ */

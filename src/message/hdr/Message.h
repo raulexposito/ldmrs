@@ -5,6 +5,7 @@
 #include "../../body/hdr/Body.h"
 #include "../../header/enum/HeaderTypeEnum.h"
 #include <stdint.h> 	// para 'uint8_t'
+#include <string>
 
 class Message {
 
@@ -14,19 +15,21 @@ class Message {
 
 		virtual ~Message();
 
-		uint8_t * getBytes();
-
 		Header* getHeader();
 
 		Body* getBody();
 
-		void showBytes();
+		uint8_t * getBytesInRaw();
 
 		int getAmountBytes();
 
-		HeaderTypeEnum getDataType();
+		bool isScanDataMessage();
 
-		void showInfo();
+		bool isErrorAndWarningMessage();
+
+		bool isCommandMessage();
+
+		bool isCommandReplyMessage();
 
 	protected:
 
@@ -34,13 +37,11 @@ class Message {
 
 		Body* body;
 
+	private:
+
 		uint8_t* bytes;
 
 		int messageSize;
-
-	private:
-
-		void populateBytes();
 
 		void showHeaderDataType(HeaderTypeEnum headerType, Body* body);
 

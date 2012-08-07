@@ -11,19 +11,27 @@ class Header {
 
 	public:
 
+		// empleado programaticamente para que los desarrolladores puedan crear encabezados
+		// (generalmente de COMMAND)
 		Header(int dataBlockSize, uint8_t preffix, uint8_t suffix);
 
+		// empleado por la libreria para almacenar mensajes recibidos
+		// (SCAN DATA, ERROR AND WARNING, COMMAND REPLY)
 		Header(uint8_t * headerBytes);
 
 		virtual ~Header();
 
-		uint8_t * getBytes();
+		uint8_t * getBytesInRaw();
 
 		int getBodySize();
 
-		void showBytes();
+		virtual bool isScanDataHeader();
 
-		virtual HeaderTypeEnum getDataType()=0;
+		virtual bool isErrorAndWarningHeader();
+
+		virtual bool isCommandHeader();
+
+		virtual bool isCommandReplyHeader();
 
 	protected:
 

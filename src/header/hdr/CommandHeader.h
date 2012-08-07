@@ -11,9 +11,7 @@ class CommandHeader : public Header {
 	public:
 		CommandHeader(int dataBlockSize);
 
-		CommandHeader(uint8_t * headerBytes);
-
-		virtual HeaderTypeEnum getDataType();
+		bool isCommandHeader();
 };
 
 #endif /* COMMANDHEADER_H_ */

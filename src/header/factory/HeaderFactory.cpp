@@ -24,9 +24,7 @@ Header* HeaderFactory::generateHeader (uint8_t * headerBytes) {
 	} else if (headerBytes[14] == 0x20 && headerBytes[15] == 0x30) {
 		header = new ErrorAndWarningHeader(headerBytes);
 	} else 	if (headerBytes[14] == 0x20 && headerBytes[15] == 0x20) {
-		header = new CommandReplyHeader(headerBytes);
-	} else {
-		header = new CommandHeader(headerBytes);
+		 new CommandReplyHeader(headerBytes);
 	}
 	return header;
 }

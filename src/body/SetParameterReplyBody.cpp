@@ -6,14 +6,11 @@
 #define CODE_SUFFIX 0x00
 #define BODY_SIZE 10
 
-// TODO: implementar
-SetParameterReplyBody::SetParameterReplyBody(ParameterEnum parameter):
-			Body(BODY_SIZE, CODE_PREFFIX, CODE_SUFFIX) {}
-
 SetParameterReplyBody::SetParameterReplyBody(int bodySize, uint8_t * bodyBytes):
 		Body(bodySize, bodyBytes) {
 }
 
+// TODO: isXXX2()
 BodyTypeEnum SetParameterReplyBody::getBodyType() {
 	return SET_PARAMETER;
 }

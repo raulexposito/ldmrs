@@ -9,11 +9,9 @@
 class ScanDataHeader : public Header {
 
 	public:
-		ScanDataHeader(int dataBlockSize);
-
 		ScanDataHeader(uint8_t * headerBytes);
 
-		virtual HeaderTypeEnum getDataType();
+		bool isScanDataHeader();
 };
 
 #endif // SCANDATAHEADER_H

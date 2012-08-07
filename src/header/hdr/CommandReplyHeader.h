@@ -9,11 +9,9 @@
 class CommandReplyHeader : public Header {
 
 	public:
-		CommandReplyHeader(int dataBlockSize);
-
 		CommandReplyHeader(uint8_t * headerBytes);
 
-		virtual HeaderTypeEnum getDataType();
+		bool isCommandReplyHeader();
 };
 
 #endif /* COMMANDREPLYHEADER_H_ */

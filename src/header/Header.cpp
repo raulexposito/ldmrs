@@ -4,8 +4,6 @@
 #define HEADER_SIZE 24
 #define LENGTH_FIRST_POSITION 8
 
-#define DATATYPE_PREFIX
-
 Header::Header (int dataBlockSize, uint8_t preffix, uint8_t suffix) {
 	bytes = new uint8_t[HEADER_SIZE];
 	addMagicWord();
@@ -69,7 +67,7 @@ Header::~Header() {
 	delete [] bytes;
 }
 
-uint8_t * Header::getBytes() {
+uint8_t * Header::getBytesInRaw() {
 	return bytes;
 }
 
@@ -82,6 +80,11 @@ int Header::getBodySize () {
 	return bodySize;
 }
 
-void Header::showBytes() {
-	BytesConverter::getInstance()->print(bytes, HEADER_SIZE);
-}
+bool Header::isScanDataHeader() { return false; }
+
+bool Header::isErrorAndWarningHeader() { return false; }
+
+bool Header::isCommandHeader() { return false; }
+
+bool Header::isCommandReplyHeader() { return false; }
+

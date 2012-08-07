@@ -14,12 +14,10 @@ BodyFactory* BodyFactory::instance = 0;
 BodyFactory* BodyFactory::getInstance() {
    if (!instance)
 	   instance = new BodyFactory;
-
    return instance;
 }
 
 Body* BodyFactory::generateBody (int bodySize, uint8_t * bodyBytes) {
-
 	Body * body = new Body(bodySize, bodyBytes);
 	return body;
 }

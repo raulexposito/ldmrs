@@ -2,6 +2,7 @@
 #define BYTESCONVERTER_H
 
 #include <stdint.h> 	// para 'uint8_t'
+#include <string>
 
 class BytesConverter {
 
@@ -10,6 +11,8 @@ class BytesConverter {
 		static BytesConverter* getInstance();
 
 		void print (uint8_t * bytes, int size);
+
+		std::string toString (uint8_t * bytes, int size);
 
 	private:
 

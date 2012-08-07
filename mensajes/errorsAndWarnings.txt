@@ -1,0 +1,4 @@
+	RAW header: AF FE C0 C2 00 00 00 00 00 00 00 10 00 00 20 30 00 05 47 0B E0 7C BD 30 
+	RAW body: 00 00 00 00 00 00 01 00 00 00 00 00 00 00 00 00 
+	----------------------
+	type: ERRORS AND WARNINGS
