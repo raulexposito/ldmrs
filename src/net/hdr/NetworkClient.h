@@ -19,6 +19,7 @@ class NetworkClient {
 		NetworkClient();
 		NetworkClient(NetworkClient const&){};
 		uint8_t * receiveBody(int bodySize);
+		void log (bool sent, Message * message);
 		static NetworkClient* instance;
 		int serverSocket;
 };

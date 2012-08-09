@@ -18,9 +18,13 @@
 #include "../config/hdr/Configuration.h"
 #include "../log/hdr/Logger.h"
 #include "../log/hdr/Recorder.h"
+#include "../util/hdr/BytesConverter.h"
 
 #define HEADER_LENGTH 24
 #define LENGTH_FIRST_POSITION 8
+
+#define SENT true
+#define RECEIVED false
 
 NetworkClient* NetworkClient::instance = 0;
 
@@ -28,7 +32,7 @@ void logConfiguration ();
 
 NetworkClient* NetworkClient::getInstance() {
    if (!instance)
-	   instance = new NetworkClient;
+	   instance = new NetworkClient();
 
    return instance;
 }
@@ -98,7 +102,7 @@ void logConfiguration () {
 
 Message * NetworkClient::receive () {
 
-	// TODO: partir este metodo y generar dos: el primero recupera el encabezado y el segundo el cuerpo
+	// TODO: partir este metodo y generar dos: el primero recupera el encabezado y el segundo el cuerpo.
 
 	uint8_t * receivedHeaderBytes = new uint8_t[HEADER_LENGTH];
 	read (serverSocket, receivedHeaderBytes, HEADER_LENGTH);
@@ -109,12 +113,27 @@ Message * NetworkClient::receive () {
 	Body * body = BodyFactory::getInstance()->generateBody(header->getBodySize(), receivedBodyBytes);
 
 	Message * message = new Message(header, body);
+
 	Recorder::getInstance()->record(message);
+	log (RECEIVED, message);
 
 	return message;
 }
 
 void NetworkClient::send (Message * message) {
+	log (SENT, message);
 	write (serverSocket, message->getBytesInRaw(), message->getAmountBytes());
+}
+
+
+void NetworkClient::log (bool sent, Message * message) {
+	std::stringstream logMessage;
+	if (sent) {
+		logMessage << "[SENT] ";
+	} else {
+		logMessage << "[REVC] ";
+	}
+	logMessage << BytesConverter::getInstance()->toString(message->getBytesInRaw(), message->getAmountBytes());
+	Logger::getInstance()->log(logMessage.str());
 }
 

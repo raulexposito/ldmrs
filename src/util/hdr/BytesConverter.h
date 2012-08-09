@@ -14,6 +14,8 @@ class BytesConverter {
 
 		std::string toString (uint8_t * bytes, int size);
 
+		uint8_t* toUint8t (char * bytes, int size);
+
 	private:
 
 		BytesConverter(){};

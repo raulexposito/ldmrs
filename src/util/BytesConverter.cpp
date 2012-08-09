@@ -29,8 +29,11 @@ std::string BytesConverter::toString (uint8_t * bytes, int size) {
 	int i;
 	for (i = 0; i < size; i++) {
 		result << setw(2) << setfill('0') << hex << uppercase << (int) bytes[i] << " ";
-//		cout << setw(2) << setfill('0') << hex << uppercase << (int) bytes[i] << " ";
 	}
-//	cout << dec;
 	return result.str();
+}
+
+uint8_t* BytesConverter::toUint8t (char * bytes, int size) {
+	// TODO
+	return 0;
 }

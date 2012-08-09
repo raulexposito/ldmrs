@@ -53,8 +53,8 @@ int Configuration::getPort() {
 	return atoi(getParameter(CONFIG_PARAM_TCPIP_PORT).c_str());
 }
 
-std::string Configuration::getPath() {
-	return getParameter(CONFIG_PARAM_FILE_PATH);
+const char * Configuration::getPath() {
+	return getParameter(CONFIG_PARAM_FILE_PATH).c_str();
 }
 
 bool Configuration::isLogOnConsole() {

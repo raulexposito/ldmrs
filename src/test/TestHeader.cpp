@@ -19,18 +19,14 @@
 #include "../log/hdr/Recorder.h"
 #include "../util/hdr/DateTime.h"
 #include "../util/hdr/BytesConverter.h"
+#include "../file/hdr/FileClient.h"
 
 #include <time.h>
 #include <iostream>		// para 'cout'
 #include <iomanip>		// para formateo de cout
 using namespace std;	// para formateo de cout
 
-void delay(int secs) {
-  for(int i = (time(NULL) + secs); time(NULL) != i; time(NULL));
-}
-
 void testStartMensajes() {
-
 	Message *request = new StartMeasureMessage();
 	NetworkClient::getInstance()->send(request);
 	Message * response = NetworkClient::getInstance()->receive();
@@ -131,7 +127,7 @@ void testDateTime () {
 	cout << DateTime::getInstance()->getCurrentTime(":") << endl;
 }
 
-void testSaveTrace () {
+void testRecordTrace () {
 
 //	RAW header: AF FE C0 C2 00 00 00 00 00 00 00 02 00 00 20 20 00 05 47 2F D6 90 06 38
 //	RAW body: 21 00
@@ -188,6 +184,12 @@ void testLecturaLaser() {
 	}
 }
 
+void testReadRecord() {
+	//for (int i = 0; i < 100; i++) {
+		FileClient::getInstance()->receive();
+	//}
+}
+
 int main () {
 //	testStartMensajes();
 //	testStopMensajes();
@@ -201,10 +203,11 @@ int main () {
 
 //	testDateTime();
 
-//	testSaveTrace();
+//	testRecordTrace();
 
+//	testLecturaLaser();
 
-	testLecturaLaser();
+	testReadRecord();
 
 	return 0;
 }

@@ -21,7 +21,7 @@ class Configuration {
 
 		int getPort();
 
-		std::string getPath();
+		const char * getPath();
 
 		bool isLogOnConsole();
 
