@@ -4,15 +4,19 @@
 #include "../header/hdr/ErrorAndWarningHeader.h"
 #include "../header/hdr/ScanDataHeader.h"
 #include "../header/factory/hdr/HeaderFactory.h"
-#include "../body/hdr/GetParameterRequestBody.h"
+#include "../body/hdr/GetParameterCommandBody.h"
+#include "../body/hdr/ResetCommandBody.h"
+#include "../body/hdr/StartMeasureCommandBody.h"
+#include "../body/hdr/StopMeasureCommandBody.h"
 #include "../body/factory/hdr/BodyFactory.h"
-#include "../message/hdr/ResetMessage.h"
-#include "../message/hdr/GetParameterRequestMessage.h"
-#include "../message/hdr/GetStatusRequestMessage.h"
-#include "../message/hdr/SetParameterRequestMessage.h"
-#include "../message/hdr/StopMeasureMessage.h"
-#include "../message/hdr/StartMeasureMessage.h"
-#include "../message/hdr/SaveConfigMessage.h"
+#include "../body/enum/ParameterEnum.h"
+#include "../message/hdr/ResetCommandMessage.h"
+#include "../message/hdr/GetParameterCommandMessage.h"
+#include "../message/hdr/GetStatusCommandMessage.h"
+#include "../message/hdr/SetParameterCommandMessage.h"
+#include "../message/hdr/StopMeasureCommandMessage.h"
+#include "../message/hdr/StartMeasureCommandMessage.h"
+#include "../message/hdr/SaveConfigCommandMessage.h"
 #include "../net/hdr/NetworkClient.h"
 #include "../config/hdr/Configuration.h"
 #include "../log/hdr/Logger.h"
@@ -27,7 +31,7 @@
 using namespace std;	// para formateo de cout
 
 void testStartMensajes() {
-	Message *request = new StartMeasureMessage();
+	Message *request = new StartMeasureCommandMessage();
 	NetworkClient::getInstance()->send(request);
 	Message * response = NetworkClient::getInstance()->receive();
 
@@ -36,7 +40,7 @@ void testStartMensajes() {
 }
 
 void testStopMensajes() {
-	Message *request = new StopMeasureMessage();
+	Message *request = new StopMeasureCommandMessage();
 	NetworkClient::getInstance()->send(request);
 	Message * response = NetworkClient::getInstance()->receive();
 	delete request;
@@ -44,7 +48,7 @@ void testStopMensajes() {
 }
 
 void testReset() {
-	Message *request = new ResetMessage();
+	Message *request = new ResetCommandMessage();
 	NetworkClient::getInstance()->send(request);
 	delete request;
 }
@@ -60,7 +64,7 @@ void testLeerLaser() {
 
 void testGetParameter() {
 
-	Message *request = new GetParameterRequestMessage(TCP_PORT);
+	Message *request = new GetParameterCommandMessage(TCP_PORT);
 	NetworkClient::getInstance()->send(request);
 	Message * response = NetworkClient::getInstance()->receive();
 
@@ -81,7 +85,7 @@ Header* generateHeader (int numerico) {
 	return new ScanDataHeader(new uint8_t[3]);
 }
 
-void testTipos() {
+void testTiposEncabezado() {
 	Header *command = generateHeader(0);
 	cout << command->isCommandHeader() << endl;
 	cout << command->isCommandReplyHeader() << endl;
@@ -109,6 +113,48 @@ void testTipos() {
 	cout << scanDataHeader->isErrorAndWarningHeader() << endl;
 	cout << scanDataHeader->isScanDataHeader() << endl << endl;
 	delete command;
+}
+
+Body* generateBody (int numerico) {
+
+	if (numerico == 0) {
+		return new StartMeasureCommandBody();
+	} else if (numerico == 1) {
+		return new StopMeasureCommandBody();
+	} else if (numerico == 2) {
+		return new ResetCommandBody();
+	}
+	return new GetParameterCommandBody(IP_ADDRESS);
+}
+
+void testTiposCuerpo() {
+	Body *startMeasure = generateBody(0);
+	cout << startMeasure->isStartMeasureCommandBody() << endl;
+	cout << startMeasure->isStopMeasureCommandBody() << endl;
+	cout << startMeasure->isResetCommandBody() << endl;
+	cout << startMeasure->isGetParameterCommandBody() << endl << endl;
+	delete startMeasure;
+
+	Body *stopMeasure = generateBody(1);
+	cout << stopMeasure->isStartMeasureCommandBody() << endl;
+	cout << stopMeasure->isStopMeasureCommandBody() << endl;
+	cout << stopMeasure->isResetCommandBody() << endl;
+	cout << stopMeasure->isGetParameterCommandBody() << endl << endl;
+	delete stopMeasure;
+
+	Body *reset = generateBody(2);
+	cout << reset->isStartMeasureCommandBody() << endl;
+	cout << reset->isStopMeasureCommandBody() << endl;
+	cout << reset->isResetCommandBody() << endl;
+	cout << reset->isGetParameterCommandBody() << endl << endl;
+	delete reset;
+
+	Body *getParameter = generateBody(3);
+	cout << getParameter->isStartMeasureCommandBody() << endl;
+	cout << getParameter->isStopMeasureCommandBody() << endl;
+	cout << getParameter->isResetCommandBody() << endl;
+	cout << getParameter->isGetParameterCommandBody() << endl << endl;
+	delete getParameter;
 }
 
 void testGenerarLog() {
@@ -190,6 +236,28 @@ void testReadRecord() {
 	//}
 }
 
+void testAsText() {
+	Header *command = generateHeader(0);
+	cout << command->asText() << endl;
+	delete command;
+
+	Header *commandReply = generateHeader(1);
+	cout << commandReply->asText() << endl;
+	delete commandReply;
+
+	Header *errorAndWarningHeader = generateHeader(2);
+	cout << errorAndWarningHeader->asText() << endl;
+	delete errorAndWarningHeader;
+
+	Header *scanDataHeader = generateHeader(3);
+	cout << scanDataHeader->asText() << endl;
+	delete command;
+
+	Body *getParameter = generateBody(0);
+	cout << getParameter->asText() << endl;
+	delete getParameter;
+}
+
 int main () {
 //	testStartMensajes();
 //	testStopMensajes();
@@ -197,7 +265,9 @@ int main () {
 
 //	testGetParameter();
 
-//	testTipos();
+//	testTiposEncabezado();
+
+//	testTiposCuerpo();
 
 //	testGenerarLog();
 
@@ -207,7 +277,9 @@ int main () {
 
 //	testLecturaLaser();
 
-	testReadRecord();
+//	testReadRecord();
+
+	testAsText();
 
 	return 0;
 }

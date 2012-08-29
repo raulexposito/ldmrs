@@ -78,6 +78,62 @@ bool Message::isCommandReplyMessage() {
 	return this->header->isCommandReplyHeader();
 }
 
+bool Message::isGetParameterCommandMessage() {
+	return this->body->isGetParameterCommandBody();
+}
+
+bool Message::isGetParameterCommandReplyMessage() {
+	return this->body->isGetParameterCommandReplyBody();
+}
+
+bool Message::isGetStatusCommandMessage() {
+	return this->body->isGetStatusCommandBody();
+}
+
+bool Message::isGetStatusCommandReplyMessage() {
+	return this->body->isGetStatusCommandReplyBody();
+}
+
+bool Message::isResetCommandMessage() {
+	return this->body->isResetCommandBody();
+}
+
+bool Message::isSaveConfigCommandMessage() {
+	return this->body->isSaveConfigCommandBody();
+}
+
+bool Message::isSetNTPTimestampFracSecCommandMessage() {
+	return this->body->isSetNTPTimestampFracSecCommandBody();
+}
+
+bool Message::isSetNTPTimestampFracSecCommandReplyMessage() {
+	return this->body->isSetNTPTimestampFracSecCommandReplyBody();
+}
+
+bool Message::isSetNTPTimestampSecCommandMessage() {
+	return this->body->isSetNTPTimestampSecCommandBody();
+}
+
+bool Message::isSetNTPTimestampSecCommandReplyMessage() {
+	return this->body->isSetNTPTimestampSecCommandReplyBody();
+}
+
+bool Message::isSetParameterCommandMessage() {
+	return this->body->isSetParameterCommandBody();
+}
+
+bool Message::isSetParameterCommandReplyMessage() {
+	return this->body->isSetParameterCommandReplyBody();
+}
+
+bool Message::isStartMeasureCommandMessage() {
+	return this->body->isStartMeasureCommandBody();
+}
+
+bool Message::isStopMeasureCommandMessage() {
+	return this->body->isStopMeasureCommandBody();
+}
+
 int Message::getAmountBytes() {
 	return HEADER_SIZE + this->header->getBodySize();
 }

@@ -7,6 +7,8 @@
 #include <stdint.h> 	// para 'uint8_t'
 #include <string>
 
+// TODO: faltan muchos tipos de mensajes por implementar
+
 class Message {
 
 	public:
@@ -31,6 +33,36 @@ class Message {
 
 		bool isCommandReplyMessage();
 
+		bool isGetParameterCommandMessage();
+
+		bool isGetParameterCommandReplyMessage();
+
+		bool isGetStatusCommandMessage();
+
+		bool isGetStatusCommandReplyMessage();
+
+		bool isResetCommandMessage();
+
+		bool isSaveConfigCommandMessage();
+
+		bool isSetNTPTimestampFracSecCommandMessage();
+
+		bool isSetNTPTimestampFracSecCommandReplyMessage();
+
+		bool isSetNTPTimestampSecCommandMessage();
+
+		bool isSetNTPTimestampSecCommandReplyMessage();
+
+		bool isSetParameterCommandMessage();
+
+		bool isSetParameterCommandReplyMessage();
+
+		bool isStartMeasureCommandMessage();
+
+		bool isStopMeasureCommandMessage();
+
+		// TODO: incluir metodo toString() o similar con el que generar el log
+
 	protected:
 
 		Header* header;
@@ -43,6 +75,7 @@ class Message {
 
 		int messageSize;
 
+		// TODO: borrar todos estos metodos
 		void showHeaderDataType(HeaderTypeEnum headerType, Body* body);
 
 		void showScanData(Body* body);

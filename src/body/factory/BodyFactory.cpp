@@ -1,13 +1,10 @@
 #include "hdr/BodyFactory.h"
-#include "../hdr/ResetBody.h"
-#include "../hdr/GetStatusReplyBody.h"
-#include "../hdr/SaveConfigBody.h"
-#include "../hdr/SetParameterReplyBody.h"
-#include "../hdr/GetParameterReplyBody.h"
-#include "../hdr/StartMeasureBody.h"
-#include "../hdr/StopMeasureBody.h"
-#include "../hdr/SetNTPTimestampSecReplyBody.h"
-#include "../hdr/SetNTPTimestampFracSecReplyBody.h"
+#include "../hdr/ResetCommandBody.h"
+#include "../hdr/GetStatusCommandReplyBody.h"
+#include "../hdr/SaveConfigCommandBody.h"
+#include "../hdr/GetParameterCommandReplyBody.h"
+#include "../hdr/SetNTPTimestampSecCommandReplyBody.h"
+#include "../hdr/SetNTPTimestampFracSecCommandReplyBody.h"
 
 BodyFactory* BodyFactory::instance = 0;
 

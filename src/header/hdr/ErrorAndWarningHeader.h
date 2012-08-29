@@ -12,6 +12,8 @@ class ErrorAndWarningHeader : public Header {
 		ErrorAndWarningHeader(uint8_t * headerBytes);
 
 		bool isErrorAndWarningHeader();
+
+		std::string asText();
 };
 
 #endif /* ERRORANDWARNINGHEADER_H_ */

@@ -1,60 +1,15 @@
-	
-	
-* Message::showGetStatus()
 
 
-	Algo similar habria que hacer en este metodo. Los valores en bruto se recuperan bien pero deben ser convertidos. Pagina 10.
+3- Implementar asText() en los mensajes	-> encabezado + cuerpo + hexadecimal
 
+4- Factoria de cuerpos recibidos desde el laser
 
-* SetNTPTimestampSec y SetNTPTimestampFracSec
-	
+5- Recuperar informacion especifica de los cuerpos
+	--> terminar 'asText()' en los cuerpos 
 
-	Hay que investigar el formato NTP
+6- Cuerpos y mensajes de tipo Scan Data
 
+7- Excepciones de tipo Error and Warning
 
-* Message::showScanData()
+n- NTP en encabezados, en los SetNTPTimestamp y en el asText() de los encebazados
 
-	
-	Eliminar los TODO con el formato de fecha NTP
-
-	
-* Message::showPointMeasurement()
-
-
-	Mostrar layer y echo como UINT4. Pagina 5.
-
-	
----------------------------
-
-
-1) En header.h:
-
-void addReservedAndSourceId();
-
-dividir en dos metodos
-
-
-2) prefix es con una sola f, aunque suffix es con dos f.
-
-reemplazar en todos los ficheros
-
-
-3) #define HEADER_SIZE 24 
-
-dejar en un unico .h
-
-	
----------------------------
-
-1- logs unicamente en el caso de leer desde el laser. Quiza configurable desde el properties
-
-2- fichero con constantes
-
-3- NTP
-
-4- refactorizacion de paquetes
-
-5- Message, debe preguntar el tipo al Header con isXXX()
-
-6- destructores!!!!!
- 

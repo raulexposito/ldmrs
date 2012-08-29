@@ -12,6 +12,8 @@ class CommandReplyHeader : public Header {
 		CommandReplyHeader(uint8_t * headerBytes);
 
 		bool isCommandReplyHeader();
+
+		std::string asText();
 };
 
 #endif /* COMMANDREPLYHEADER_H_ */

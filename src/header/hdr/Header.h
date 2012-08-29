@@ -1,8 +1,11 @@
 #ifndef HEADER_H
 #define HEADER_H
 
-#include <stdint.h> 	// para 'uint8_t'
 #include "../enum/HeaderTypeEnum.h"
+
+#include <stdint.h> 	// para 'uint8_t'
+#include <string>
+#include <sstream>
 
 /**
  * Clase basica con todos los elementos que requieren los encabezados del protocolo LD-MRS
@@ -12,7 +15,7 @@ class Header {
 	public:
 
 		// empleado programaticamente para que los desarrolladores puedan crear encabezados
-		// (generalmente de COMMAND)
+		// (generalmente de tipo COMMAND)
 		Header(int dataBlockSize, uint8_t preffix, uint8_t suffix);
 
 		// empleado por la libreria para almacenar mensajes recibidos
@@ -24,6 +27,10 @@ class Header {
 		uint8_t * getBytesInRaw();
 
 		int getBodySize();
+
+		//TODO: 'std::string getNTP()' para poder mostrar la fecha de creacion del mensaje en el asText()
+
+		virtual std::string asText();
 
 		virtual bool isScanDataHeader();
 

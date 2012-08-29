@@ -9,3 +9,9 @@ CommandHeader::CommandHeader(int dataBlockSize):
 bool CommandHeader::isCommandHeader() {
 	return true;
 }
+
+std::string CommandHeader::asText() {
+	std::stringstream text;
+	text << "COMMAND:" << getBodySize();
+	return text.str();
+}

@@ -57,3 +57,32 @@ void ParameterConverter::parameterToHex(ParameterEnum parameter, uint8_t & preff
 			break;
 	}
 }
+
+std::string ParameterConverter::parameterToText(ParameterEnum parameter) {
+	switch (parameter) {
+		case IP_ADDRESS:
+			return "IP ADDRESS";
+		case TCP_PORT:
+			return "TCP PORT";
+		case SUBNET_MASK:
+			return "SUBNET MASK";
+		case STANDARD_GATEWAY:
+			return "STANDARD GATEWAY";
+		case DATA_OUTPUT_FLAG:
+			return "DATA OUTPUT FLAG";
+		case START_ANGLE:
+			return "START ANGLE";
+		case END_ANGLE:
+			return "END ANGLE";
+		case SCAN_FRECUENCY:
+			return "SCAN FRECUENCY";
+		case SYNC_ANGLE_OFFSET:
+			return "SYNC ANGLE OFFSET";
+		case ANGULAR_RESOLUTION_TYPE:
+			return "ANGULAR RESOLUTION TYPE";
+		case ANGLE_TICKS_PER_ROTATION:
+			return "ANGLE TICKS PER ROTATION";
+	}
+	return "UNKNOWN";
+}
+

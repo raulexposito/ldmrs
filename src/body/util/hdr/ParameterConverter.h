@@ -3,6 +3,8 @@
 
 #include "../../enum/ParameterEnum.h"
 #include <stdint.h> 	// para 'uint8_t'
+#include <string>
+#include <sstream>
 
 class ParameterConverter {
 
@@ -10,6 +12,8 @@ class ParameterConverter {
 		static ParameterConverter* getInstance();
 
 		void parameterToHex(ParameterEnum parameter, uint8_t & preffix, uint8_t & suffix);
+
+		std::string parameterToText(ParameterEnum parameter);
 
 	private:
 

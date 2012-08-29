@@ -88,3 +88,8 @@ bool Header::isCommandHeader() { return false; }
 
 bool Header::isCommandReplyHeader() { return false; }
 
+std::string Header::asText() {
+	std::stringstream text;
+	text << "GENERIC HEADER";
+	return text.str();
+}

@@ -12,6 +12,8 @@ class CommandHeader : public Header {
 		CommandHeader(int dataBlockSize);
 
 		bool isCommandHeader();
+
+		std::string asText();
 };
 
 #endif /* COMMANDHEADER_H_ */

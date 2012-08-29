@@ -12,6 +12,8 @@ class ScanDataHeader : public Header {
 		ScanDataHeader(uint8_t * headerBytes);
 
 		bool isScanDataHeader();
+
+		std::string asText();
 };
 
 #endif // SCANDATAHEADER_H
