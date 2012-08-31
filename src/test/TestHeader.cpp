@@ -76,7 +76,7 @@ void testGetParameter() {
 Header* generateHeader (int numerico) {
 
 	if (numerico == 0) {
-		return new CommandHeader(10);
+		return new CommandHeader(4);
 	} else if (numerico == 1) {
 		return new CommandReplyHeader(new uint8_t[3]);
 	} else if (numerico == 2) {
@@ -239,22 +239,26 @@ void testReadRecord() {
 void testAsText() {
 	Header *command = generateHeader(0);
 	cout << command->asText() << endl;
-	delete command;
 
 	Header *commandReply = generateHeader(1);
 	cout << commandReply->asText() << endl;
-	delete commandReply;
 
 	Header *errorAndWarningHeader = generateHeader(2);
 	cout << errorAndWarningHeader->asText() << endl;
-	delete errorAndWarningHeader;
 
 	Header *scanDataHeader = generateHeader(3);
 	cout << scanDataHeader->asText() << endl;
-	delete command;
 
-	Body *getParameter = generateBody(0);
+	Body *getParameter = generateBody(3);
 	cout << getParameter->asText() << endl;
+
+	Message *message = new Message(command, getParameter);
+	cout << message->asText() << endl;
+
+	delete command;
+	delete commandReply;
+	delete errorAndWarningHeader;
+	delete command;
 	delete getParameter;
 }
 

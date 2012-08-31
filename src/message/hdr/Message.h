@@ -6,6 +6,7 @@
 #include "../../header/enum/HeaderTypeEnum.h"
 #include <stdint.h> 	// para 'uint8_t'
 #include <string>
+#include <sstream>
 
 // TODO: faltan muchos tipos de mensajes por implementar
 
@@ -22,6 +23,8 @@ class Message {
 		Body* getBody();
 
 		uint8_t * getBytesInRaw();
+
+		virtual std::string asText();
 
 		int getAmountBytes();
 
@@ -60,8 +63,6 @@ class Message {
 		bool isStartMeasureCommandMessage();
 
 		bool isStopMeasureCommandMessage();
-
-		// TODO: incluir metodo toString() o similar con el que generar el log
 
 	protected:
 

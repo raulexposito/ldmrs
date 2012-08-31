@@ -11,8 +11,8 @@ bool GetParameterCommandReplyBody::isGetParameterCommandReplyBody() {
 
 std::string GetParameterCommandReplyBody::asText() {
 	std::stringstream text;
-	text << "GET PARAMETER COMMAND REPLY" << ":";
-	text << getAmountBytes() << ":";
+	text << "GET PARAMETER COMMAND REPLY" << "[";
+	text << getAmountBytes() << "]:";
 	// TODO: recuperar el tipo de parametro
 	// TODO: recuperar el valor del parametro
 	return text.str();

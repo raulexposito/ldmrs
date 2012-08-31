@@ -16,8 +16,8 @@ bool SetNTPTimestampSecCommandBody::isSetNTPTimestampSecCommandBody() {
 
 std::string SetNTPTimestampSecCommandBody::asText() {
 	std::stringstream text;
-	text << "SET NTP TIMESTAMP SEC COMMAND" << ":";
-	text << getAmountBytes() << ":";
+	text << "SET NTP TIMESTAMP SEC COMMAND" << "[";
+	text << getAmountBytes() << "]:";
 	// TODO: mostrar el tiempo en cristiano
 	return text.str();
 }

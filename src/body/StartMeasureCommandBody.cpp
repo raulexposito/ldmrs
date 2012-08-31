@@ -13,7 +13,7 @@ bool StartMeasureCommandBody::isStartMeasureCommandBody() {
 
 std::string StartMeasureCommandBody::asText() {
 	std::stringstream text;
-	text << "START MEASURE COMMAND" << ":";
-	text << getAmountBytes();
+	text << "START MEASURE COMMAND" << "[";
+	text << getAmountBytes() << "]";
 	return text.str();
 }

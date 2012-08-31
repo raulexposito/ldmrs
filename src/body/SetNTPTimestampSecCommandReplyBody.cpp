@@ -10,8 +10,8 @@ bool SetNTPTimestampSecCommandReplyBody::isSetNTPTimestampSecCommandReplyBody() 
 
 std::string SetNTPTimestampSecCommandReplyBody::asText() {
 	std::stringstream text;
-	text << "SET NTP TIMESTAMP FRAC SEC COMMAND REPLY" << ":";
-	text << getAmountBytes() << ":";
+	text << "SET NTP TIMESTAMP FRAC SEC COMMAND REPLY" << "[";
+	text << getAmountBytes() << "]:";
 	// TODO: mostrar el tiempo recibido en cristiano
 	return text.str();
 }

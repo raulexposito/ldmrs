@@ -13,7 +13,7 @@ bool SaveConfigCommandBody::isSaveConfigCommandBody() {
 
 std::string SaveConfigCommandBody::asText() {
 	std::stringstream text;
-	text << "SAVE CONFIG COMMAND" << ":";
-	text << getAmountBytes();
+	text << "SAVE CONFIG COMMAND" << "[";
+	text << getAmountBytes() << "]";
 	return text.str();
 }

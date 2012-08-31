@@ -13,7 +13,7 @@ bool StopMeasureCommandBody::isStopMeasureCommandBody() {
 
 std::string StopMeasureCommandBody::asText() {
 	std::stringstream text;
-	text << "STOP MEASURE BODY" << ":";
-	text << getAmountBytes();
+	text << "STOP MEASURE BODY" << "[";
+	text << getAmountBytes() << "]";
 	return text.str();
 }

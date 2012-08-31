@@ -12,8 +12,8 @@ bool GetStatusCommandReplyBody::isGetStatusCommandReplyBody() {
 
 std::string GetStatusCommandReplyBody::asText() {
 	std::stringstream text;
-	text << "GET STATUS COMMAND REPLY" << ":";
-	text << getAmountBytes() << ":";
+	text << "GET STATUS COMMAND REPLY" << "[";
+	text << getAmountBytes() << "]:";
 	// TODO: mostrar estado
 	return text.str();
 }

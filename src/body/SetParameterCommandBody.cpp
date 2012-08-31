@@ -91,8 +91,8 @@ bool SetParameterCommandBody::isSetParameterCommandBody() {
 
 std::string SetParameterCommandBody::asText() {
 	std::stringstream text;
-	text << "SET PARAMETER COMMAND" << ":";
-	text << getAmountBytes() << ":";
+	text << "SET PARAMETER COMMAND" << "[";
+	text << getAmountBytes() << "]:";
 	// TODO: mostrar el parametro
 	// TODO: mostrar el valor del parametro
 	return text.str();

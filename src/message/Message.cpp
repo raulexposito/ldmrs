@@ -1,4 +1,5 @@
 #include "hdr/Message.h"
+#include "../util/hdr/BytesConverter.h"
 
 #include <iostream>		// para 'cout'
 #include <iomanip>		// para formateo de cout
@@ -137,6 +138,17 @@ bool Message::isStopMeasureCommandMessage() {
 int Message::getAmountBytes() {
 	return HEADER_SIZE + this->header->getBodySize();
 }
+
+std::string Message::asText() {
+	std::stringstream text;
+	text << this->header->asText();
+	text << ":";
+	text << this->body->asText();
+	text << ":";
+	text << BytesConverter::getInstance()->toString(this->getBytesInRaw(), this->getAmountBytes());
+	return text.str();
+}
+
 
 void Message::showHeaderDataType(HeaderTypeEnum headerType, Body* body) {
 	switch (headerType) {

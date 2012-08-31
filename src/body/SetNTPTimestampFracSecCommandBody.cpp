@@ -16,8 +16,8 @@ bool SetNTPTimestampFracSecCommandBody::isSetNTPTimestampFracSecCommandBody() {
 
 std::string SetNTPTimestampFracSecCommandBody::asText() {
 	std::stringstream text;
-	text << "SET NTP TIMESTAMP FRAC SEC COMMAND" << ":";
-	text << getAmountBytes() << ":";
+	text << "SET NTP TIMESTAMP FRAC SEC COMMAND" << "[";
+	text << getAmountBytes() << "]:";
 	// TODO: mostrar el tiempo en cristiano
 	return text.str();
 }
