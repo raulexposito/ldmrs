@@ -9,6 +9,7 @@
 
 GetParameterCommandBody::GetParameterCommandBody(ParameterEnum parameter):
 			Body(BODY_SIZE, CODE_PREFFIX, CODE_SUFFIX) {
+	this->parameter = parameter;
 	addParameterCode(parameter);
 }
 

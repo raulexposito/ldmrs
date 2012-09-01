@@ -12,6 +12,8 @@
 SetParameterCommandBody::SetParameterCommandBody(ParameterEnum parameter, uint32_t value):
 			Body(BODY_SIZE, CODE_PREFFIX, CODE_SUFFIX) {
 
+	this->parameter = parameter;
+	this->value = value;
 	switch (parameter) {
 		case IP_ADDRESS:
 			addParameterCode(IP_ADDRESS);
@@ -93,7 +95,7 @@ std::string SetParameterCommandBody::asText() {
 	std::stringstream text;
 	text << "SET PARAMETER COMMAND" << "[";
 	text << getAmountBytes() << "]:";
-	// TODO: mostrar el parametro
-	// TODO: mostrar el valor del parametro
+	text << ParameterConverter::getInstance()->parameterToText(parameter) << ":";
+	text << value << ":";
 	return text.str();
 }

@@ -102,15 +102,13 @@ void logConfiguration () {
 
 Message * NetworkClient::receive () {
 
-	// TODO: partir este metodo y generar dos: el primero recupera el encabezado y el segundo el cuerpo.
-
 	uint8_t * receivedHeaderBytes = new uint8_t[HEADER_LENGTH];
 	read (serverSocket, receivedHeaderBytes, HEADER_LENGTH);
 	Header * header = HeaderFactory::getInstance()->generateHeader(receivedHeaderBytes);
 
 	uint8_t * receivedBodyBytes = new uint8_t[header->getBodySize()];
 	read (serverSocket, receivedBodyBytes, header->getBodySize());
-	Body * body = BodyFactory::getInstance()->generateBody(header->getBodySize(), receivedBodyBytes);
+	Body * body = BodyFactory::getInstance()->generateBody(header, receivedBodyBytes);
 
 	Message * message = new Message(header, body);
 

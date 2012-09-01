@@ -17,6 +17,11 @@ class GetParameterCommandReplyBody : public Body {
 		bool isGetParameterCommandReplyBody();
 
 		std::string asText();
+
+	private:
+		std::string addAddress();
+
+		int addNumber();
 };
 
 #endif // GETPARAMETERREQUESTBODY_H

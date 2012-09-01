@@ -8,6 +8,8 @@
 #include "../body/hdr/ResetCommandBody.h"
 #include "../body/hdr/StartMeasureCommandBody.h"
 #include "../body/hdr/StopMeasureCommandBody.h"
+#include "../body/hdr/ScanDataBody.h"
+#include "../body/hdr/ErrorAndWarningBody.h"
 #include "../body/factory/hdr/BodyFactory.h"
 #include "../body/enum/ParameterEnum.h"
 #include "../message/hdr/ResetCommandMessage.h"
@@ -262,6 +264,30 @@ void testAsText() {
 	delete getParameter;
 }
 
+void testBodyFactory() {
+	Header *command = generateHeader(0);
+	Header *commandReply = generateHeader(1);
+	Header *errorAndWarningHeader = generateHeader(2);
+	Header *scanDataHeader = generateHeader(3);
+
+	Body *getParameterCommand = BodyFactory::getInstance()->generateBody(command, new uint8_t[1]);
+	Body *getParameterCommandReply = BodyFactory::getInstance()->generateBody(commandReply, new uint8_t[1]);
+
+	Body *errorAndWarning = BodyFactory::getInstance()->generateBody(errorAndWarningHeader, new uint8_t[1]);
+	cout << errorAndWarning->isScanDataBody() << "\n";
+	cout << errorAndWarning->isErrorAndWarningBody() << "\n";
+
+	Body *scanData = BodyFactory::getInstance()->generateBody(scanDataHeader, new uint8_t[1]);
+	cout << scanData->isScanDataBody() << "\n";
+	cout << scanData->isErrorAndWarningBody() << "\n";
+
+	delete getParameterCommand;
+	delete getParameterCommandReply;
+	delete errorAndWarning;
+	delete scanData;
+}
+
+
 int main () {
 //	testStartMensajes();
 //	testStopMensajes();
@@ -283,7 +309,9 @@ int main () {
 
 //	testReadRecord();
 
-	testAsText();
+//	testAsText();
+
+	testBodyFactory();
 
 	return 0;
 }

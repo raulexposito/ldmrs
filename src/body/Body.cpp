@@ -58,6 +58,10 @@ bool Body::isStartMeasureCommandBody() { return false; }
 
 bool Body::isStopMeasureCommandBody() { return false; }
 
+bool Body::isScanDataBody() { return false; }
+
+bool Body::isErrorAndWarningBody() { return false; }
+
 std::string Body::asText() {
 	std::stringstream text;
 	text << "GENERIC BODY";

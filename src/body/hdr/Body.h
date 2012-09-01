@@ -56,7 +56,9 @@ class Body {
 
 		virtual bool isStopMeasureCommandBody();
 
-		// TODO: incluir metodo toString() o similar con el que generar el log
+		virtual bool isScanDataBody();
+
+		virtual bool isErrorAndWarningBody();
 
 	protected:
 

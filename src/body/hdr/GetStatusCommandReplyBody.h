@@ -16,6 +16,9 @@ class GetStatusCommandReplyBody : public Body {
 		bool isGetStatusCommandReplyBody();
 
 		std::string asText();
+
+	private:
+		std::string showHex8(uint8_t uint8);
 };
 
 #endif // GETSTATUSREPLYBODY_H

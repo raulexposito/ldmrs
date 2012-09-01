@@ -1,15 +1,11 @@
 
 
-3- Implementar asText() en los mensajes	-> encabezado + cuerpo + hexadecimal
+1- Cuerpos y mensajes de tipo Scan Data
 
-4- Factoria de cuerpos recibidos desde el laser
+2- Excepciones de tipo Error and Warning
 
-5- Recuperar informacion especifica de los cuerpos
+3- Recuperar informacion especifica de los cuerpos
 	--> terminar 'asText()' en los cuerpos con TODO
 
-6- Cuerpos y mensajes de tipo Scan Data
-
-7- Excepciones de tipo Error and Warning
-
-n- NTP en encabezados, en los SetNTPTimestamp y en el asText() de los encebazados
+n- NTP en encabezados, en los SetNTPTimestamp y en el asText() de los encabezados
 

@@ -8,8 +8,6 @@
 #include <string>
 #include <sstream>
 
-// TODO: faltan muchos tipos de mensajes por implementar
-
 class Message {
 
 	public:

@@ -3,7 +3,7 @@
 
 #include "Body.h"
 #include "../enum/ParameterEnum.h"
-#include <stdint.h> 	// para 'uint16_t'
+#include <stdint.h> 	// para 'uint32_t'
 
 /**
  * Cuerpo del comando 'set parameter'
@@ -20,6 +20,9 @@ class SetParameterCommandBody : public Body {
 		std::string asText();
 
 	private:
+		ParameterEnum parameter;
+		uint32_t value;
+
 		void addParameterCode(ParameterEnum parameter);
 		void addUINT32ParameterValue(uint32_t value);
 		void addUINT16ParameterValue(uint32_t value);

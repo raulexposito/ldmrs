@@ -13,7 +13,7 @@ class BodyFactory {
 
 		static BodyFactory* getInstance();
 
-		Body * generateBody (int bodySize, uint8_t * bodyBytes);
+		Body * generateBody (Header * header, uint8_t * bodyBytes);
 
 	private:
 
@@ -21,6 +21,7 @@ class BodyFactory {
 		BodyFactory(BodyFactory const&){};
 		static BodyFactory* instance;
 		int bodySize;
+		Body* generateCommandReplyBody(int bodySize, uint8_t * bodyBytes);
 };
 
 #endif // BODYFACTORY_H
