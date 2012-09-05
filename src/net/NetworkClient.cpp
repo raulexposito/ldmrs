@@ -20,6 +20,9 @@
 #include "../log/hdr/Recorder.h"
 #include "../util/hdr/BytesConverter.h"
 
+#define HOST "ldmrs_device"
+#define PORT "ldmrs_port"
+
 #define HEADER_LENGTH 24
 #define LENGTH_FIRST_POSITION 8
 
@@ -47,13 +50,15 @@ NetworkClient::NetworkClient() {
 	struct hostent *host;
 	inet_pton(AF_INET, Configuration::getInstance()->getIp().c_str(), &ipv4addr);
 
-	port = getservbyport(Configuration::getInstance()->getPort(), "tcp");
+	// port = getservbyport(Configuration::getInstance()->getPort(), "tcp");
+	port = getservbyname (PORT, "tcp");
 	if (port == NULL) {
 		Logger::getInstance()->log("Can't connect with port!");
 		return;
 	}
 
-	host = gethostbyaddr(&ipv4addr, sizeof ipv4addr, AF_INET);
+	// host = gethostbyaddr(&ipv4addr, sizeof ipv4addr, AF_INET);
+	host = gethostbyname (HOST);
 	if (host == NULL) {
 		Logger::getInstance()->log("Can't connect with host!");
 		return;
@@ -89,15 +94,6 @@ void logConfiguration () {
 	Logger::getInstance()->log(ip.str());
 	Logger::getInstance()->log(port.str());
 	Logger::getInstance()->log("");
-/*
-
-
-	std::string message = "Connecting with LDMRS device:t";
-	message.append();
-	message.append(":");
-	message.append(ipAsString.str());
-	Logger::getInstance()->log(message.c_str());
-*/
 }
 
 Message * NetworkClient::receive () {
@@ -106,7 +102,7 @@ Message * NetworkClient::receive () {
 	read (serverSocket, receivedHeaderBytes, HEADER_LENGTH);
 	Header * header = HeaderFactory::getInstance()->generateHeader(receivedHeaderBytes);
 
-	uint8_t * receivedBodyBytes = new uint8_t[header->getBodySize()];
+    uint8_t * receivedBodyBytes = new uint8_t[header->getBodySize()];
 	read (serverSocket, receivedBodyBytes, header->getBodySize());
 	Body * body = BodyFactory::getInstance()->generateBody(header, receivedBodyBytes);
 

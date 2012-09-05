@@ -36,14 +36,14 @@ Body* BodyFactory::generateBody (Header * header, uint8_t * bodyBytes) {
 }
 
 Body* BodyFactory::generateCommandReplyBody(int bodySize, uint8_t * bodyBytes) {
+	if (bodyBytes[TYPE_FIRST_POSITION] == 0x11 && bodyBytes[TYPE_SECOND_POSITION]  == 0x00) {
+		return new GetParameterCommandReplyBody(bodySize, bodyBytes);
+	}
 	if (bodyBytes[TYPE_FIRST_POSITION] == 0x01 && bodyBytes[TYPE_SECOND_POSITION]  == 0x00) {
 		return new GetStatusCommandReplyBody(bodySize, bodyBytes);
 	}
 	if (bodyBytes[TYPE_FIRST_POSITION] == 0x10 && bodyBytes[TYPE_SECOND_POSITION]  == 0x00) {
 		return new SetParameterCommandReplyBody(bodySize, bodyBytes);
-	}
-	if (bodyBytes[TYPE_FIRST_POSITION] == 0x11 && bodyBytes[TYPE_SECOND_POSITION]  == 0x00) {
-		return new GetParameterCommandReplyBody(bodySize, bodyBytes);
 	}
 	if (bodyBytes[TYPE_FIRST_POSITION] == 0x30 && bodyBytes[TYPE_SECOND_POSITION]  == 0x00) {
 		return new SetNTPTimestampSecCommandReplyBody(bodySize, bodyBytes);
