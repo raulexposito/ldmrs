@@ -102,16 +102,20 @@ Message * NetworkClient::receive () {
 	read (serverSocket, receivedHeaderBytes, HEADER_LENGTH);
 	Header * header = HeaderFactory::getInstance()->generateHeader(receivedHeaderBytes);
 
-    uint8_t * receivedBodyBytes = new uint8_t[header->getBodySize()];
-	read (serverSocket, receivedBodyBytes, header->getBodySize());
-	Body * body = BodyFactory::getInstance()->generateBody(header, receivedBodyBytes);
+	if (header != NULL) {
 
-	Message * message = new Message(header, body);
+	    uint8_t * receivedBodyBytes = new uint8_t[header->getBodySize()];
+		read (serverSocket, receivedBodyBytes, header->getBodySize());
+		Body * body = BodyFactory::getInstance()->generateBody(header, receivedBodyBytes);
 
-	Recorder::getInstance()->record(message);
-	log (RECEIVED, message);
+		Message * message = new Message(header, body);
 
-	return message;
+		Recorder::getInstance()->record(message);
+		log (RECEIVED, message);
+
+		return message;
+	}
+	return NULL;
 }
 
 void NetworkClient::send (Message * message) {
@@ -127,7 +131,7 @@ void NetworkClient::log (bool sent, Message * message) {
 	} else {
 		logMessage << "[REVC] ";
 	}
-	logMessage << BytesConverter::getInstance()->toString(message->getBytesInRaw(), message->getAmountBytes());
+	logMessage << message->asText();
 	Logger::getInstance()->log(logMessage.str());
 }
 

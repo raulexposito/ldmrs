@@ -1,4 +1,9 @@
 
+probar setParameter
+
+acceso a la red por configuracion
+
+0- Grabador
 
 1- Cuerpos y mensajes de tipo Scan Data
 

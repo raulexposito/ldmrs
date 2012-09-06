@@ -40,6 +40,8 @@ class Body {
 
 		virtual bool isSaveConfigCommandBody();
 
+		virtual bool isSaveConfigCommandReplyBody();
+
 		virtual bool isSetNTPTimestampFracSecCommandBody();
 
 		virtual bool isSetNTPTimestampFracSecCommandReplyBody();
@@ -54,7 +56,11 @@ class Body {
 
 		virtual bool isStartMeasureCommandBody();
 
+		virtual bool isStartMeasureCommandReplyBody();
+
 		virtual bool isStopMeasureCommandBody();
+
+		virtual bool isStopMeasureCommandReplyBody();
 
 		virtual bool isScanDataBody();
 

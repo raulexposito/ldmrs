@@ -56,11 +56,17 @@ bool Body::isSetParameterCommandReplyBody() { return false; }
 
 bool Body::isStartMeasureCommandBody() { return false; }
 
+bool Body::isStartMeasureCommandReplyBody() { return false; }
+
 bool Body::isStopMeasureCommandBody() { return false; }
+
+bool Body::isStopMeasureCommandReplyBody() { return false; }
 
 bool Body::isScanDataBody() { return false; }
 
 bool Body::isErrorAndWarningBody() { return false; }
+
+bool Body::isSaveConfigCommandReplyBody() { return false; }
 
 std::string Body::asText() {
 	std::stringstream text;

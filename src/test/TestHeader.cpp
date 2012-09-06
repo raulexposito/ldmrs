@@ -36,7 +36,6 @@ void testStartMensajes() {
 	Message *request = new StartMeasureCommandMessage();
 	NetworkClient::getInstance()->send(request);
 	Message * response = NetworkClient::getInstance()->receive();
-
 	delete request;
 	delete response;
 }
@@ -273,11 +272,14 @@ void testReceiveStopMeasureReplyCommand () {
 }
 
 void testLecturaLaser() {
-	testStopMensajes();
-	testReset();
-	testStartMensajes();
 
-	while (true) {
+//	testStopMensajes();
+//	testReset();
+//	testStartMensajes();
+
+	int i = 0;
+	for (i = 0; i < 1000; i++) {
+//	while (true) {
 		NetworkClient::getInstance()->receive();
 	}
 }
@@ -340,7 +342,7 @@ void testBodyFactory() {
 
 int main () {
 //	testStartMensajes();
-	testStopMensajes();
+//	testStopMensajes();
 //	testLeerLaser();
 //	testGetParameter();
 //	testTiposEncabezado();
@@ -348,12 +350,13 @@ int main () {
 //	testGenerarLog();
 //	testDateTime();
 //	testRecordTrace();
-//	testLecturaLaser();
+	testLecturaLaser();
 //	testReadRecord();
 //	testAsText();
 //	testBodyFactory();
 
 //	testReceiveStopMeasureReplyCommand();
+
 
 	return 0;
 }
