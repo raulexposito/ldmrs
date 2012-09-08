@@ -11,7 +11,7 @@ bool SaveConfigCommandReplyBody::isSaveConfigCommandReplyBody() {
 std::string SaveConfigCommandReplyBody::asText() {
 	std::stringstream text;
 	text << "SAVE CONFIG COMMAND REPLY" << "[";
-	text << getAmountBytes() << "]:";
+	text << getAmountBytes() << "]";
 	// TODO: mostrar el tiempo recibido en cristiano
 	return text.str();
 }

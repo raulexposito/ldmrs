@@ -10,6 +10,7 @@
 #define CONFIG_PARAM_TCPIP_IP "TCPIP.ip"
 #define CONFIG_PARAM_TCPIP_PORT "TCPIP.port"
 #define CONFIG_PARAM_FILE_PATH "FILE.path"
+#define CONFIG_PARAM_FILE_MILISECONDS_BETWEEN_MESSAGES "FILE.milisecondsBetweenMessages"
 #define CONFIG_PARAM_LOG_LOG_ON_CONSOLE "LOG.logOnConsole"
 #define CONFIG_PARAM_LOG_LOG_ON_FILE "LOG.logOnFile"
 #define CONFIG_PARAM_LOG_LOG_FILE_BUFFER "LOG.logFileBuffer"
@@ -75,6 +76,10 @@ bool Configuration::isRecordMeasurements() {
 
 int Configuration::getRecordMeasurementsBuffer() {
 	return atoi(getParameter(CONFIG_PARAM_RECORD_RECORD_MEASUREMENTS_BUFFER).c_str());
+}
+
+float Configuration::getMilisecondsBetweenMessages() {
+	return (atoi(getParameter(CONFIG_PARAM_FILE_MILISECONDS_BETWEEN_MESSAGES).c_str())) / 1000;
 }
 
 // http://stackoverflow.com/questions/6175502/how-to-parse-ini-file-with-boost

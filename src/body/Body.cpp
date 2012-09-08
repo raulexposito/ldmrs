@@ -2,7 +2,6 @@
 #include "../util/hdr/BytesConverter.h"
 
 #define RESERVED 0x00
-#define BODY_SIZE_BY_DEFAULT 4
 
 Body::Body(int bodySize, uint8_t preffix, uint8_t suffix) {
 	this->bodySize = bodySize;
@@ -27,7 +26,7 @@ uint8_t * Body::getBytesInRaw() {
 }
 
 int Body::getAmountBytes() {
-	return BODY_SIZE_BY_DEFAULT;
+	return this->bodySize;
 }
 
 bool Body::isGetParameterCommandBody() { return false; }

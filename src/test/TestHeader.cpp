@@ -27,7 +27,6 @@
 #include "../util/hdr/BytesConverter.h"
 #include "../file/hdr/FileClient.h"
 
-#include <time.h>
 #include <iostream>		// para 'cout'
 #include <iomanip>		// para formateo de cout
 using namespace std;	// para formateo de cout
@@ -42,6 +41,14 @@ void testStartMensajes() {
 
 void testStopMensajes() {
 	Message *request = new StopMeasureCommandMessage();
+	NetworkClient::getInstance()->send(request);
+	Message * response = NetworkClient::getInstance()->receive();
+	delete request;
+	delete response;
+}
+
+void testGetStatus() {
+	Message *request = new GetStatusCommandMessage();
 	NetworkClient::getInstance()->send(request);
 	Message * response = NetworkClient::getInstance()->receive();
 	delete request;
@@ -63,9 +70,9 @@ void testLeerLaser() {
 	delete laserRead;
 }
 
-void testGetParameter() {
+void testGetParameter(ParameterEnum parameter) {
 
-	Message *request = new GetParameterCommandMessage(TCP_PORT);
+	Message *request = new GetParameterCommandMessage(parameter);
 	NetworkClient::getInstance()->send(request);
 	Message * response = NetworkClient::getInstance()->receive();
 
@@ -278,16 +285,18 @@ void testLecturaLaser() {
 //	testStartMensajes();
 
 	int i = 0;
-	for (i = 0; i < 1000; i++) {
+	for (i = 0; i < 100000; i++) {
 //	while (true) {
 		NetworkClient::getInstance()->receive();
+		sleep(0);
 	}
 }
 
 void testReadRecord() {
-	//for (int i = 0; i < 100; i++) {
-		FileClient::getInstance()->receive();
-	//}
+	for (int i = 0; i < 100; i++) {
+		Message * message = FileClient::getInstance()->receive();
+		cout << message->asText() << endl;
+	}
 }
 
 void testAsText() {
@@ -350,13 +359,15 @@ int main () {
 //	testGenerarLog();
 //	testDateTime();
 //	testRecordTrace();
-	testLecturaLaser();
-//	testReadRecord();
+//	testLecturaLaser();
+	testReadRecord();
 //	testAsText();
 //	testBodyFactory();
 
 //	testReceiveStopMeasureReplyCommand();
 
-
+//	testStopMensajes();
+//	testGetStatus();
+//	testGetParameter(SCAN_FRECUENCY);
 	return 0;
 }

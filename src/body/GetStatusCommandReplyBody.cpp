@@ -10,6 +10,7 @@ bool GetStatusCommandReplyBody::isGetStatusCommandReplyBody() {
 	return true;
 }
 
+// TODO: formatear adecuadamente
 std::string GetStatusCommandReplyBody::asText() {
 	std::stringstream text;
 	text << "GET STATUS COMMAND REPLY" << "[";
@@ -28,13 +29,6 @@ std::string GetStatusCommandReplyBody::asText() {
 	text << "Scanner status: ";
 	text << showHex8(getBytesInRaw()[6]);
 	text << showHex8(getBytesInRaw()[7]);
-	text << "]:";
-
-	text << "Scanner status: ";
-	text << showHex8(getBytesInRaw()[6]);
-	text << showHex8(getBytesInRaw()[7]);
-	text << showHex8(getBytesInRaw()[8]);
-	text << showHex8(getBytesInRaw()[9]);
 	text << "]:";
 
 	text << "Temperature: ";

@@ -1,16 +1,16 @@
 
-probar setParameter
-
-acceso a la red por configuracion
-
-0- Grabador
+0- probar setParameter
 
 1- Cuerpos y mensajes de tipo Scan Data
+	--> subobjetos
 
-2- Excepciones de tipo Error and Warning
+2- Acceso a la red por configuracion
+	
+3- Excepciones de tipo Error and Warning
+	--> poblar el mensaje de error
 
-3- Recuperar informacion especifica de los cuerpos
+4- Recuperar informacion especifica de los cuerpos
 	--> terminar 'asText()' en los cuerpos con TODO
 
-n- NTP en encabezados, en los SetNTPTimestamp y en el asText() de los encabezados
+5- NTP en encabezados, en los SetNTPTimestamp y en el asText() de los encabezados
 

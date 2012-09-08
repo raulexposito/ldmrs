@@ -19,8 +19,12 @@ class FileClient {
 
 		FileClient();
 		FileClient(FileClient const&){};
+		Header * generateHeader (char * headerReadedBytes);
+		Body * generateBody (char * bodyReadedBytes, Header * header);
 		static FileClient* instance;
 		ifstream ifs;
+
+		uint8_t convert(char value, bool first);
 };
 
 

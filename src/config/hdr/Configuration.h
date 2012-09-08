@@ -33,6 +33,8 @@ class Configuration {
 
 		int getRecordMeasurementsBuffer();
 
+		float getMilisecondsBetweenMessages();
+
 	private:
 
 		Configuration(){};
