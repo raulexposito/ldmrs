@@ -3,14 +3,12 @@
 
 1- Cuerpos y mensajes de tipo Scan Data
 	--> subobjetos
-
-2- Acceso a la red por configuracion
 	
-3- Excepciones de tipo Error and Warning
+2- Excepciones de tipo Error and Warning
 	--> poblar el mensaje de error
 
-4- Recuperar informacion especifica de los cuerpos
+3- Recuperar informacion especifica de los cuerpos
 	--> terminar 'asText()' en los cuerpos con TODO
 
-5- NTP en encabezados, en los SetNTPTimestamp y en el asText() de los encabezados
+4- NTP en encabezados, en los SetNTPTimestamp y en el asText() de los encabezados
 

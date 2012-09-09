@@ -20,9 +20,6 @@
 #include "../log/hdr/Recorder.h"
 #include "../util/hdr/BytesConverter.h"
 
-#define HOST "ldmrs_device"
-#define PORT "ldmrs_port"
-
 #define HEADER_LENGTH 24
 #define LENGTH_FIRST_POSITION 8
 
@@ -50,15 +47,13 @@ NetworkClient::NetworkClient() {
 	struct hostent *host;
 	inet_pton(AF_INET, Configuration::getInstance()->getIp().c_str(), &ipv4addr);
 
-	// port = getservbyport(Configuration::getInstance()->getPort(), "tcp");
-	port = getservbyname (PORT, "tcp");
+	port = getservbyport(htons(Configuration::getInstance()->getPort()), "tcp");
 	if (port == NULL) {
 		Logger::getInstance()->log("Can't connect with port!");
 		return;
 	}
 
-	// host = gethostbyaddr(&ipv4addr, sizeof ipv4addr, AF_INET);
-	host = gethostbyname (HOST);
+	host = gethostbyaddr(&ipv4addr, sizeof ipv4addr, AF_INET);
 	if (host == NULL) {
 		Logger::getInstance()->log("Can't connect with host!");
 		return;

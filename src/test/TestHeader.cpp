@@ -285,10 +285,9 @@ void testLecturaLaser() {
 //	testStartMensajes();
 
 	int i = 0;
-	for (i = 0; i < 100000; i++) {
+	for (i = 0; i < 10000; i++) {
 //	while (true) {
 		NetworkClient::getInstance()->receive();
-		sleep(0);
 	}
 }
 
@@ -352,15 +351,14 @@ void testBodyFactory() {
 int main () {
 //	testStartMensajes();
 //	testStopMensajes();
-//	testLeerLaser();
 //	testGetParameter();
 //	testTiposEncabezado();
 //	testTiposCuerpo();
 //	testGenerarLog();
 //	testDateTime();
 //	testRecordTrace();
-//	testLecturaLaser();
-	testReadRecord();
+	testLecturaLaser();
+//	testReadRecord();
 //	testAsText();
 //	testBodyFactory();
 
