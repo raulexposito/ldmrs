@@ -32,8 +32,3 @@ std::string BytesConverter::toString (uint8_t * bytes, int size) {
 	}
 	return result.str();
 }
-
-uint8_t* BytesConverter::toUint8t (char * bytes, int size) {
-	// TODO
-	return 0;
-}

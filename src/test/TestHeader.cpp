@@ -293,10 +293,10 @@ void testLecturaLaser() {
 }
 
 void testReadRecord() {
-	for (int i = 0; i < 100; i++) {
+//	for (int i = 0; i < 100; i++) {
 		Message * message = FileClient::getInstance()->receive();
 		cout << message->asText() << endl;
-	}
+//	}
 }
 
 void testAsText() {

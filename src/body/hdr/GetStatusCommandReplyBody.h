@@ -19,6 +19,18 @@ class GetStatusCommandReplyBody : public Body {
 
 	private:
 		std::string showHex8(uint8_t uint8);
+
+		std::string showVersion(uint8_t first, uint8_t second);
+
+		std::string scannerStatus(uint8_t n);
+
+		float temperature(uint8_t first, uint8_t second);
+
+		std::string calculateSerialNumber(uint8_t first, uint8_t second);
+
+		int counterSerialNumber(uint8_t first, uint8_t second);
+
+		std::string calculateTimestamp(uint8_t first, uint8_t second, uint8_t third, uint8_t forth, uint8_t fifth, uint8_t sixth);
 };
 
 #endif // GETSTATUSREPLYBODY_H

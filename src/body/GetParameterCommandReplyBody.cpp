@@ -65,12 +65,11 @@ std::string GetParameterCommandReplyBody::asText() {
 
 std::string GetParameterCommandReplyBody::addAddress() {
 	std::stringstream address;
-	// TODO: hacen falta estos std::setfill('0')??
 	int i;
 	for (i = COMMAND_REPLY_PARAMETER_VALUE_END_POSITION; i >= COMMAND_REPLY_PARAMETER_VALUE_INIT_POSITION + 1; i--) {
-		address << std::setfill('0') << (int) getBytesInRaw()[i] << ".";
+		address << (int) getBytesInRaw()[i] << ".";
 	}
-	address << std::setfill('0') << (int) getBytesInRaw()[COMMAND_REPLY_PARAMETER_VALUE_INIT_POSITION];
+	address << (int) getBytesInRaw()[COMMAND_REPLY_PARAMETER_VALUE_INIT_POSITION];
 	return address.str();
 }
 
