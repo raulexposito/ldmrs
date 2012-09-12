@@ -28,8 +28,6 @@ class Header {
 
 		int getBodySize();
 
-		//TODO: 'std::string getNTP()' para poder mostrar la fecha de creacion del mensaje en el asText()
-
 		virtual std::string asText();
 
 		virtual bool isScanDataHeader();

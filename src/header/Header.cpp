@@ -50,7 +50,6 @@ void Header::addDataType(uint8_t preffix, uint8_t suffix) {
 	bytes[15] = suffix;
 }
 
-// TODO: implementar
 void Header::addNTPTime() {
 	bytes[16] = 0x00;
 	bytes[17] = 0x00;

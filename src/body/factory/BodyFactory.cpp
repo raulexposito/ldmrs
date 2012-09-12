@@ -5,8 +5,6 @@
 #include "../hdr/SaveConfigCommandReplyBody.h"
 #include "../hdr/GetParameterCommandReplyBody.h"
 #include "../hdr/SetParameterCommandReplyBody.h"
-#include "../hdr/SetNTPTimestampSecCommandReplyBody.h"
-#include "../hdr/SetNTPTimestampFracSecCommandReplyBody.h"
 #include "../hdr/StartMeasureCommandReplyBody.h"
 #include "../hdr/StopMeasureCommandReplyBody.h"
 #include "../hdr/ErrorAndWarningBody.h"
@@ -53,23 +51,15 @@ Body* BodyFactory::generateCommandReplyBody(int bodySize, uint8_t * bodyBytes) {
 	if (bodyBytes[TYPE_FIRST_POSITION] == 0x10 && bodyBytes[TYPE_SECOND_POSITION]  == 0x00) {
 		return new SetParameterCommandReplyBody(bodySize, bodyBytes);
 	}
-	if (bodyBytes[TYPE_FIRST_POSITION] == 0x30 && bodyBytes[TYPE_SECOND_POSITION]  == 0x00) {
-		return new SetNTPTimestampSecCommandReplyBody(bodySize, bodyBytes);
-	}
-	if (bodyBytes[TYPE_FIRST_POSITION] == 0x31 && bodyBytes[TYPE_SECOND_POSITION]  == 0x00) {
-		return new SetNTPTimestampFracSecCommandReplyBody(bodySize, bodyBytes);
-	}
 	if (bodyBytes[TYPE_FIRST_POSITION] == 0x04 && bodyBytes[TYPE_SECOND_POSITION]  == 0x00) {
 		return new SaveConfigCommandReplyBody(bodySize, bodyBytes);
 	}
-
 	if (bodyBytes[TYPE_FIRST_POSITION] == 0x20 && bodyBytes[TYPE_SECOND_POSITION]  == 0x00) {
 		return new StartMeasureCommandReplyBody(bodySize, bodyBytes);
 	}
 	if (bodyBytes[TYPE_FIRST_POSITION] == 0x21 && bodyBytes[TYPE_SECOND_POSITION]  == 0x00) {
 		return new StopMeasureCommandReplyBody(bodySize, bodyBytes);
 	}
-
 
 	std::stringstream warnMessage;
 	warnMessage << "[WARN] UNKNOWN TYPE OF RECEIVED COMMAND REPLY: ";

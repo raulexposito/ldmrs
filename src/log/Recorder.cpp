@@ -46,9 +46,8 @@ std::string composeTrace (Message * message) {
 }
 
 void Recorder::record(Message * message) {
-
     if (recordMeasurements) {
-    	ofs << composeTrace(message);
+    	ofs << composeTrace(message) << endl;
     	flushRecordFile();
     }
 }

@@ -12,6 +12,6 @@ std::string ScanDataBody::asText() {
 	std::stringstream text;
 	text << "SCAN DATA" << "[";
 	text << getAmountBytes() << "]";
-	// TODO: mostrar informacion relevante
+	// TODO: si esta sincronizado, mostrar numero de puntos. Sino, indicar que esta desincronizado
 	return text.str();
 }

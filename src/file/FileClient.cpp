@@ -7,6 +7,7 @@
 
 #define HEADER_SIZE 24
 #define CHARS_PER_BYTE 2
+#define RETURN 2
 
 FileClient* FileClient::instance = 0;
 
@@ -23,13 +24,13 @@ FileClient::FileClient () {
 
 Message * FileClient::receive () {
 
-	char * headerReadedBytes = new char[HEADER_SIZE * CHARS_PER_BYTE + 1];
-	ifs.get(headerReadedBytes, HEADER_SIZE * CHARS_PER_BYTE + 1);
+	char * headerReadedBytes = new char[HEADER_SIZE * CHARS_PER_BYTE + RETURN + 1];
+	ifs.get(headerReadedBytes, HEADER_SIZE * CHARS_PER_BYTE + RETURN  + 1);
 
 	Header * header = generateHeader (headerReadedBytes);
 
-	char * bodyReadedBytes = new char[header->getBodySize() * CHARS_PER_BYTE + 1];
-	ifs.get(bodyReadedBytes, header->getBodySize() * CHARS_PER_BYTE + 1);
+	char * bodyReadedBytes = new char[header->getBodySize() * CHARS_PER_BYTE + RETURN  + 1];
+	ifs.get(bodyReadedBytes, header->getBodySize() * CHARS_PER_BYTE + RETURN  + 1);
 
 	Body * body = generateBody (bodyReadedBytes, header);
 
@@ -47,7 +48,7 @@ Message * FileClient::receive () {
 }
 
 Header * FileClient::generateHeader (char * headerReadedBytes) {
-	uint8_t * headerBytes = new uint8_t[HEADER_SIZE * CHARS_PER_BYTE + 1];
+	uint8_t * headerBytes = new uint8_t[HEADER_SIZE * CHARS_PER_BYTE + RETURN  + 1];
 	int i = 0;
 	for (i = 0; i < HEADER_SIZE; i++) {
 		headerBytes[i] = convert(headerReadedBytes[(i * 2)], true);
@@ -58,7 +59,7 @@ Header * FileClient::generateHeader (char * headerReadedBytes) {
 }
 
 Body * FileClient::generateBody (char * bodyReadedBytes, Header * header) {
-	uint8_t * bodyBytes = new uint8_t[header->getBodySize() * CHARS_PER_BYTE + 1];
+	uint8_t * bodyBytes = new uint8_t[header->getBodySize() * CHARS_PER_BYTE + RETURN  + 1];
 	int i = 0;
 	for (i = 0; i < header->getBodySize(); i++) {
 		bodyBytes[i] = convert(bodyReadedBytes[(i * 2)], true);

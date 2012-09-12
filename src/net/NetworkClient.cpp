@@ -110,6 +110,7 @@ Message * NetworkClient::receive () {
 
 		return message;
 	}
+	// TODO: quitar NULL
 	return NULL;
 }
 

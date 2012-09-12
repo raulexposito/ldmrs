@@ -1,14 +1,11 @@
 
-0- probar setParameter
 
 1- Cuerpos y mensajes de tipo Scan Data
-	--> subobjetos
+
+	--> 1.1 desincronizacion
+	--> 1.2 subobjetos
 	
-2- Excepciones de tipo Error and Warning
-	--> poblar el mensaje de error
+2- Actualizar grabador con retornos de carro
 
-3- Recuperar informacion especifica de los cuerpos
-	--> terminar 'asText()' en los cuerpos con TODO
-
-4- NTP en encabezados, en los SetNTPTimestamp y en el asText() de los encabezados
-
+	--> 2.1 desincronizacion
+	--> 2.2 insertar enters y tratar enters

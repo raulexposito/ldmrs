@@ -279,16 +279,23 @@ void testReceiveStopMeasureReplyCommand () {
 }
 
 void testLecturaLaser() {
+/*
+	testStopMensajes();
+	testReset();
+	testStartMensajes();
+*/
 
-//	testStopMensajes();
-//	testReset();
-//	testStartMensajes();
-
-	int i = 0;
-	for (i = 0; i < 10000; i++) {
-//	while (true) {
-		NetworkClient::getInstance()->receive();
+	while (true) {
+/*		Message * message = */NetworkClient::getInstance()->receive();
+/*
+		if (message == NULL || message->isErrorAndWarningMessage()) {
+			testStopMensajes();
+			testReset();
+			testStartMensajes();
+		}
+*/
 	}
+
 }
 
 void testReadRecord() {
