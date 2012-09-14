@@ -28,12 +28,7 @@ Header* HeaderFactory::generateHeader (uint8_t * headerBytes) {
 		return new CommandReplyHeader(headerBytes);
 	}
 
-	std::stringstream warnMessage;
-	warnMessage << "[WARN] UNKNOWN TYPE OF RECEIVED HEADER: ";
-	warnMessage << BytesConverter::getInstance()->toString(headerBytes, HEADER_SIZE);
-
-	Logger::getInstance()->log(warnMessage.str());
-	// return new Header(new uint8_t[HEADER_SIZE]);
+	Logger::getInstance()->log("[WARN] SYNCHRONIZING... ");
 	return NULL;
 }
 

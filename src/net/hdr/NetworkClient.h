@@ -17,11 +17,16 @@ class NetworkClient {
 	private:
 
 		NetworkClient();
-		NetworkClient(NetworkClient const&){};
-		uint8_t * receiveBody(int bodySize);
+		NetworkClient (NetworkClient const&){};
+		uint8_t * receiveBody (int bodySize);
+		Header * getHeader ();
+		Body * getBody (Header * header);
+		bool isMagicWord (uint8_t * magicWord);
 		void log (bool sent, Message * message);
 		static NetworkClient* instance;
 		int serverSocket;
+		bool synchronizationHasBeenNeeded;
+		Header * nextHeader;
 };
 
 #endif // NETWORKCLIENT_H
