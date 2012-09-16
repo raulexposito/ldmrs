@@ -21,6 +21,7 @@ class NetworkClient {
 		uint8_t * receiveBody (int bodySize);
 		Header * getHeader ();
 		Body * getBody (Header * header);
+		Header * recoverSavedHeaderOrReadTheNextOne();
 		bool isMagicWord (uint8_t * magicWord);
 		void log (bool sent, Message * message);
 		static NetworkClient* instance;

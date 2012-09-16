@@ -1,11 +1,10 @@
 
 
-1- Cuerpos y mensajes de tipo Scan Data
+1- mensajes de tipo Scan Data
 
-	--> 1.1 desincronizacion
-	--> 1.2 subobjetos
-	
-2- Actualizar grabador con retornos de carro
+	--> 1.1 subobjetos
 
-	--> 2.1 desincronizacion
-	--> 2.2 insertar enters y tratar enters
+2- startmeausure con wireshark
+
+3- conector
+

@@ -27,8 +27,6 @@ Header* HeaderFactory::generateHeader (uint8_t * headerBytes) {
 	} else if (headerBytes[14] == 0x20 && headerBytes[15] == 0x20) {
 		return new CommandReplyHeader(headerBytes);
 	}
-
-	Logger::getInstance()->log("[WARN] SYNCHRONIZING... ");
 	return NULL;
 }
 

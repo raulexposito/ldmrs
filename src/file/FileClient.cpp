@@ -7,7 +7,6 @@
 
 #define HEADER_SIZE 24
 #define CHARS_PER_BYTE 2
-#define RETURN 2
 
 FileClient* FileClient::instance = 0;
 
@@ -23,15 +22,13 @@ FileClient::FileClient () {
 }
 
 Message * FileClient::receive () {
+	std::string line;
+	getline (ifs,line);
 
-	char * headerReadedBytes = new char[HEADER_SIZE * CHARS_PER_BYTE + RETURN + 1];
-	ifs.get(headerReadedBytes, HEADER_SIZE * CHARS_PER_BYTE + RETURN  + 1);
-
+	const char * headerReadedBytes = line.substr(0, HEADER_SIZE * CHARS_PER_BYTE).c_str();
 	Header * header = generateHeader (headerReadedBytes);
 
-	char * bodyReadedBytes = new char[header->getBodySize() * CHARS_PER_BYTE + RETURN  + 1];
-	ifs.get(bodyReadedBytes, header->getBodySize() * CHARS_PER_BYTE + RETURN  + 1);
-
+	const char * bodyReadedBytes = line.substr((HEADER_SIZE + header->getBodySize()) * CHARS_PER_BYTE).c_str();
 	Body * body = generateBody (bodyReadedBytes, header);
 
 	if (ifs.eof()) {
@@ -39,38 +36,31 @@ Message * FileClient::receive () {
 		ifs.seekg(0);
 	}
 
-	free(headerReadedBytes);
-	free(bodyReadedBytes);
-
 	sleep (Configuration::getInstance()->getMilisecondsBetweenMessages());
-
 	return new Message(header, body);
 }
 
-Header * FileClient::generateHeader (char * headerReadedBytes) {
-	uint8_t * headerBytes = new uint8_t[HEADER_SIZE * CHARS_PER_BYTE + RETURN  + 1];
+Header * FileClient::generateHeader (const char * headerReadedBytes) {
+	uint8_t * headerBytes = new uint8_t[HEADER_SIZE];
 	int i = 0;
 	for (i = 0; i < HEADER_SIZE; i++) {
 		headerBytes[i] = convert(headerReadedBytes[(i * 2)], true);
 		headerBytes[i] += convert(headerReadedBytes[(i * 2) + 1], false);
 	}
-
 	return HeaderFactory::getInstance()->generateHeader(headerBytes);
 }
 
-Body * FileClient::generateBody (char * bodyReadedBytes, Header * header) {
-	uint8_t * bodyBytes = new uint8_t[header->getBodySize() * CHARS_PER_BYTE + RETURN  + 1];
+Body * FileClient::generateBody (const char * bodyReadedBytes, Header * header) {
+	uint8_t * bodyBytes = new uint8_t[header->getBodySize()];
 	int i = 0;
 	for (i = 0; i < header->getBodySize(); i++) {
 		bodyBytes[i] = convert(bodyReadedBytes[(i * 2)], true);
 		bodyBytes[i] += convert(bodyReadedBytes[(i * 2) + 1], false);
 	}
-
 	return BodyFactory::getInstance()->generateBody(header, bodyBytes);
 }
 
 uint8_t FileClient::convert(char value, bool first) {
-
 	uint8_t returnValue;
 
 	if (value == 'a' || value == 'A') {

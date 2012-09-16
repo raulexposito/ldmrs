@@ -279,11 +279,11 @@ void testReceiveStopMeasureReplyCommand () {
 }
 
 void testLecturaLaser() {
-
-//	testStopMensajes();
-//	testReset();
-//	testStartMensajes();
-
+/*
+	testStopMensajes();
+	testReset();
+	testStartMensajes();
+*/
 	while (true) {
 		NetworkClient::getInstance()->receive();
 /*
@@ -294,14 +294,13 @@ void testLecturaLaser() {
 		}
 */
 	}
-
 }
 
 void testReadRecord() {
-//	for (int i = 0; i < 100; i++) {
+	for (int i = 0; i < 10; i++) {
 		Message * message = FileClient::getInstance()->receive();
-		cout << message->asText() << endl;
-//	}
+		cout << message->asText() << "\n";
+	}
 }
 
 void testAsText() {
@@ -363,8 +362,8 @@ int main () {
 //	testGenerarLog();
 //	testDateTime();
 //	testRecordTrace();
-	testLecturaLaser();
-//	testReadRecord();
+//	testLecturaLaser();
+	testReadRecord();
 //	testAsText();
 //	testBodyFactory();
 
