@@ -42,7 +42,7 @@ void Configuration::print () {
 
 SourceEnum Configuration::getSource() {
 	std::string source = getParameter(CONFIG_PARAM_SOURCE);
-	if (source.compare("FILE")) return SOURCE_FILE;
+	if (source.compare("FILE") == 0) return SOURCE_FILE;
 	return SOURCE_TCPIP;
 }
 

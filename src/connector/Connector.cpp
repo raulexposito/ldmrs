@@ -3,19 +3,18 @@
 #include "../net/hdr/NetworkClient.h"
 #include "../file/hdr/FileClient.h"
 
-Connector::Connector() {
-
+void Connector::sendMessage(Message * message) {
+	if (Configuration::getInstance()->getSource()==SOURCE_TCPIP) {
+		NetworkClient::getInstance()->send(message);
+	}
 }
 
-
-void Connector::action() {
-	if (Configuration::getInstance()->getSource()==SOURCE_FILE) {
-		for (int i = 0; i < 100; i++) {
-			Message * message = FileClient::getInstance()->receive();
-			std::cout << message->asText() << std::endl;
-		}
+Message * Connector::receiveMessage() {
+	Message * message;
+	if (Configuration::getInstance()->getSource()==SOURCE_TCPIP) {
+		message = NetworkClient::getInstance()->receive();
 	} else {
-		NetworkClient::getInstance()->receive();
+		message = FileClient::getInstance()->receive();
 	}
-
+	return message;
 }

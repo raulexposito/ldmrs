@@ -4,6 +4,7 @@
 #include "../body/hdr/Body.h"
 #include "../header/factory/hdr/HeaderFactory.h"
 #include "../body/factory/hdr/BodyFactory.h"
+#include "../log/hdr/Logger.h"
 
 #define HEADER_SIZE 24
 #define CHARS_PER_BYTE 2
@@ -11,8 +12,19 @@
 FileClient* FileClient::instance = 0;
 
 FileClient* FileClient::getInstance() {
-   if (!instance)
+   if (!instance) {
 	   instance = new FileClient();
+
+	   std::stringstream recordFile;
+	   recordFile << "\tRecord file: '";
+	   recordFile << Configuration::getInstance()->getPath();
+	   recordFile << "'";
+
+	   Logger::getInstance()->log("Reading a saved record:");
+	   Logger::getInstance()->log("");
+	   Logger::getInstance()->log(recordFile.str());
+	   Logger::getInstance()->log("");
+   }
 
    return instance;
 }
@@ -37,7 +49,10 @@ Message * FileClient::receive () {
 	}
 
 	sleep (Configuration::getInstance()->getMilisecondsBetweenMessages());
-	return new Message(header, body);
+
+	Message * message = new Message(header, body);
+	log (message);
+	return message;
 }
 
 Header * FileClient::generateHeader (const char * headerReadedBytes) {
@@ -90,4 +105,11 @@ uint8_t FileClient::convert(char value, bool first) {
 	}
 
 	return returnValue;
+}
+
+void FileClient::log (Message * message) {
+	std::stringstream logMessage;
+	logMessage << "[REVC] ";
+	logMessage << message->asText();
+	Logger::getInstance()->log(logMessage.str());
 }

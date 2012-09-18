@@ -26,6 +26,7 @@
 #include "../util/hdr/DateTime.h"
 #include "../util/hdr/BytesConverter.h"
 #include "../file/hdr/FileClient.h"
+#include "../connector/hdr/Connector.h"
 
 #include <iostream>		// para 'cout'
 #include <iomanip>		// para formateo de cout
@@ -279,21 +280,21 @@ void testReceiveStopMeasureReplyCommand () {
 }
 
 void testLecturaLaser() {
-/*
+
 	testStopMensajes();
 	testReset();
 	testStartMensajes();
-*/
+/*
 	while (true) {
 		NetworkClient::getInstance()->receive();
-/*
+
 		if (message == NULL || message->isErrorAndWarningMessage()) {
 			testStopMensajes();
 			testReset();
 			testStartMensajes();
 		}
-*/
 	}
+*/
 }
 
 void testReadRecord() {
@@ -352,6 +353,20 @@ void testBodyFactory() {
 	delete scanData;
 }
 
+void testSendConector() {
+	Message *request = new GetStatusCommandMessage();
+	Message *response;
+
+	Connector * connector = new Connector();
+	connector->sendMessage(request);
+	while (true) {
+		response = connector->receiveMessage();
+	}
+
+	delete request;
+	delete response;
+	delete connector;
+}
 
 int main () {
 //	testStartMensajes();
@@ -363,11 +378,13 @@ int main () {
 //	testDateTime();
 //	testRecordTrace();
 //	testLecturaLaser();
-	testReadRecord();
+//	testReadRecord();
 //	testAsText();
 //	testBodyFactory();
 
 //	testReceiveStopMeasureReplyCommand();
+
+	testSendConector();
 
 //	testStopMensajes();
 //	testGetStatus();

@@ -21,6 +21,7 @@ class FileClient {
 		FileClient(FileClient const&){};
 		Header * generateHeader (const char * headerReadedBytes);
 		Body * generateBody (const char * bodyReadedBytes, Header * header);
+		void log (Message * message);
 		static FileClient* instance;
 		ifstream ifs;
 
