@@ -43,27 +43,25 @@ NetworkClient::NetworkClient() {
 
 	logConfiguration();
 
-	struct sockaddr_in sockaddr;
-	struct in_addr ipv4addr;
-	struct servent *port;
-	struct hostent *host;
-	inet_pton(AF_INET, Configuration::getInstance()->getIp().c_str(), &ipv4addr);
+    struct sockaddr_in dest_addr;
 
-	port = getservbyport(htons(Configuration::getInstance()->getPort()), "tcp");
-	if (port == NULL) {
-		Logger::getInstance()->log("Can't connect with port!");
-		return;
-	}
+    int sock=socket(PF_INET, SOCK_STREAM, 0);
+    if (sock == -1)
+    {
+    	Logger::getInstance()->log("Error, could not open socket\n");
+    	return;
+    }
 
-	host = gethostbyaddr(&ipv4addr, sizeof ipv4addr, AF_INET);
-	if (host == NULL) {
-		Logger::getInstance()->log("Can't connect with host!");
-		return;
-	}
+    dest_addr.sin_family = AF_INET;
+    dest_addr.sin_port = htons(Configuration::getInstance()->getPort());
+    dest_addr.sin_addr.s_addr = inet_addr(Configuration::getInstance()->getIp().c_str());
+    memset(dest_addr.sin_zero, '\0', sizeof( dest_addr.sin_zero ));
 
-	sockaddr.sin_family = AF_INET;
-	sockaddr.sin_addr.s_addr = ((struct in_addr *)(host->h_addr))->s_addr;
-	sockaddr.sin_port = port->s_port;
+    if (connect( sock, (struct sockaddr *)&dest_addr, sizeof(struct sockaddr)) == -1)
+    {
+    	Logger::getInstance()->log("Could not connect to remote host.\n");
+    	return;
+    }
 
 	serverSocket = socket (AF_INET, SOCK_STREAM, 0);
 	if (serverSocket == -1) {
@@ -73,7 +71,7 @@ NetworkClient::NetworkClient() {
 
 	if (connect (
 			serverSocket,
-				 (struct sockaddr *)&sockaddr,
+				 (struct sockaddr *)&dest_addr,
 				 sizeof (sockaddr)) == -1)
 	{
 		Logger::getInstance()->log("Connection established!");

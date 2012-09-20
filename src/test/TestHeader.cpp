@@ -377,14 +377,14 @@ int main () {
 //	testGenerarLog();
 //	testDateTime();
 //	testRecordTrace();
-//	testLecturaLaser();
+	testLecturaLaser();
 //	testReadRecord();
 //	testAsText();
 //	testBodyFactory();
 
 //	testReceiveStopMeasureReplyCommand();
 
-	testSendConector();
+//	testSendConector();
 
 //	testStopMensajes();
 //	testGetStatus();
