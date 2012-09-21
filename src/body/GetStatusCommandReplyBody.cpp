@@ -16,35 +16,35 @@ std::string GetStatusCommandReplyBody::asText() {
 	text << getAmountBytes() << "]:";
 
 	text << "firmware[";
-	text << showVersion(getBytesInRaw()[3], getBytesInRaw()[2]);
+	text << showVersion(getBytesInRaw()[2], getBytesInRaw()[3]);
 	text << "]:";
 
 	text << "FPGA version[";
-	text << showVersion(getBytesInRaw()[5], getBytesInRaw()[4]);
+	text << showVersion(getBytesInRaw()[4], getBytesInRaw()[5]);
 	text << "]:";
 
 	text << "Scanner status[";
-	text << scannerStatus(getBytesInRaw()[6]);
+	text << scannerStatus(getBytesInRaw()[7]);
 	text << "]:";
 
 	text << "Temperature[";
-	text << temperature(getBytesInRaw()[13], getBytesInRaw()[12]);
+	text << temperature(getBytesInRaw()[12], getBytesInRaw()[13]);
 	text << "]:";
 
 	text << "Serial number 0[";
-	text << calculateSerialNumber(getBytesInRaw()[15], getBytesInRaw()[14]);
+	text << calculateSerialNumber(getBytesInRaw()[14], getBytesInRaw()[15]);
 	text << "]:";
 
 	text << "Serial number 1[";
-	text << counterSerialNumber(getBytesInRaw()[17], getBytesInRaw()[16]);
+	text << counterSerialNumber(getBytesInRaw()[16], getBytesInRaw()[17]);
 	text << "]:";
 
 	text << "FPGA timestamp[";
-	text << calculateTimestamp(getBytesInRaw()[25], getBytesInRaw()[24], getBytesInRaw()[23], getBytesInRaw()[22], getBytesInRaw()[21], getBytesInRaw()[20]);
+	text << calculateTimestamp(getBytesInRaw()[20], getBytesInRaw()[21], getBytesInRaw()[22], getBytesInRaw()[23], getBytesInRaw()[24], getBytesInRaw()[25]);
 	text << "]:";
 
 	text << "DSP timestamp[";
-	text << calculateTimestamp(getBytesInRaw()[31], getBytesInRaw()[30], getBytesInRaw()[29], getBytesInRaw()[28], getBytesInRaw()[27], getBytesInRaw()[26]);
+	text << calculateTimestamp(getBytesInRaw()[26], getBytesInRaw()[27], getBytesInRaw()[28], getBytesInRaw()[29], getBytesInRaw()[30], getBytesInRaw()[31]);
 	text << "]";
 
 	return text.str();
@@ -102,6 +102,7 @@ std::string GetStatusCommandReplyBody::scannerStatus(uint8_t n){
 
 float GetStatusCommandReplyBody::temperature(uint8_t first, uint8_t second) {
 	float temperature = first * 256 + second;
+	temperature /= 16;
 	temperature -= 579.2364;
 	temperature /= 3.63;
 	return temperature;

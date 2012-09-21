@@ -33,11 +33,12 @@
 using namespace std;	// para formateo de cout
 
 void testStartMensajes() {
-	Message *request = new StartMeasureCommandMessage();
-	NetworkClient::getInstance()->send(request);
-	Message * response = NetworkClient::getInstance()->receive();
-	delete request;
-	delete response;
+	Message * message = new StartMeasureCommandMessage();
+	Connector * connector = new Connector();
+	connector->sendMessage(message);
+
+	Message * respuesta = connector->receiveMessage();
+	respuesta->asText();
 }
 
 void testStopMensajes() {
@@ -49,11 +50,17 @@ void testStopMensajes() {
 }
 
 void testGetStatus() {
-	Message *request = new GetStatusCommandMessage();
-	NetworkClient::getInstance()->send(request);
-	Message * response = NetworkClient::getInstance()->receive();
-	delete request;
-	delete response;
+	Message *message = new GetStatusCommandMessage();
+	Connector * connector = new Connector();
+	connector->sendMessage(message);
+
+	sleep (2);
+
+	Message * respuesta = connector->receiveMessage();
+	cout << respuesta->asText();
+
+	respuesta = connector->receiveMessage();
+	cout << respuesta->asText();
 }
 
 void testReset() {
@@ -280,21 +287,15 @@ void testReceiveStopMeasureReplyCommand () {
 }
 
 void testLecturaLaser() {
-
+/*
 	testStopMensajes();
 	testReset();
 	testStartMensajes();
-/*
-	while (true) {
-		NetworkClient::getInstance()->receive();
-
-		if (message == NULL || message->isErrorAndWarningMessage()) {
-			testStopMensajes();
-			testReset();
-			testStartMensajes();
-		}
-	}
 */
+	int i = 0;
+	for (i = 0; i < 100; i++) {
+		NetworkClient::getInstance()->receive();
+	}
 }
 
 void testReadRecord() {
@@ -387,6 +388,7 @@ int main () {
 //	testSendConector();
 
 //	testStopMensajes();
+//	testStartMensajes();
 //	testGetStatus();
 //	testGetParameter(SCAN_FRECUENCY);
 	return 0;
