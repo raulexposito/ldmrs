@@ -10,8 +10,7 @@ bool SaveConfigCommandReplyBody::isSaveConfigCommandReplyBody() {
 
 std::string SaveConfigCommandReplyBody::asText() {
 	std::stringstream text;
-	text << "SAVE CONFIG COMMAND REPLY" << "[";
-	text << getAmountBytes() << "]";
+	text << "SAVE CONFIG COMMAND REPLY";
 	return text.str();
 }
 

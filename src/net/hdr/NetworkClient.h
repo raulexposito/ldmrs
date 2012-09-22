@@ -28,6 +28,7 @@ class NetworkClient {
 		int serverSocket;
 		bool synchronizationHasBeenNeeded;
 		Header * nextHeader;
+		bool shouldUseNextHeader;
 };
 
 #endif // NETWORKCLIENT_H

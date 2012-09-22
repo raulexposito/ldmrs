@@ -93,9 +93,8 @@ bool SetParameterCommandBody::isSetParameterCommandBody() {
 
 std::string SetParameterCommandBody::asText() {
 	std::stringstream text;
-	text << "SET PARAMETER COMMAND" << "[";
-	text << getAmountBytes() << "]:";
+	text << "SET PARAMETER COMMAND -> ";
 	text << ParameterConverter::getInstance()->parameterToText(parameter) << ":";
-	text << value << ":";
+	text << value;
 	return text.str();
 }

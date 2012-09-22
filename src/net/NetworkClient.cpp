@@ -42,7 +42,6 @@ NetworkClient* NetworkClient::getInstance() {
 NetworkClient::NetworkClient() {
 
 	logConfiguration();
-
     struct sockaddr_in dest_addr;
 
     int sock=socket(PF_INET, SOCK_STREAM, 0);
@@ -79,6 +78,7 @@ NetworkClient::NetworkClient() {
 	}
 
 	synchronizationHasBeenNeeded = false;
+	shouldUseNextHeader = false;
 }
 void logConfiguration () {
 	std::stringstream ip;
@@ -95,16 +95,28 @@ void logConfiguration () {
 
 Message * NetworkClient::receive () {
 
+	Logger::getInstance()->log("receive");
+	if (shouldUseNextHeader) Logger::getInstance()->log("shouldUseNextHeader");
+	else Logger::getInstance()->log("NO shouldUseNextHeader");
+
+	if (synchronizationHasBeenNeeded) Logger::getInstance()->log("synchronizationHasBeenNeeded");
+	else Logger::getInstance()->log("NO synchronizationHasBeenNeeded");
+
 	Header * header = recoverSavedHeaderOrReadTheNextOne();
 	Body * body = getBody(header);
 
 	if (header->isScanDataHeader()) {
 
+		Logger::getInstance()->log("Mensaje de tipo ScanData");
 		// Se almacena la cabecera del siguiente mensaje
 		nextHeader = getHeader();
+		shouldUseNextHeader = true;
 
 		if (synchronizationHasBeenNeeded) {
 			// Se descarta el mensaje actual y se lee el siguente
+
+			Logger::getInstance()->log("LLAMADA RECURSIVA");
+			synchronizationHasBeenNeeded = false;
 			return receive();
 		}
 	}
@@ -130,26 +142,29 @@ Header * NetworkClient::getHeader () {
 
 		// leemos los primeros 4 caracteres, que deberian ser la palabra magica
 		read (serverSocket, magicWordBytes, MAGIC_WORD_LENGTH);
+		cout << std::endl << "magicWordBytes: ";
+		BytesConverter::getInstance()->print(magicWordBytes, MAGIC_WORD_LENGTH);
+		cout << std::endl;
 
 		if (!isMagicWord(magicWordBytes)) {
 
 			uint8_t * nextStepByte = new uint8_t[NEXT_STEP_LENGTH];
 			while (!isMagicWord(magicWordBytes)) {
 				read (serverSocket, nextStepByte, NEXT_STEP_LENGTH);
-
+				// BytesConverter::getInstance()->print(nextStepByte, NEXT_STEP_LENGTH);
 				int k = 0;
 				for (k = 0; k < HEADER_LENGTH - 1; k ++) {
 					magicWordBytes[k] = magicWordBytes[k+1];
 				}
 				magicWordBytes[HEADER_LENGTH - 1] = nextStepByte[0];
+
+				cout << "\tmagicWordBytes: ";
+				BytesConverter::getInstance()->print(magicWordBytes, MAGIC_WORD_LENGTH);
+				cout << std::endl;
 			}
 
 			// hemos necesitado sincronizar
 			synchronizationHasBeenNeeded = true;
-		} else {
-
-			// la palabra magica estaba al comienzo, no ha sido necesario sincronizar
-			synchronizationHasBeenNeeded = false;
 		}
 
 		// copiamos la palabra magica
@@ -160,10 +175,19 @@ Header * NetworkClient::getHeader () {
 
 		// leemos y copiamos el resto del mesaje
 		read (serverSocket, restOfHeaderBytes, HEADER_LENGTH - MAGIC_WORD_LENGTH);
+		cout << "restOfHeaderBytes: ";
+		BytesConverter::getInstance()->print(restOfHeaderBytes, HEADER_LENGTH - MAGIC_WORD_LENGTH);
+		cout << std::endl;
+
 		int j = 0;
+
 		for (j = 4; j < HEADER_LENGTH; j++) {
 			allReceivedHeaderBytes[j] = restOfHeaderBytes[j - MAGIC_WORD_LENGTH];
 		}
+
+		cout << "header: ";
+		BytesConverter::getInstance()->print(allReceivedHeaderBytes, HEADER_LENGTH);
+		cout << std::endl;
 
 		// generamos un encabezado. Si no es valido devolvera null y seguiremos recorriendo la medicion del laser
 		result = HeaderFactory::getInstance()->generateHeader(allReceivedHeaderBytes);
@@ -178,16 +202,23 @@ Header * NetworkClient::getHeader () {
 Body * NetworkClient::getBody (Header * header) {
 	uint8_t * receivedBodyBytes = new uint8_t[header->getBodySize()];
 	read (serverSocket, receivedBodyBytes, header->getBodySize());
+
+	cout << "receivedBodyBytes: ";
+	BytesConverter::getInstance()->print(receivedBodyBytes, header->getBodySize());
+	cout << std::endl << std::endl;
+
 	return BodyFactory::getInstance()->generateBody(header, receivedBodyBytes);
 }
 
 Header * NetworkClient::recoverSavedHeaderOrReadTheNextOne() {
 	Header * header;
-	if (nextHeader == NULL) {
-		header = getHeader();
-	} else {
+	if (shouldUseNextHeader) {
+		Logger::getInstance()->log("parece ser que shouldUseNextHeader");
 		header = nextHeader;
-		nextHeader = NULL;
+		shouldUseNextHeader = false;
+	} else {
+		Logger::getInstance()->log("parece ser que NO shouldUseNextHeader");
+		header = getHeader();
 	}
 	return header;
 }

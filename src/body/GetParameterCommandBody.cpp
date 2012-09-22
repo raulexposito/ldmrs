@@ -30,8 +30,7 @@ bool GetParameterCommandBody::isGetParameterCommandBody() {
 
 std::string GetParameterCommandBody::asText() {
 	std::stringstream text;
-	text << "GET PARAMETER COMMAND" << "[";
-	text << getAmountBytes() << "]:";
+	text << "GET PARAMETER COMMAND -> ";
 	text << ParameterConverter::getInstance()->parameterToText(parameter);
 	return text.str();
 }

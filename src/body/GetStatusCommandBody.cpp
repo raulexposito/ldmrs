@@ -13,7 +13,6 @@ bool GetStatusCommandBody::isGetStatusCommandBody() {
 
 std::string GetStatusCommandBody::asText() {
 	std::stringstream text;
-	text << "GET STATUS COMMAND" << "[";
-	text << getAmountBytes() << "]";
+	text << "GET STATUS COMMAND";
 	return text.str();
 }

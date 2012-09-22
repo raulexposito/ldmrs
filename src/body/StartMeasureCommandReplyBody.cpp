@@ -11,7 +11,6 @@ bool StartMeasureCommandReplyBody::isStartMeasureCommandReplyBody() {
 
 std::string StartMeasureCommandReplyBody::asText() {
 	std::stringstream text;
-	text << "START MEASURE COMMAND REPLY" << "[";
-	text << getAmountBytes() << "]:";
+	text << "START MEASURE COMMAND REPLY";
 	return text.str();
 }

@@ -117,11 +117,7 @@ int Message::getAmountBytes() {
 
 std::string Message::asText() {
 	std::stringstream text;
-	text << this->header->asText();
-	text << ":";
 	text << this->body->asText();
-	text << ":";
-	text << BytesConverter::getInstance()->toString(this->getBytesInRaw(), this->getAmountBytes());
 	return text.str();
 }
 

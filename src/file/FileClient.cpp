@@ -40,7 +40,7 @@ Message * FileClient::receive () {
 	const char * headerReadedBytes = line.substr(0, HEADER_SIZE * CHARS_PER_BYTE).c_str();
 	Header * header = generateHeader (headerReadedBytes);
 
-	const char * bodyReadedBytes = line.substr((HEADER_SIZE + header->getBodySize()) * CHARS_PER_BYTE).c_str();
+	const char * bodyReadedBytes = line.substr(HEADER_SIZE * CHARS_PER_BYTE, line.size() - CHARS_PER_BYTE).c_str();
 	Body * body = generateBody (bodyReadedBytes, header);
 
 	if (ifs.eof()) {

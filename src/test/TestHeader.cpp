@@ -57,10 +57,10 @@ void testGetStatus() {
 	sleep (2);
 
 	Message * respuesta = connector->receiveMessage();
-	cout << respuesta->asText();
+//	cout << respuesta->asText();
 
-	respuesta = connector->receiveMessage();
-	cout << respuesta->asText();
+//	respuesta = connector->receiveMessage();
+//	cout << respuesta->asText();
 }
 
 void testReset() {
@@ -355,17 +355,17 @@ void testBodyFactory() {
 }
 
 void testSendConector() {
-	Message *request = new GetStatusCommandMessage();
-	Message *response;
+//	Message *request = new GetStatusCommandMessage();
+//	Message *response;
 
 	Connector * connector = new Connector();
-	connector->sendMessage(request);
-	while (true) {
-		response = connector->receiveMessage();
-	}
+//	connector->sendMessage(request);
+//	while (true) {
+		/*response = */connector->receiveMessage();
+//	}
 
-	delete request;
-	delete response;
+//	delete request;
+//	delete response;
 	delete connector;
 }
 
@@ -378,18 +378,20 @@ int main () {
 //	testGenerarLog();
 //	testDateTime();
 //	testRecordTrace();
-	testLecturaLaser();
+//	testLecturaLaser();
 //	testReadRecord();
 //	testAsText();
 //	testBodyFactory();
-
 //	testReceiveStopMeasureReplyCommand();
+//	testStartMensajes();
+
+//	testStopMensajes();
+//  testReset();
+//	testStartMensajes();
 
 //	testSendConector();
 
-//	testStopMensajes();
-//	testStartMensajes();
-//	testGetStatus();
+	testGetStatus();
 //	testGetParameter(SCAN_FRECUENCY);
 	return 0;
 }

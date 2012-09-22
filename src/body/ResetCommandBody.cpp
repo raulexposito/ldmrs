@@ -13,7 +13,6 @@ bool ResetCommandBody::isResetCommandBody() {
 
 std::string ResetCommandBody::asText() {
 	std::stringstream text;
-	text << "RESET COMMAND" << "[";
-	text << getAmountBytes() << "]";
+	text << "RESET COMMAND";
 	return text.str();
 }

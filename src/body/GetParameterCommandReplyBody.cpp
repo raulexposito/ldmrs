@@ -18,8 +18,7 @@ bool GetParameterCommandReplyBody::isGetParameterCommandReplyBody() {
 
 std::string GetParameterCommandReplyBody::asText() {
 	std::stringstream text;
-	text << "GET PARAMETER COMMAND REPLY" << "[";
-	text << getAmountBytes() << "]:";
+	text << "GET PARAMETER COMMAND REPLY -> ";
 	if (getBytesInRaw()[COMMAND_REPLY_PARAMETER_TYPE_FIRST_POSITION] == 0x00 && getBytesInRaw()[COMMAND_REPLY_PARAMETER_TYPE_SECOND_POSITION]  == 0x10) {
 		text << "IP ADDRESS:";
 		text << addAddress();

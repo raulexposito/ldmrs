@@ -2,6 +2,8 @@
 #define SCANDATABODY_H_
 
 #include "Body.h"
+#include "../scanpoint/hdr/ScanPoint.h"
+#include <vector>
 
 /**
  * Cuerpo del comando 'Scan Data'
@@ -16,6 +18,14 @@ class ScanDataBody : public Body {
 		bool isScanDataBody();
 
 		std::string asText();
+
+		std::vector<ScanPoint> getPointCloud();
+
+		int getAmountPoints();
+
+	private:
+		int amountPoints;
+
 };
 
 #endif /* SCANDATABODY_H_ */

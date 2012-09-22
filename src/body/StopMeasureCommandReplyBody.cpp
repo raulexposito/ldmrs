@@ -11,7 +11,6 @@ bool StopMeasureCommandReplyBody::isStopMeasureCommandReplyBody() {
 
 std::string StopMeasureCommandReplyBody::asText() {
 	std::stringstream text;
-	text << "STOP MEASURE COMMAND REPLY" << "[";
-	text << getAmountBytes() << "]:";
+	text << "STOP MEASURE COMMAND REPLY";
 	return text.str();
 }

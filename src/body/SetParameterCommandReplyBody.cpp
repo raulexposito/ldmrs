@@ -11,7 +11,6 @@ bool SetParameterCommandReplyBody::isSetParameterCommandReplyBody() {
 
 std::string SetParameterCommandReplyBody::asText() {
 	std::stringstream text;
-	text << "SET PARAMETER COMMAND REPLY" << "[";
-	text << getAmountBytes() << "]:";
+	text << "SET PARAMETER COMMAND REPLY";
 	return text.str();
 }
