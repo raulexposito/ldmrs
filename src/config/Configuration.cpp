@@ -16,6 +16,9 @@
 #define CONFIG_PARAM_LOG_LOG_FILE_BUFFER "LOG.logFileBuffer"
 #define CONFIG_PARAM_RECORD_RECORD_MEASUREMENTS "RECORD.recordMeasurements"
 #define CONFIG_PARAM_RECORD_RECORD_MEASUREMENTS_BUFFER "RECORD.recordMeasurementsBuffer"
+#define CONFIG_PARAM_POINTCLOUD_SHOW_POINTCLOUD "POINTCLOUD.showPointCloud"
+#define CONFIG_PARAM_POINTCLOUD_RECORD_POINTCLOUD "POINTCLOUD.recordPointCloud"
+
 
 using namespace std;
 
@@ -80,6 +83,14 @@ int Configuration::getRecordMeasurementsBuffer() {
 
 float Configuration::getMilisecondsBetweenMessages() {
 	return (atoi(getParameter(CONFIG_PARAM_FILE_MILISECONDS_BETWEEN_MESSAGES).c_str())) / 1000;
+}
+
+bool Configuration::isShowPointCloud() {
+	return getParameter(CONFIG_PARAM_POINTCLOUD_SHOW_POINTCLOUD) == "true";
+}
+
+bool Configuration::isRecordPointCloud() {
+	return getParameter(CONFIG_PARAM_POINTCLOUD_RECORD_POINTCLOUD) == "true";
 }
 
 // http://stackoverflow.com/questions/6175502/how-to-parse-ini-file-with-boost

@@ -105,6 +105,10 @@ Message * NetworkClient::receive () {
 	Header * header = recoverSavedHeaderOrReadTheNextOne();
 	Body * body = getBody(header);
 
+	Message * message = new Message(header, body);
+	log (RECEIVED, message);
+	Recorder::getInstance()->record(message);
+
 	if (header->isScanDataHeader()) {
 
 		Logger::getInstance()->log("Mensaje de tipo ScanData");
@@ -119,13 +123,6 @@ Message * NetworkClient::receive () {
 			synchronizationHasBeenNeeded = false;
 			return receive();
 		}
-	}
-
-	Message * message = new Message(header, body);
-	log (RECEIVED, message);
-
-	if (!synchronizationHasBeenNeeded) {
-		Recorder::getInstance()->record(message);
 	}
 
 	return message;
@@ -157,10 +154,6 @@ Header * NetworkClient::getHeader () {
 					magicWordBytes[k] = magicWordBytes[k+1];
 				}
 				magicWordBytes[HEADER_LENGTH - 1] = nextStepByte[0];
-
-				cout << "\tmagicWordBytes: ";
-				BytesConverter::getInstance()->print(magicWordBytes, MAGIC_WORD_LENGTH);
-				cout << std::endl;
 			}
 
 			// hemos necesitado sincronizar

@@ -35,6 +35,10 @@ class Configuration {
 
 		float getMilisecondsBetweenMessages();
 
+		bool isShowPointCloud();
+
+		bool isRecordPointCloud();
+
 	private:
 
 		Configuration(){};

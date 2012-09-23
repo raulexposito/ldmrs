@@ -4,6 +4,12 @@
 #include "Body.h"
 #include "../scanpoint/hdr/ScanPoint.h"
 #include <vector>
+#include <fstream>
+#include <iostream>
+
+using std::ostream;
+using std::ofstream;
+using std::cout;
 
 /**
  * Cuerpo del comando 'Scan Data'
@@ -21,11 +27,17 @@ class ScanDataBody : public Body {
 
 		std::vector<ScanPoint> getPointCloud();
 
+		std::string generateFilenamePointcloud();
+
 		int getAmountPoints();
+
+		std::string showPoints();
+
+		void savePoints();
 
 	private:
 		int amountPoints;
-
+		ofstream ofs;
 };
 
 #endif /* SCANDATABODY_H_ */

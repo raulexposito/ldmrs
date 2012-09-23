@@ -1,7 +1,6 @@
 #include "hdr/Recorder.h"
 #include "../config/hdr/Configuration.h"
 #include "../util/hdr/DateTime.h"
-
 #include "../util/hdr/BytesConverter.h"
 
 #include <sstream>
