@@ -29,6 +29,7 @@ Recorder::Recorder() {
 	recordMeasurements=Configuration::getInstance()->isRecordMeasurements();
 	recordMeasurementsBuffer=Configuration::getInstance()->getRecordMeasurementsBuffer();
 	recordMeasurementsBufferCounter=0;
+	recordBuffer.clear();
 	createRecordFile(recordMeasurements);
 }
 
@@ -46,7 +47,7 @@ std::string composeTrace (Message * message) {
 
 void Recorder::record(Message * message) {
     if (recordMeasurements) {
-    	ofs << composeTrace(message) << endl;
+    	recordBuffer << composeTrace(message) << endl;
     	flushRecordFile();
     }
 }
@@ -62,6 +63,8 @@ void Recorder::flushRecordFile() {
 	recordMeasurementsBufferCounter ++;
     if (recordMeasurementsBufferCounter >= recordMeasurementsBuffer) {
     	recordMeasurementsBufferCounter = 0;
+    	ofs << recordBuffer.str();
+    	recordBuffer.clear();
     	ofs.flush();
     }
 }

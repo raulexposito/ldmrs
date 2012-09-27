@@ -4,6 +4,7 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <sstream>
 
 using std::ostream;
 using std::ofstream;
@@ -33,6 +34,7 @@ class Logger {
 		int logFileBuffer;
 		int logFileBufferCounter;
 		std::string filename;
+		std::stringstream logBuffer;
 		ofstream ofs;
 };
 

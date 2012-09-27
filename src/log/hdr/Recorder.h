@@ -4,6 +4,7 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <sstream>
 
 #include "../../message/hdr/Message.h"
 
@@ -33,6 +34,7 @@ class Recorder {
 		int recordMeasurementsBuffer;
 		int recordMeasurementsBufferCounter;
 		std::string filename;
+		std::stringstream recordBuffer;
 		ofstream ofs;
 };
 

@@ -34,19 +34,25 @@ FileClient::FileClient () {
 }
 
 Message * FileClient::receive () {
+
+	if (ifs.eof()) {
+		ifs.clear();
+		ifs.seekg(0);
+		return receive();
+	}
+
 	std::string line;
 	getline (ifs,line);
+
+	if (line.size() < HEADER_SIZE * CHARS_PER_BYTE) {
+		return receive();
+	}
 
 	const char * headerReadedBytes = line.substr(0, HEADER_SIZE * CHARS_PER_BYTE).c_str();
 	Header * header = generateHeader (headerReadedBytes);
 
 	const char * bodyReadedBytes = line.substr(HEADER_SIZE * CHARS_PER_BYTE, line.size() - CHARS_PER_BYTE).c_str();
 	Body * body = generateBody (bodyReadedBytes, header);
-
-	if (ifs.eof()) {
-		ifs.clear();
-		ifs.seekg(0);
-	}
 
 	sleep (Configuration::getInstance()->getMilisecondsBetweenMessages());
 

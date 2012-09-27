@@ -353,18 +353,30 @@ void testBodyFactory() {
 }
 
 void testConector() {
-//	Message *request = new GetStatusCommandMessage();
-//	Message *response;
-
 	Connector * connector = new Connector();
-//	connector->sendMessage(request);
-//	while (true) {
-		/* response = */connector->receiveMessage()->asText();
-//	}
+	Message *startMeasure = new StartMeasureCommandMessage();
+	Message *stopMeasure = new StopMeasureCommandMessage();
+
+	Message *receivedMessage;
+	connector->sendMessage(startMeasure);
+
+	while (true) {
+		receivedMessage = connector->receiveMessage();
+		receivedMessage->asText();
+
+		if (receivedMessage->isErrorAndWarningMessage()) {
+			connector->sendMessage(stopMeasure);
+			sleep (10);
+			connector->sendMessage(startMeasure);
+		}
+	}
+
+
+
 
 //	delete request;
 //	delete response;
-	delete connector;
+//	delete connector;
 }
 
 int main () {

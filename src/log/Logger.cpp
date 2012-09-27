@@ -25,6 +25,7 @@ Logger::Logger() {
 	logOnFile=Configuration::getInstance()->isLogOnFile();
 	logFileBuffer=Configuration::getInstance()->getLogFileBuffer();
 	logFileBufferCounter=0;
+	logBuffer.clear();
 	createLogFile(logOnFile);
 }
 
@@ -36,14 +37,14 @@ void Logger::log(std::string message) {
 			" " +
 			DateTime::getInstance()->getCurrentTime(TIME_SEPARATOR) +
 			"] " +
-			message;
+			message + "\n";
 
     if (logOnConsole) {
-    	cout << logMessage << "\n";
+    	cout << logMessage;
     }
 
     if (logOnFile) {
-    	ofs << logMessage << "\n";
+    	logBuffer << logMessage;
     	flushLogFile();
     }
 }
@@ -59,6 +60,8 @@ void Logger::flushLogFile() {
     logFileBufferCounter ++;
     if (logFileBufferCounter >= logFileBuffer) {
     	logFileBufferCounter = 0;
+    	ofs << logBuffer.str();
+    	logBuffer.clear();
     	ofs.flush();
     }
 }

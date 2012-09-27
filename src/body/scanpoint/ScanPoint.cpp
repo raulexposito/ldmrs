@@ -12,30 +12,30 @@ ScanPoint::ScanPoint(uint8_t data0, uint8_t data1, uint8_t data2, uint8_t data3,
 }
 
 int ScanPoint::getLayer() {
-	return byte0 / 16;
-}
-
-int ScanPoint::getEcho() {
 	return byte0 % 16;
 }
 
+int ScanPoint::getEcho() {
+	return byte0 / 16;
+}
+
 std::string ScanPoint::getFlags() {
-	if (byte1 == 1) return "transparent point";
-	if (byte1 == 2) return "clutter (atmospheric)";
-	if (byte1 == 8) return "dirt";
+	if (byte1 == 80) return "transparent";
+	if (byte1 == 40) return "clutter    ";
+	if (byte1 == 1)  return "dirt       ";
 	return "reserved";
 }
 
 int ScanPoint::getHorizontalAngle() {
-	return byte2 * 256 + byte3;
+	return byte3 * 256 + byte2;
 }
 
 int ScanPoint::getRadialDistance() {
-	return byte4 * 256 + byte5;
+	return byte5 * 256 + byte4;
 }
 
 int ScanPoint::getEchoPulseWidth() {
-	return byte6 * 256 + byte7;
+	return byte7 * 256 + byte6;
 }
 
 uint8_t* ScanPoint::getBytesInRaw() {

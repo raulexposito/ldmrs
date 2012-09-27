@@ -13,7 +13,7 @@
 ScanDataBody::ScanDataBody(int bodySize, uint8_t * bodyBytes):
 		Body(bodySize, bodyBytes) {
 
-	amountPoints = bodyBytes[28] * 256 + bodyBytes[29];
+	amountPoints = bodyBytes[29] * 256 + bodyBytes[28];
 }
 
 bool ScanDataBody::isScanDataBody() {
