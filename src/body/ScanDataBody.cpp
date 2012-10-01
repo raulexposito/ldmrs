@@ -14,6 +14,7 @@ ScanDataBody::ScanDataBody(int bodySize, uint8_t * bodyBytes):
 		Body(bodySize, bodyBytes) {
 
 	amountPoints = bodyBytes[29] * 256 + bodyBytes[28];
+	getPointCloud();
 }
 
 bool ScanDataBody::isScanDataBody() {

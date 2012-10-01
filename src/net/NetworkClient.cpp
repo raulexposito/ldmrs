@@ -30,8 +30,6 @@
 
 NetworkClient* NetworkClient::instance = 0;
 
-void logConfiguration ();
-
 NetworkClient* NetworkClient::getInstance() {
    if (!instance)
 	   instance = new NetworkClient();
@@ -39,9 +37,12 @@ NetworkClient* NetworkClient::getInstance() {
    return instance;
 }
 
+void NetworkClient::resetConnection () {
+	instance = 0;
+}
+
 NetworkClient::NetworkClient() {
 
-	logConfiguration();
     struct sockaddr_in dest_addr;
 
     int sock=socket(PF_INET, SOCK_STREAM, 0);
@@ -80,51 +81,28 @@ NetworkClient::NetworkClient() {
 	synchronizationHasBeenNeeded = false;
 	shouldUseNextHeader = false;
 }
-void logConfiguration () {
-	std::stringstream ip;
-	std::stringstream port;
-	ip << "\tIP Address: " << Configuration::getInstance()->getIp().c_str();
-	port << "\t      Port: " << Configuration::getInstance()->getPort();
-
-	Logger::getInstance()->log("Connecting with LDMRS device:");
-	Logger::getInstance()->log("");
-	Logger::getInstance()->log(ip.str());
-	Logger::getInstance()->log(port.str());
-	Logger::getInstance()->log("");
-}
 
 Message * NetworkClient::receive () {
-/*
-	Logger::getInstance()->log("receive");
-	if (shouldUseNextHeader) Logger::getInstance()->log("shouldUseNextHeader");
-	else Logger::getInstance()->log("NO shouldUseNextHeader");
-
-	if (synchronizationHasBeenNeeded) Logger::getInstance()->log("synchronizationHasBeenNeeded");
-	else Logger::getInstance()->log("NO synchronizationHasBeenNeeded");
-*/
-	Header * header = recoverSavedHeaderOrReadTheNextOne();
+	//Header * header = recoverSavedHeaderOrReadTheNextOne();
+	Header * header = getHeader();
 	Body * body = getBody(header);
-
-	Message * message = new Message(header, body);
-	log (RECEIVED, message);
-	Recorder::getInstance()->record(message);
-
+/*
 	if (header->isScanDataHeader()) {
-
-		//Logger::getInstance()->log("Mensaje de tipo ScanData");
 		// Se almacena la cabecera del siguiente mensaje
 		nextHeader = getHeader();
 		shouldUseNextHeader = true;
 
 		if (synchronizationHasBeenNeeded) {
 			// Se descarta el mensaje actual y se lee el siguente
-
-//			Logger::getInstance()->log("LLAMADA RECURSIVA");
+			Logger::getInstance()->log("LLAMADA RECURSIVA");
 			synchronizationHasBeenNeeded = false;
 			return receive();
 		}
 	}
-
+*/
+	Message * message = new Message(header, body);
+	log (RECEIVED, message);
+	Recorder::getInstance()->record(message);
 	return message;
 }
 

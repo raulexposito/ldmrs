@@ -13,6 +13,14 @@ class Connector {
 		void sendMessage(Message * message);
 
 		Message * receiveMessage();
+
+	private:
+
+		void logNetworkConfiguration();
+
+		void logFileConfiguration();
+
+		bool configurationHasBeenShown;
 };
 
 

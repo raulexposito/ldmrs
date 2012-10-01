@@ -14,6 +14,8 @@ class NetworkClient {
 
 		void send (Message * message);
 
+		void resetConnection ();
+
 	private:
 
 		NetworkClient();

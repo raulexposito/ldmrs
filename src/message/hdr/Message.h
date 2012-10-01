@@ -60,6 +60,10 @@ class Message {
 
 		bool isStartMeasureCommandMessage();
 
+		bool isStartMeasureCommandReplyMessage();
+
+		bool isStopMeasureCommandReplyMessage();
+
 		bool isStopMeasureCommandMessage();
 
 	protected:

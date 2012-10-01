@@ -107,6 +107,14 @@ bool Message::isStartMeasureCommandMessage() {
 	return this->body->isStartMeasureCommandBody();
 }
 
+bool Message::isStartMeasureCommandReplyMessage() {
+	return this->body->isStartMeasureCommandReplyBody();
+}
+
+bool Message::isStopMeasureCommandReplyMessage() {
+	return this->body->isStopMeasureCommandReplyBody();
+}
+
 bool Message::isStopMeasureCommandMessage() {
 	return this->body->isStopMeasureCommandBody();
 }

@@ -14,16 +14,6 @@ FileClient* FileClient::instance = 0;
 FileClient* FileClient::getInstance() {
    if (!instance) {
 	   instance = new FileClient();
-
-	   std::stringstream recordFile;
-	   recordFile << "\tRecord file: '";
-	   recordFile << Configuration::getInstance()->getPath();
-	   recordFile << "'";
-
-	   Logger::getInstance()->log("Reading a saved record:");
-	   Logger::getInstance()->log("");
-	   Logger::getInstance()->log(recordFile.str());
-	   Logger::getInstance()->log("");
    }
 
    return instance;
