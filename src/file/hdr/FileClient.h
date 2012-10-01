@@ -8,9 +8,13 @@
 using std::ifstream;
 using std::cout;
 
+/**
+ * Clase encargada de leer las grabaciones realizadas en fichero
+ */
 class FileClient {
 
 	public:
+
 		static FileClient* getInstance();
 
 		Message * receive ();
@@ -18,11 +22,17 @@ class FileClient {
 	private:
 
 		FileClient();
+
 		FileClient(FileClient const&){};
+
 		Header * generateHeader (const char * headerReadedBytes);
+
 		Body * generateBody (const char * bodyReadedBytes, Header * header);
+
 		void log (Message * message);
+
 		static FileClient* instance;
+
 		ifstream ifs;
 
 		uint8_t convert(char value, bool first);

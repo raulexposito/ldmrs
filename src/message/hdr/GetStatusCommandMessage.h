@@ -9,6 +9,7 @@
 class GetStatusCommandMessage : public Message {
 
 	public:
+
 		GetStatusCommandMessage();
 };
 

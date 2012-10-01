@@ -10,6 +10,7 @@
 class GetParameterCommandBody : public Body {
 
 	public:
+
 		GetParameterCommandBody(ParameterEnum parameter);
 
 		int getAmountBytes();

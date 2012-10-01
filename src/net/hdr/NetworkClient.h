@@ -4,10 +4,13 @@
 #include <stdint.h> 	// para 'uint8_t'
 #include "../../message/hdr/Message.h"
 
-
+/**
+ * Clase encargada de enviar y recibir mensajes al y desde el laser
+ */
 class NetworkClient {
 
 	public:
+
 		static NetworkClient* getInstance();
 
 		Message * receive ();
@@ -19,18 +22,22 @@ class NetworkClient {
 	private:
 
 		NetworkClient();
+
 		NetworkClient (NetworkClient const&){};
+
 		uint8_t * receiveBody (int bodySize);
+
 		Header * getHeader ();
+
 		Body * getBody (Header * header);
-		Header * recoverSavedHeaderOrReadTheNextOne();
+
 		bool isMagicWord (uint8_t * magicWord);
+
 		void log (bool sent, Message * message);
+
 		static NetworkClient* instance;
+
 		int serverSocket;
-		bool synchronizationHasBeenNeeded;
-		Header * nextHeader;
-		bool shouldUseNextHeader;
 };
 
 #endif // NETWORKCLIENT_H

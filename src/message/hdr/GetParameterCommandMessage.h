@@ -10,6 +10,7 @@
 class GetParameterCommandMessage : public Message {
 
 	public:
+
 		GetParameterCommandMessage(ParameterEnum parameter);
 };
 

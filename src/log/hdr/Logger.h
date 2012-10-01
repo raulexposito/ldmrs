@@ -24,17 +24,27 @@ class Logger {
 	private:
 
 		Logger();
+
 		void createLogFile(bool create);
+
 		void flushLogFile();
+
 		std::string generateFilenameLog();
 
 		static Logger* instance;
+
 		bool logOnFile;
+
 		bool logOnConsole;
+
 		int logFileBuffer;
+
 		int logFileBufferCounter;
+
 		std::string filename;
+
 		std::stringstream logBuffer;
+
 		ofstream ofs;
 };
 

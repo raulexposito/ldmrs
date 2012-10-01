@@ -9,6 +9,7 @@
 class ErrorAndWarningHeader : public Header {
 
 	public:
+
 		ErrorAndWarningHeader(uint8_t * headerBytes);
 
 		bool isErrorAndWarningHeader();

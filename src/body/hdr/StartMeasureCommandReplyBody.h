@@ -9,6 +9,7 @@
 class StartMeasureCommandReplyBody : public Body {
 
 	public:
+
 		StartMeasureCommandReplyBody(int bodySize, uint8_t * bodyBytes);
 
 		bool isStartMeasureCommandReplyBody();

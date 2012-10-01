@@ -9,6 +9,7 @@
 class StopMeasureCommandBody : public Body {
 
 	public:
+
 		StopMeasureCommandBody();
 
 		bool isStopMeasureCommandBody();

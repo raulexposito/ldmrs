@@ -9,6 +9,7 @@
 class GetStatusCommandBody : public Body {
 
 	public:
+
 		GetStatusCommandBody();
 
 		bool isGetStatusCommandBody();

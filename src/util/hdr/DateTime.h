@@ -16,9 +16,10 @@ class DateTime {
 	private:
 
 		DateTime(){};
+
 		DateTime(DateTime const&){};
+
 		static DateTime* instance;
 };
-
 
 #endif /* DATETIME_H_ */

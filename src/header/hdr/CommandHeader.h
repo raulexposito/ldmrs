@@ -9,6 +9,7 @@
 class CommandHeader : public Header {
 
 	public:
+
 		CommandHeader(int dataBlockSize);
 
 		bool isCommandHeader();

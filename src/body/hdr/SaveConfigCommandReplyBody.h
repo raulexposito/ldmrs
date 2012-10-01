@@ -11,7 +11,8 @@
 class SaveConfigCommandReplyBody : public Body {
 
 	public:
-	SaveConfigCommandReplyBody(int bodySize, uint8_t * bodyBytes);
+
+		SaveConfigCommandReplyBody(int bodySize, uint8_t * bodyBytes);
 
 		bool isSaveConfigCommandReplyBody();
 

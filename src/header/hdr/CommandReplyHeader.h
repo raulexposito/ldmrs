@@ -9,6 +9,7 @@
 class CommandReplyHeader : public Header {
 
 	public:
+
 		CommandReplyHeader(uint8_t * headerBytes);
 
 		bool isCommandReplyHeader();

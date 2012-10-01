@@ -26,15 +26,25 @@ class Recorder {
 	private:
 
 		Recorder();
+
 		void createRecordFile(bool create);
+
 		std::string generateFilenameRecord();
+
 		void flushRecordFile();
+
 		static Recorder* instance;
+
 		bool recordMeasurements;
+
 		int recordMeasurementsBuffer;
+
 		int recordMeasurementsBufferCounter;
+
 		std::string filename;
+
 		std::stringstream recordBuffer;
+
 		ofstream ofs;
 };
 

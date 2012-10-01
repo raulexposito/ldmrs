@@ -19,6 +19,7 @@ using std::cout;
 class ScanDataBody : public Body {
 
 	public:
+
 		ScanDataBody(int bodySize, uint8_t * bodyBytes);
 
 		bool isScanDataBody();
@@ -36,6 +37,7 @@ class ScanDataBody : public Body {
 		void savePoints();
 
 	private:
+
 		int amountPoints;
 		ofstream ofs;
 };

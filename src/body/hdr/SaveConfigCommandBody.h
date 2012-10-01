@@ -9,6 +9,7 @@
 class SaveConfigCommandBody : public Body {
 
 	public:
+
 		SaveConfigCommandBody();
 
 		bool isSaveConfigCommandBody();

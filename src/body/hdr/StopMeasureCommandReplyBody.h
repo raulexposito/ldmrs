@@ -9,6 +9,7 @@
 class StopMeasureCommandReplyBody : public Body {
 
 	public:
+
 		StopMeasureCommandReplyBody(int bodySize, uint8_t * bodyBytes);
 
 		bool isStopMeasureCommandReplyBody();

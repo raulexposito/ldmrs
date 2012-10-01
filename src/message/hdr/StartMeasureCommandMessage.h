@@ -9,6 +9,7 @@
 class StartMeasureCommandMessage : public Message {
 
 	public:
+
 		StartMeasureCommandMessage();
 };
 

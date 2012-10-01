@@ -10,6 +10,7 @@
 class SetParameterCommandMessage : public Message {
 
 	public:
+
 		SetParameterCommandMessage(ParameterEnum parameter, uint32_t value);
 };
 

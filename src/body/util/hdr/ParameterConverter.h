@@ -9,6 +9,7 @@
 class ParameterConverter {
 
 	public:
+
 		static ParameterConverter* getInstance();
 
 		void parameterToHex(ParameterEnum parameter, uint8_t & preffix, uint8_t & suffix);
@@ -18,7 +19,9 @@ class ParameterConverter {
 	private:
 
 		ParameterConverter(){};
+
 		ParameterConverter(ParameterConverter const&){};
+
 		static ParameterConverter* instance;
 };
 

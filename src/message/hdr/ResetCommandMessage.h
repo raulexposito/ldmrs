@@ -9,6 +9,7 @@
 class ResetCommandMessage : public Message {
 
 	public:
+
 		ResetCommandMessage();
 };
 

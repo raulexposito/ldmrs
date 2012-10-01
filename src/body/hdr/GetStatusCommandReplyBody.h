@@ -11,6 +11,7 @@
 class GetStatusCommandReplyBody : public Body {
 
 	public:
+
 		GetStatusCommandReplyBody(int bodySize, uint8_t * bodyBytes);
 
 		bool isGetStatusCommandReplyBody();
@@ -18,6 +19,7 @@ class GetStatusCommandReplyBody : public Body {
 		std::string asText();
 
 	private:
+
 		std::string showHex8(uint8_t uint8);
 
 		std::string showVersion(uint8_t first, uint8_t second);

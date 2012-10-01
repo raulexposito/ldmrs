@@ -1,5 +1,5 @@
-#ifndef GETPARAMETERREQUESTBODY_H
-#define GETPARAMETERREQUESTBODY_H
+#ifndef GETPARAMETERREQUESTREPLYBODY_H
+#define GETPARAMETERREQUESTREPLYBODY_H
 
 #include "Body.h"
 #include "../enum/ParameterEnum.h"
@@ -12,6 +12,7 @@
 class GetParameterCommandReplyBody : public Body {
 
 	public:
+
 		GetParameterCommandReplyBody(int bodySize, uint8_t * bodyBytes);
 
 		bool isGetParameterCommandReplyBody();
@@ -19,9 +20,10 @@ class GetParameterCommandReplyBody : public Body {
 		std::string asText();
 
 	private:
+
 		std::string addAddress();
 
 		int addNumber();
 };
 
-#endif // GETPARAMETERREQUESTBODY_H
+#endif // GETPARAMETERREQUESTREPLYBODY_H

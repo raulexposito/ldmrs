@@ -9,6 +9,7 @@
 class StartMeasureCommandBody : public Body {
 
 	public:
+
 		StartMeasureCommandBody();
 
 		bool isStartMeasureCommandBody();

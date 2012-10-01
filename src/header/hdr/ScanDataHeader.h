@@ -9,6 +9,7 @@
 class ScanDataHeader : public Header {
 
 	public:
+
 		ScanDataHeader(uint8_t * headerBytes);
 
 		bool isScanDataHeader();

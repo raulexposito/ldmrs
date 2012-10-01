@@ -13,6 +13,7 @@
 class SetParameterCommandReplyBody : public Body {
 
 	public:
+
 		SetParameterCommandReplyBody(int bodySize, uint8_t * bodyBytes);
 
 		bool isSetParameterCommandReplyBody();

@@ -7,6 +7,10 @@
 #include "../../hdr/Body.h"
 #include "../../enum/ParameterEnum.h"
 
+/**
+ * Clase encargada de generar cuerpos de mensajes con el flujo de bytes
+ * que reciba
+ */
 class BodyFactory {
 
 	public:
@@ -18,9 +22,13 @@ class BodyFactory {
 	private:
 
 		BodyFactory(){};
+
 		BodyFactory(BodyFactory const&){};
+
 		static BodyFactory* instance;
+
 		int bodySize;
+
 		Body* generateCommandReplyBody(int bodySize, uint8_t * bodyBytes);
 };
 

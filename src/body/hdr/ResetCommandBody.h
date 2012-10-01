@@ -9,6 +9,7 @@
 class ResetCommandBody : public Body {
 
 	public:
+
 		ResetCommandBody();
 
 		bool isResetCommandBody();

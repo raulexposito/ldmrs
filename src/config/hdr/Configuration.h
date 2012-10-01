@@ -42,6 +42,7 @@ class Configuration {
 	private:
 
 		Configuration(){};
+
 		static Configuration* instance;
 };
 

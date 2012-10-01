@@ -38,7 +38,6 @@ class ScanPoint {
 		uint8_t byte5;
 		uint8_t byte6;
 		uint8_t byte7;
-
 };
 
 #endif // SCANPOINT_H

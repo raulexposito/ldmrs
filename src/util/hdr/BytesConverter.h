@@ -19,7 +19,9 @@ class BytesConverter {
 	private:
 
 		BytesConverter(){};
+
 		BytesConverter(BytesConverter const&){};
+
 		static BytesConverter* instance;
 };
 

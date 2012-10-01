@@ -11,6 +11,7 @@
 class ErrorAndWarningBody : public Body {
 
 	public:
+
 		ErrorAndWarningBody(int bodySize, uint8_t * bodyBytes);
 
 		bool isErrorAndWarningBody();
@@ -18,6 +19,7 @@ class ErrorAndWarningBody : public Body {
 		std::string asText();
 
 	private:
+
 		std::string getBinaryRepresentation (uint8_t value);
 };
 

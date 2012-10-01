@@ -9,6 +9,7 @@
 class SaveConfigCommandMessage : public Message {
 
 	public:
+
 		SaveConfigCommandMessage();
 };
 
