@@ -1,7 +1,0 @@
-	RAW header: AF FE C0 C2 00 00 00 00 00 00 00 08 00 00 20 20 00 05 47 81 64 69 C7 4C 
-	RAW body: 11 00 00 10 DD 96 75 A3 
-	----------------------
-	type: COMMAND REPLY
-	subtype: GET PARAMETER
-	parameter: IP ADDRESS
-	value: A3 75 96 DD

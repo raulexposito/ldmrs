@@ -1,7 +1,0 @@
-	RAW header: AF FE C0 C2 00 00 00 00 00 00 00 08 00 00 20 20 00 05 47 A5 92 6D F1 A4 
-	RAW body: 11 00 01 10 50 00 00 00 
-	----------------------
-	type: COMMAND REPLY
-	subtype: GET PARAMETER
-	parameter: TCP PORT
-	value: 00 00 00 50 
