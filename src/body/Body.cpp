@@ -14,7 +14,11 @@ Body::Body(int bodySize, uint8_t preffix, uint8_t suffix) {
 
 Body::Body(int bodySize, uint8_t * bodyBytes) {
 	this->bodySize = bodySize;
-	bytes = bodyBytes;
+	bytes = new uint8_t[bodySize];
+	int i = 0;
+	for (i = 0; i < bodySize; i++) {
+		bytes[i] = bodyBytes[i];
+	}
 }
 
 Body::~Body() {

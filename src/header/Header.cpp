@@ -15,7 +15,11 @@ Header::Header (int dataBlockSize, uint8_t preffix, uint8_t suffix) {
 }
 
 Header::Header (uint8_t * headerBytes) {
-	bytes = headerBytes;
+	bytes = new uint8_t[HEADER_SIZE];
+	int i = 0;
+	for (i = 0; i < HEADER_SIZE; i++) {
+		bytes[i] = headerBytes[i];
+	}
 }
 
 void Header::addMagicWord() {

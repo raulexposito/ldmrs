@@ -86,6 +86,7 @@ Message * NetworkClient::receive () {
 	Message * message = new Message(header, body);
 	log (RECEIVED, message);
 	Recorder::getInstance()->record(message);
+
 	return message;
 }
 
@@ -102,16 +103,16 @@ Header * NetworkClient::getHeader () {
 		read (serverSocket, magicWordBytes, MAGIC_WORD_LENGTH);
 
 		if (!isMagicWord(magicWordBytes)) {
-
 			uint8_t * nextStepByte = new uint8_t[NEXT_STEP_LENGTH];
 			while (!isMagicWord(magicWordBytes)) {
+
 				read (serverSocket, nextStepByte, NEXT_STEP_LENGTH);
-				// BytesConverter::getInstance()->print(nextStepByte, NEXT_STEP_LENGTH);
+
 				int k = 0;
-				for (k = 0; k < HEADER_LENGTH - 1; k ++) {
+				for (k = 0; k < MAGIC_WORD_LENGTH - 1; k ++) {
 					magicWordBytes[k] = magicWordBytes[k+1];
 				}
-				magicWordBytes[HEADER_LENGTH - 1] = nextStepByte[0];
+				magicWordBytes[MAGIC_WORD_LENGTH - 1] = nextStepByte[0];
 			}
 		}
 
@@ -125,8 +126,7 @@ Header * NetworkClient::getHeader () {
 		read (serverSocket, restOfHeaderBytes, HEADER_LENGTH - MAGIC_WORD_LENGTH);
 
 		int j = 0;
-
-		for (j = 4; j < HEADER_LENGTH; j++) {
+		for (j = MAGIC_WORD_LENGTH; j < HEADER_LENGTH; j++) {
 			allReceivedHeaderBytes[j] = restOfHeaderBytes[j - MAGIC_WORD_LENGTH];
 		}
 
@@ -136,6 +136,7 @@ Header * NetworkClient::getHeader () {
 
 	delete magicWordBytes;
 	delete restOfHeaderBytes;
+	delete allReceivedHeaderBytes;
 
 	return result;
 }
@@ -143,7 +144,6 @@ Header * NetworkClient::getHeader () {
 Body * NetworkClient::getBody (Header * header) {
 	uint8_t * receivedBodyBytes = new uint8_t[header->getBodySize()];
 	read (serverSocket, receivedBodyBytes, header->getBodySize());
-
 	return BodyFactory::getInstance()->generateBody(header, receivedBodyBytes);
 }
 

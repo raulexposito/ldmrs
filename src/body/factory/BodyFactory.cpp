@@ -32,7 +32,6 @@ Body* BodyFactory::generateBody (Header * header, uint8_t * bodyBytes) {
 	if (header->isScanDataHeader()) {
 		return new ScanDataBody(header->getBodySize(), bodyBytes);
 	}
-
 	std::stringstream warnMessage;
 	warnMessage << "[WARN] UNKNOWN TYPE OF RECEIVED BODY: ";
 	warnMessage << BytesConverter::getInstance()->toString(bodyBytes, header->getBodySize());
