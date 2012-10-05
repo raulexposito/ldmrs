@@ -84,15 +84,82 @@ std::string ScanDataBody::showPoints() {
 
 void ScanDataBody::savePoints() {
 	std::string filename = generateFilenamePointcloud();
-	ofs.open(filename.c_str());
 	std::vector<ScanPoint> pointCloud = getPointCloud();
-
 	int i = 0;
+
+	// LINEA 0
+
+	std::stringstream fileName_0;
+	std::stringstream measure_0;
+	measure_0 << "Horizontal Angle" << ";" << "Radial Distance" << "\n";
+
+	fileName_0 << filename << "_0_" << GENERIC_LOG_FILE_NAME;
+	ofs.open(fileName_0.str().c_str());
+
 	for (i = 0; i < amountPoints; i++) {
 		ScanPoint currentPoint = pointCloud[i];
-		ofs << currentPoint.getRadialDistance() << ";";
+		if (currentPoint.getLayer() == 0) {
+			measure_0 << currentPoint.getHorizontalAngle() << ";" << currentPoint.getRadialDistance() << "\n";
+		}
 	}
+	ofs << measure_0.str();
 	ofs.flush();
+	ofs.close();
+
+	// LINEA 1
+
+	std::stringstream fileName_1;
+	std::stringstream measure_1;
+	measure_1 << "Horizontal Angle" << ";" << "Radial Distance" << "\n";
+
+	fileName_1 << filename << "_1_" << GENERIC_LOG_FILE_NAME;
+	ofs.open(fileName_1.str().c_str());
+
+	for (i = 0; i < amountPoints; i++) {
+		ScanPoint currentPoint = pointCloud[i];
+		if (currentPoint.getLayer() == 1) {
+			measure_1 << currentPoint.getHorizontalAngle() << ";" << currentPoint.getRadialDistance() << "\n";
+		}
+	}
+	ofs << measure_1.str();
+	ofs.flush();
+	ofs.close();
+
+	// LINEA 2
+	std::stringstream fileName_2;
+	std::stringstream measure_2;
+	measure_2 << "Horizontal Angle" << ";" << "Radial Distance" << "\n";
+
+	fileName_2 << filename << "_2_" << GENERIC_LOG_FILE_NAME;
+	ofs.open(fileName_2.str().c_str());
+
+	for (i = 0; i < amountPoints; i++) {
+		ScanPoint currentPoint = pointCloud[i];
+		if (currentPoint.getLayer() == 2) {
+			measure_2 << currentPoint.getHorizontalAngle() << ";" << currentPoint.getRadialDistance() << "\n";
+		}
+	}
+	ofs << measure_2.str();
+	ofs.flush();
+	ofs.close();
+
+	// LINEA 3
+	std::stringstream fileName_3;
+	std::stringstream measure_3;
+	measure_3 << "Horizontal Angle" << ";" << "Radial Distance" << "\n";
+
+	fileName_3 << filename << "_3_" << GENERIC_LOG_FILE_NAME;
+	ofs.open(fileName_3.str().c_str());
+
+	for (i = 0; i < amountPoints; i++) {
+		ScanPoint currentPoint = pointCloud[i];
+		if (currentPoint.getLayer() == 3) {
+			measure_3 << currentPoint.getHorizontalAngle() << ";" << currentPoint.getRadialDistance() << "\n";
+		}
+	}
+	ofs << measure_3.str();
+	ofs.flush();
+	ofs.close();
 }
 
 
@@ -103,7 +170,7 @@ std::string ScanDataBody::generateFilenamePointcloud () {
 	std::stringstream file;
 	file <<	DateTime::getInstance()->getCurrentDate(NO_SEPARATOR) << "-" <<
 			DateTime::getInstance()->getCurrentTime(NO_SEPARATOR) << "_" <<
-			milliseconds.tv_usec << "_" << GENERIC_LOG_FILE_NAME;
+			milliseconds.tv_usec;
 
 	return file.str();
 }

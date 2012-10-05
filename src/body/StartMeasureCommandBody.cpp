@@ -1,5 +1,6 @@
 #include "hdr/StartMeasureCommandBody.h"
 #include "../net/hdr/NetworkClient.h"
+#include "../config/hdr/Configuration.h"
 
 #define CODE_PREFFIX 0x20
 #define CODE_SUFFIX 0x00
@@ -7,7 +8,9 @@
 
 StartMeasureCommandBody::StartMeasureCommandBody():
 			Body(BODY_SIZE, CODE_PREFFIX, CODE_SUFFIX) {
-	NetworkClient::getInstance()->resetConnection();
+	if (Configuration::getInstance()->getSource()==SOURCE_TCPIP) {
+		NetworkClient::getInstance()->resetConnection();
+	}
 }
 
 bool StartMeasureCommandBody::isStartMeasureCommandBody() {

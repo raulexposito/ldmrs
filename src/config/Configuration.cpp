@@ -82,7 +82,7 @@ int Configuration::getRecordMeasurementsBuffer() {
 }
 
 float Configuration::getMilisecondsBetweenMessages() {
-	return (atoi(getParameter(CONFIG_PARAM_FILE_MILISECONDS_BETWEEN_MESSAGES).c_str())) / 1000;
+	return ((atoi(getParameter(CONFIG_PARAM_FILE_MILISECONDS_BETWEEN_MESSAGES).c_str())) / 1000) + .1;
 }
 
 bool Configuration::isShowPointCloud() {

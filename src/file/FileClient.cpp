@@ -34,6 +34,8 @@ Message * FileClient::receive () {
 	std::string line;
 	getline (ifs,line);
 
+	sleep (Configuration::getInstance()->getMilisecondsBetweenMessages());
+
 	if (line.size() < HEADER_SIZE * CHARS_PER_BYTE) {
 		return receive();
 	}
@@ -43,8 +45,6 @@ Message * FileClient::receive () {
 
 	const char * bodyReadedBytes = line.substr(HEADER_SIZE * CHARS_PER_BYTE, line.size() - CHARS_PER_BYTE).c_str();
 	Body * body = generateBody (bodyReadedBytes, header);
-
-	sleep (Configuration::getInstance()->getMilisecondsBetweenMessages());
 
 	Message * message = new Message(header, body);
 	log (message);
